@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | Agarwooding</title>
+  <meta name="description" content="Contact Agarwooding for product enquiries, wholesale partnerships, bespoke sourcing, or general questions. Seoul, South Korea."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+<style>
+/* Contact layout */
+.contact-grid {
+  display:grid; grid-template-columns:1fr 1.2fr; gap:80px; align-items:start;
+}
+
+/* Info side */
+.info-block { margin-bottom:44px; }
+.info-block:last-child { margin-bottom:0; }
+.info-label { font-size:10px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); margin-bottom:10px; }
+.info-value { font-size:16px; color:var(--cream); line-height:1.7; font-weight:300; }
+.info-value a { color:var(--gold); transition:color .3s; }
+.info-value a:hover { color:var(--gold-light); }
+
+.contact-method {
+  display:flex; align-items:center; gap:16px; padding:22px 24px;
+  border:1px solid rgba(212,168,67,.12); margin-bottom:10px;
+  cursor:none; transition:border-color .4s, background .4s;
+  text-decoration:none;
+}
+.contact-method:hover { border-color:rgba(212,168,67,.4); background:rgba(212,168,67,.04); }
+.contact-method-icon { font-size:22px; }
+.contact-method-text .label { font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--amber); margin-bottom:2px; }
+.contact-method-text .value { font-size:15px; color:var(--cream); }
+
+/* Form */
+.contact-form { display:flex; flex-direction:column; gap:16px; }
+
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+.field { display:flex; flex-direction:column; gap:6px; }
+.field label { font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--amber); }
+.field input,
+.field textarea,
+.field select {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(212,168,67,.2);
+  padding:14px 18px; font-size:14px; color:#fff;
+  font-family:var(--font-b); font-weight:300;
+  transition:border-color .3s, background .3s;
+  outline:none; cursor:text; border-radius:0;
+  -webkit-appearance:none; appearance:none;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus { border-color:rgba(212,168,67,.7); background:rgba(212,168,67,.04); }
+.field input::placeholder,
+.field textarea::placeholder { color:rgba(255,255,255,.22); }
+.field select { cursor:none; color:rgba(255,255,255,.5); }
+.field select option { background:#1a1108; color:#fff; }
+.field textarea { resize:vertical; min-height:150px; line-height:1.7; }
+
+.form-note { font-size:12px; color:rgba(255,255,255,.25); line-height:1.6; }
+
+.submit-btn {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:18px 40px; background:linear-gradient(135deg,var(--amber),var(--gold-light));
+  border:none; font-family:var(--font-b); font-size:11px;
+  letter-spacing:.38em; text-transform:uppercase; color:var(--black);
+  cursor:none; font-weight:500; transition:opacity .3s, transform .3s;
+  margin-top:8px;
+}
+.submit-btn:hover { opacity:.9; transform:translateY(-1px); }
+.submit-btn:disabled { opacity:.5; }
+
+/* Map placeholder */
+.map-placeholder {
+  background:var(--deep); border:1px solid rgba(212,168,67,.08);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:280px; text-align:center; gap:12px;
+}
+.map-placeholder-icon { font-size:40px; opacity:.4; }
+.map-placeholder-text { font-size:13px; color:rgba(255,255,255,.3); letter-spacing:.05em; }
+.map-placeholder-addr { font-size:14px; color:var(--cream); line-height:1.6; }
+
+/* Hours grid */
+.hours-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.hours-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.05); font-size:14px; }
+.hours-row .day { color:rgba(255,255,255,.4); font-weight:300; }
+.hours-row .time { color:var(--cream); }
+.hours-row .closed { color:rgba(255,255,255,.2); }
+
+@media(max-width:900px){
+  .contact-grid { grid-template-columns:1fr; gap:48px; }
+  .form-row { grid-template-columns:1fr; }
+  .hours-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-dot"></div>
+<canvas id="grain"></canvas>
+<div id="prog"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Agarwooding</a>
+  <ul class="nav-links">
+    <li><a href="about-agarwood.html">About Agarwood</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('images/ceremonial-room.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner max-w">
+    <p class="page-hero-tag reveal">We're Here to Help</p>
+    <h1 class="page-hero-h1 reveal delay-1">Get in <em>Touch</em></h1>
+    <p class="page-hero-sub reveal delay-2">
+      For product enquiries, wholesale partnerships, bespoke agarwood sourcing, or simply
+      to learn more — our team is ready. Weekdays 09:00–18:00 KST.
+    </p>
+  </div>
+</header>
+
+<!-- CONTACT SECTION -->
+<section class="section section--dark">
+  <div class="max-w">
+    <div class="contact-grid">
+
+      <!-- LEFT: Info -->
+      <div>
+        <p class="section-tag reveal">Direct Contact</p>
+        <h2 class="section-h2 section-h2--dark reveal delay-1" style="font-size:clamp(28px,3vw,42px);margin-bottom:2rem">Reach Us <em>Directly</em></h2>
+
+        <a href="mailto:marketing@try-n.com" class="contact-method reveal delay-2">
+          <div class="contact-method-icon">✉</div>
+          <div class="contact-method-text">
+            <div class="label">Email</div>
+            <div class="value">marketing@try-n.com</div>
+          </div>
+        </a>
+        <a href="tel:07088734003" class="contact-method reveal delay-3">
+          <div class="contact-method-icon">☎</div>
+          <div class="contact-method-text">
+            <div class="label">Phone</div>
+            <div class="value">070-8873-4003</div>
+          </div>
+        </a>
+        <a href="https://wa.me/07088734003" class="contact-method reveal delay-4">
+          <div class="contact-method-icon">💬</div>
+          <div class="contact-method-text">
+            <div class="label">WhatsApp / KakaoTalk</div>
+            <div class="value">Available weekdays</div>
+          </div>
+        </a>
+
+        <div style="margin-top:36px" class="reveal delay-2">
+          <div class="info-label">Office Address</div>
+          <div class="info-value">
+            서울특별시 금천구<br/>
+            디지털로9길 68, 1410호<br/>
+            <span style="color:rgba(255,255,255,.4);font-size:13px">Seoul, Gumcheon-gu, Digital-ro 9-gil 68<br/>Unit 1410, South Korea</span>
+          </div>
+        </div>
+
+        <div style="margin-top:36px" class="reveal delay-3">
+          <div class="info-label" style="margin-bottom:14px">Business Hours</div>
+          <div>
+            <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">09:00 – 18:00 KST</span></div>
+            <div class="hours-row"><span class="day">Saturday</span><span class="closed">Closed</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="closed">Closed</span></div>
+            <div class="hours-row"><span class="day">Public Holidays</span><span class="closed">Closed</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px" class="reveal delay-4">
+          <div class="map-placeholder">
+            <div class="map-placeholder-icon">📍</div>
+            <div class="map-placeholder-addr">서울특별시 금천구 디지털로9길 68, 1410호<br/>Seoul Digital Valley, South Korea</div>
+            <div class="map-placeholder-text">Google Maps · Naver Maps</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="reveal-right delay-1">
+        <p class="section-tag">Send a Message</p>
+        <h2 class="section-h2 section-h2--dark" style="font-size:clamp(24px,2.5vw,36px);margin-bottom:2rem">We'll Respond Within <em>24 Hours</em></h2>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required/>
+            </div>
+            <div class="field">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+82 10 0000 0000 (optional)"/>
+          </div>
+
+          <div class="field">
+            <label for="category">Enquiry Type *</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select enquiry type</option>
+              <option value="general">General Enquiry</option>
+              <option value="product">Product Information</option>
+              <option value="wholesale">Wholesale / B2B Partnership</option>
+              <option value="sourcing">Bespoke Sourcing Request</option>
+              <option value="media">Media &amp; Press</option>
+              <option value="support">Customer Support</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" placeholder="Brief subject line" required/>
+          </div>
+
+          <div class="field">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="Describe your enquiry in detail — the more context you provide, the better we can assist you." required></textarea>
+          </div>
+
+          <p class="form-note">
+            Your information is kept strictly confidential and will only be used to respond
+            to your enquiry. See our <a href="#" style="color:var(--gold)">Privacy Policy</a>.
+          </p>
+
+          <button type="submit" class="submit-btn">
+            <span>Send Message</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ BAND -->
+<section class="section section--deep">
+  <div class="max-w">
+    <div class="text-center" style="max-width:540px;margin:0 auto 52px">
+      <p class="section-tag reveal">Common Questions</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">Frequently Asked <em>Questions</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px" class="reveal delay-2">
+      <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px;margin-bottom:28px">
+        <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">Do you ship internationally?</div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">Yes — we supply to customers and business partners worldwide. Contact us for international shipping rates and customs documentation support.</div>
+      </div>
+      <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px;margin-bottom:28px">
+        <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">What is your minimum wholesale order?</div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">Minimum order quantities vary by product type and grade. Please submit a wholesale enquiry through the contact form and we'll send you our full B2B pricing guide.</div>
+      </div>
+      <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px;margin-bottom:28px">
+        <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">Can I verify the authenticity of your products?</div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">Yes. All our products carry ISO 22000 certification and full batch traceability documentation. We can provide species verification certificates and laboratory test reports on request.</div>
+      </div>
+      <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px">
+        <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">When will the capsules and ampoules be available?</div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">Both products are currently in final development. Subscribe via the contact form and we will notify you directly at launch. Early subscribers will receive exclusive pre-launch pricing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <div class="foot-grid">
+      <div><div class="foot-brand">Agarwooding</div><p class="foot-tagline">Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.</p></div>
+      <div><div class="foot-h">Navigation</div><ul class="foot-links"><li><a href="about-agarwood.html">About Agarwood</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="company.html">Company</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="foot-h">Enquiries</div><ul class="foot-links"><li><a href="contact.html">General Enquiry</a></li><li><a href="contact.html">Wholesale / B2B</a></li><li><a href="contact.html">Bespoke Sourcing</a></li><li><a href="contact.html">Media &amp; Press</a></li></ul></div>
+      <div><div class="foot-h">Contact</div><p class="foot-contact-item"><span>Email:</span> marketing@try-n.com</p><p class="foot-contact-item"><span>Phone:</span> 070-8873-4003</p><p class="foot-contact-item"><span>Hours:</span> Weekdays 09:00–18:00</p><p class="foot-contact-item" style="margin-top:8px">서울특별시 금천구 디지털로9길 68, 1410호</p></div>
+    </div>
+    <div class="foot-bottom"><span class="foot-copy">© 2024 Agarwooding Co., Ltd.</span><div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Agarwood — 침향 (沈香) | Agarwooding</title>
+  <meta name="description" content="Discover what agarwood is, how it forms, its 3,000-year history, unique properties, grading, and health benefits."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+<style>
+/* Formation stages */
+.stage-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(212,168,67,.1); border:1px solid rgba(212,168,67,.1); margin-top:64px; }
+.stage-cell { background:var(--deep); padding:40px 28px; position:relative; }
+.stage-num { font-family:var(--font-d); font-size:64px; font-weight:300; line-height:1; background:linear-gradient(135deg,var(--gold-light),var(--amber)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:16px; }
+.stage-name { font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.stage-text { font-size:14px; color:var(--text-muted); line-height:1.75; font-weight:300; }
+
+/* Properties */
+.prop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+.prop-card {
+  border:1px solid rgba(212,168,67,.12);
+  padding:36px 32px;
+  position:relative; overflow:hidden;
+  transition:border-color .4s;
+}
+.prop-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:linear-gradient(to bottom,var(--gold-light),var(--amber)); transition:height .5s var(--ease); }
+.prop-card:hover { border-color:rgba(212,168,67,.35); }
+.prop-card:hover::before { height:100%; }
+.prop-icon { font-size:32px; margin-bottom:16px; }
+.prop-title { font-family:var(--font-d); font-size:22px; font-weight:500; color:var(--cream); margin-bottom:10px; }
+.prop-desc { font-size:14px; color:var(--text-muted); line-height:1.8; font-weight:300; }
+
+/* History timeline */
+.timeline { position:relative; padding-left:40px; }
+.timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:linear-gradient(to bottom,var(--gold),transparent); }
+.tl-item { position:relative; margin-bottom:44px; }
+.tl-item::before { content:''; position:absolute; left:-44px; top:6px; width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 12px rgba(212,168,67,.5); }
+.tl-era { font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--amber); margin-bottom:6px; }
+.tl-title { font-family:var(--font-d); font-size:20px; font-weight:500; color:var(--cream); margin-bottom:8px; }
+.tl-desc { font-size:14px; color:var(--text-muted); line-height:1.75; font-weight:300; }
+
+/* Grades table */
+.grade-table { width:100%; border-collapse:collapse; margin-top:32px; }
+.grade-table th { font-size:10px; letter-spacing:.4em; text-transform:uppercase; color:var(--amber); padding:14px 20px; text-align:left; border-bottom:1px solid rgba(212,168,67,.15); }
+.grade-table td { padding:18px 20px; font-size:14px; border-bottom:1px solid rgba(255,255,255,.05); vertical-align:top; }
+.grade-table tr:last-child td { border-bottom:none; }
+.grade-table td:first-child { font-family:var(--font-d); font-size:18px; color:var(--gold); font-weight:500; }
+.grade-table td:nth-child(2) { color:var(--cream); }
+.grade-table td:nth-child(3) { color:var(--text-muted); font-weight:300; }
+.grade-table tbody tr { transition:background .3s; }
+.grade-table tbody tr:hover { background:rgba(212,168,67,.04); }
+
+/* CTA band */
+.cta-band {
+  background:linear-gradient(135deg,#110C07 0%,#0F0A05 100%);
+  border-top:1px solid rgba(212,168,67,.12);
+  border-bottom:1px solid rgba(212,168,67,.12);
+  padding:80px 52px; text-align:center;
+}
+
+@media(max-width:768px){
+  .stage-grid { grid-template-columns:repeat(2,1fr); }
+  .prop-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-dot"></div>
+<canvas id="grain"></canvas>
+<div id="prog"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Agarwooding</a>
+  <ul class="nav-links">
+    <li><a href="about-agarwood.html" class="active">About Agarwood</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('images/forest-origin.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner max-w">
+    <p class="page-hero-tag reveal">침향 (沈香) · Aquilaria · Oud</p>
+    <h1 class="page-hero-h1 reveal delay-1">What is <em>Agarwood?</em></h1>
+    <p class="page-hero-sub reveal delay-2">
+      The dark, resinous heartwood formed inside Aquilaria trees — considered more precious than gold
+      and revered across cultures for over 3,000 years.
+    </p>
+  </div>
+</header>
+
+<!-- WHAT IS AGARWOOD -->
+<section class="section section--dark">
+  <div class="max-w col-2-wide">
+    <div>
+      <p class="section-tag reveal">The Essence</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">A Wound That Creates <em>Wonder</em></h2>
+      <div class="gold-line reveal delay-2"></div>
+      <p class="section-lead section-lead--dark reveal delay-2">
+        Agarwood — known as 침향 (沈香) in Korean and Chinese medicine — forms when specific Aquilaria
+        trees are wounded by fungal infection or physical damage. In response, the tree saturates
+        its injured heartwood with a dark, aromatic resin. Over decades, this resin hardens into
+        one of the rarest, most valuable natural substances on Earth.
+      </p>
+      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem">
+        The result is a wood so dense it sinks in water — its name literally meaning "sinking wood"
+        (沈香). It has been traded along the Silk Road, burned in royal palaces, and documented in
+        the world's oldest medical texts. Today, the finest Grade A agarwood commands over
+        $100,000 per kilogram.
+      </p>
+    </div>
+    <div class="img-frame reveal-right" style="height:480px">
+      <img src="images/ceremonial-room.jpg" alt="Agarwood ceremonial" style="height:100%"/>
+      <div class="img-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION STAGES -->
+<section class="section section--deep">
+  <div class="max-w">
+    <div class="text-center" style="max-width:600px;margin:0 auto">
+      <p class="section-tag reveal">Formation Process</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">How Agarwood is Born</h2>
+      <p class="section-lead section-lead--dark reveal delay-2">Four natural stages transform a living tree into the world's rarest aromatic material.</p>
+    </div>
+    <div class="stage-grid" style="margin-top:56px">
+      <div class="stage-cell reveal delay-1">
+        <div class="stage-num">01</div>
+        <div class="stage-name">Wound</div>
+        <div class="stage-text">Natural or artificial damage to the Aquilaria tree — from insect attack, fungal penetration, or deliberate inoculation — triggers the tree's defensive response.</div>
+      </div>
+      <div class="stage-cell reveal delay-2">
+        <div class="stage-num">02</div>
+        <div class="stage-name">Infection</div>
+        <div class="stage-text">Phialophora parasitica and other fungi colonise the wound site. The deeper the microbial penetration, the richer and more complex the resulting resin.</div>
+      </div>
+      <div class="stage-cell reveal delay-3">
+        <div class="stage-num">03</div>
+        <div class="stage-name">Resin Secretion</div>
+        <div class="stage-text">The tree saturates injured wood with dark oleoresin — a chemical defence that also gives agarwood its legendary fragrance, density, and medicinal properties.</div>
+      </div>
+      <div class="stage-cell reveal delay-4">
+        <div class="stage-num">04</div>
+        <div class="stage-name">Maturation</div>
+        <div class="stage-text">Over 10 to 40+ years the resin-saturated wood hardens completely. The longer the maturation, the higher the grade — and the greater its value.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="section section--dark">
+  <div class="max-w">
+    <div class="flex-between" style="margin-bottom:52px;gap:40px;flex-wrap:wrap">
+      <div>
+        <p class="section-tag reveal">Unique Characteristics</p>
+        <h2 class="section-h2 section-h2--dark reveal delay-1">Four Properties That Make It <em>Irreplaceable</em></h2>
+      </div>
+      <p class="section-lead section-lead--dark reveal delay-2" style="max-width:400px">No synthetic compound has ever replicated the full sensory and therapeutic complexity of natural agarwood.</p>
+    </div>
+    <div class="prop-grid" data-stagger>
+      <div class="prop-card">
+        <div class="prop-icon">🌿</div>
+        <div class="prop-title">Unique Fragrance</div>
+        <div class="prop-desc">Deep, complex, and impossible to replicate synthetically. Agarwood's scent profile — woody, balsamic, sweet, and animalic — has been prized in perfumery for millennia. It promotes mental and physical wellness through aromatherapy.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">💎</div>
+        <div class="prop-title">Extreme Rarity</div>
+        <div class="prop-desc">Only 2% of wild Aquilaria trees naturally produce agarwood resin. The decades-long formation process, combined with historic overharvesting, makes high-grade specimens extraordinarily scarce and valuable.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">⚖️</div>
+        <div class="prop-title">Worth More Than Gold</div>
+        <div class="prop-desc">Grade A wild agarwood commands $50,000–$100,000+ per kilogram — far exceeding the price of gold. It is considered the world's most expensive natural raw material among aromatic substances.</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-icon">📜</div>
+        <div class="prop-title">3,000 Years of Tradition</div>
+        <div class="prop-desc">Documented in Li Shizhen's Bencaogangmu, Heo Jun's Donguibogam, ancient Egyptian texts, and the Goryeo Dynasty's Maehyangbi records. Used across East Asia, the Middle East, and India for medicine, ritual, and royalty.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section class="section section--deep">
+  <div class="max-w col-2" style="align-items:start">
+    <div>
+      <p class="section-tag reveal">Historical Journey</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">3,000 Years of <em>Sacred Use</em></h2>
+      <div class="gold-line reveal delay-2"></div>
+      <p class="section-lead section-lead--dark reveal delay-2">
+        From ancient Egypt to the courts of Joseon Korea, agarwood has been central to
+        medicine, spirituality, and luxury culture across every major civilisation.
+      </p>
+    </div>
+    <div class="timeline reveal-right delay-1">
+      <div class="tl-item">
+        <div class="tl-era">Ancient Egypt · 1,000 BCE</div>
+        <div class="tl-title">Royal Embalming & Ritual</div>
+        <div class="tl-desc">Ancient Egyptians imported oud resin along early trade routes for use in royal embalming and sacred ritual burning in temple ceremonies.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">Han Dynasty · 200 BCE – 200 CE</div>
+        <div class="tl-title">Silk Road Trade</div>
+        <div class="tl-desc">Agarwood became one of the most valuable commodities on the Silk Road, traded from Southeast Asian forests to Chinese imperial courts and Arab markets.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">Goryeo Dynasty · 918–1392</div>
+        <div class="tl-title">Korean Maehyangbi Culture</div>
+        <div class="tl-desc">Agarwood played a central role in Buddhist Korea — documented in the Maehyangbi burial records as a spiritual offering and healing medium.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">Joseon Dynasty · 1392–1897</div>
+        <div class="tl-title">Royal Medical Records</div>
+        <div class="tl-desc">Consumption of agarwood by Joseon royalty is documented in official Sillok annals. Heo Jun's Donguibogam (UNESCO heritage) details its medicinal applications.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">Ming Dynasty · 1593</div>
+        <div class="tl-title">Bencaogangmu Classification</div>
+        <div class="tl-desc">After 27 years of research, Li Shizhen classified agarwood's medicinal properties in the world's most comprehensive pre-modern pharmacopoeia.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">Today · Global</div>
+        <div class="tl-title">Modern Science Confirms Ancient Wisdom</div>
+        <div class="tl-desc">Contemporary research validates agarwood's anti-inflammatory, anxiolytic, and neuroactive properties, bridging millennia of traditional knowledge with modern medicine.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADES -->
+<section class="section section--dark">
+  <div class="max-w">
+    <div class="text-center" style="max-width:540px;margin:0 auto 52px">
+      <p class="section-tag reveal">Grading System</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">Understanding Agarwood <em>Grades</em></h2>
+    </div>
+    <div class="reveal">
+      <table class="grade-table">
+        <thead>
+          <tr>
+            <th>Grade</th>
+            <th>Name</th>
+            <th>Characteristics</th>
+            <th>Typical Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S+</td>
+            <td style="color:var(--gold-light)">Kynam / 기남</td>
+            <td>Densest resin, >90% saturation, sinks instantly. Rarest on Earth.</td>
+            <td>Collector, royal gift, investment</td>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>Super Grade</td>
+            <td>70–90% resin, rich dark colour, complex fragrance, sinks in water.</td>
+            <td>Premium oud oil, high-end incense</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Grade 1</td>
+            <td>50–70% resin. Strong fragrance, partially sinkers. Vietnam/Cambodia origin.</td>
+            <td>Bakhoor, medicinal extract, capsules</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Grade 2</td>
+            <td>30–50% resin. Good fragrance profile. Widely used in incense blends.</td>
+            <td>Incense sticks, aromatherapy, tea</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Grade 3</td>
+            <td>10–30% resin. Light colour, mild scent. Cultivated plantation wood.</td>
+            <td>Fragrance blending, accessories</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <p style="font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--amber);margin-bottom:1.4rem">Experience the Real Thing</p>
+  <h2 style="font-family:var(--font-d);font-size:clamp(28px,4vw,52px);font-weight:300;color:var(--cream);margin-bottom:1rem">Ready to discover our collection?</h2>
+  <p style="font-size:15px;color:var(--text-muted);max-width:480px;margin:0 auto 2.4rem;line-height:1.8">Explore our ISO-certified agarwood products or get in touch for bespoke sourcing.</p>
+  <div class="btn-row" style="justify-content:center">
+    <a href="products.html" class="btn btn--gold"><span>View Products</span></a>
+    <a href="contact.html"  class="btn btn--gold"><span>Contact Us</span></a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="max-w">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Agarwooding</div>
+        <p class="foot-tagline">Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.</p>
+      </div>
+      <div>
+        <div class="foot-h">Navigation</div>
+        <ul class="foot-links">
+          <li><a href="about-agarwood.html">About Agarwood</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="company.html">Company</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Resources</div>
+        <ul class="foot-links">
+          <li><a href="blog.html">Knowledge Base</a></li>
+          <li><a href="blog.html">Usage Guide</a></li>
+          <li><a href="blog.html">Authenticity Guide</a></li>
+          <li><a href="blog.html">Grade Comparison</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <p class="foot-contact-item"><span>Email:</span> marketing@try-n.com</p>
+        <p class="foot-contact-item"><span>Phone:</span> 070-8873-4003</p>
+        <p class="foot-contact-item"><span>Hours:</span> Weekdays 09:00–18:00</p>
+        <p class="foot-contact-item" style="margin-top:8px">서울특별시 금천구 디지털로9길 68, 1410호</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="foot-copy">© 2024 Agarwooding Co., Ltd.</span>
+      <div class="foot-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

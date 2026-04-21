@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agarwooding — Premium Agarwood Specialty Brand</title>
+  <meta name="description" content="Agarwooding — Premium agarwood capsules, ampoules and raw materials sourced from Vietnam, Indonesia and pristine Southeast Asian forests."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+<style>
+/* ─── HOME-ONLY STYLES ───────────────────────── */
+html { overflow: hidden; }
+body { overflow: hidden; }
+
+/* Scenes scroll container */
+.scenes {
+  height: 100vh; overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  position: relative; z-index: 1;
+  scrollbar-width: none;
+}
+.scenes::-webkit-scrollbar { display: none; }
+
+.scene {
+  height: 100vh; min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+
+/* WebGL canvas */
+#wgl { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Nav dots */
+.nav-side { display: flex; flex-direction: column; gap: 7px; }
+.ndot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(212,168,67,.3); cursor: none;
+  transition: background .3s, transform .3s;
+}
+.ndot.on { background: var(--gold); transform: scale(1.6); }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 44px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: rgba(255,255,255,.22); font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
+}
+.s-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: drip 2.3s ease-in-out infinite; transform-origin: top;
+  will-change: transform, opacity;
+}
+@keyframes drip {
+  0%   { transform:scaleY(0); }
+  60%  { transform:scaleY(1); }
+  100% { transform:scaleY(1) translateY(4px); }
+}
+
+/* ── SCENE 1: HERO ── */
+.s-hero { background: #0A0805; }
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  z-index: 0; pointer-events: none;
+}
+.s-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(10,8,5,.55) 0%, rgba(10,8,5,.20) 45%, rgba(10,8,5,.65) 100%);
+  z-index: 1;
+}
+.s-hero .hero-wrap { z-index: 2; }
+.s-hero .scroll-hint { z-index: 2; }
+.hero-wrap { text-align:center; z-index:2; padding:0 24px; }
+.hero-eye {
+  font-size:11px; letter-spacing:.55em; color:var(--amber);
+  text-transform:uppercase; margin-bottom:2rem;
+  opacity:0; transform:translateY(18px);
+}
+.hero-h1 {
+  font-family:var(--font-d); font-size:clamp(50px,9.5vw,136px);
+  font-weight:300; letter-spacing:.28em; line-height:1;
+  background:linear-gradient(120deg,#F0C870 0%,#D4A843 35%,#A86A08 65%,#F0C870 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; background-size:220% 220%;
+  animation:goldShimmer 5s ease infinite; margin-bottom:2rem;
+}
+.hero-h1:hover { animation:aberr .6s ease, goldShimmer 5s ease infinite; }
+@keyframes aberr {
+  0%   { filter:none; }
+  25%  { filter:drop-shadow(-4px 0 0 rgba(200,86,10,.55)) drop-shadow(4px 0 0 rgba(50,180,200,.45)); }
+  60%  { filter:drop-shadow(-6px 0 0 rgba(200,86,10,.6))  drop-shadow(6px 0 0 rgba(50,180,200,.5)); }
+  100% { filter:none; }
+}
+.ltr { display:inline-block; opacity:0; transform:translateY(28px); filter:blur(8px); }
+.hero-kr {
+  font-family:var(--font-d); font-style:italic; font-size:clamp(14px,1.6vw,20px);
+  color:rgba(255,255,255,.35); letter-spacing:.18em; margin-bottom:.6rem;
+  opacity:0; transform:translateY(16px);
+}
+.hero-sub {
+  font-family:var(--font-d); font-style:italic; font-size:clamp(15px,1.8vw,22px);
+  color:rgba(255,255,255,.42); letter-spacing:.12em;
+  opacity:0; transform:translateY(18px);
+}
+
+/* ── SCENE 2: MANIFESTO ── */
+.s-mani { background:linear-gradient(160deg,#130D07 0%,#0A0805 55%,#1C1208 100%); }
+.mani-wrap { text-align:center; max-width:920px; padding:0 48px; z-index:2; }
+.mani-line {
+  width:44px; height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  margin:0 auto 2rem; opacity:.6;
+}
+.mani-q {
+  font-family:var(--font-d); font-size:clamp(22px,3.8vw,56px);
+  font-weight:400; line-height:1.35; color:var(--cream); margin-bottom:2.2rem;
+  opacity:0; transform:translateY(36px);
+}
+.mani-q em {
+  background:linear-gradient(125deg,var(--gold-light),var(--amber));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-style:italic;
+}
+.mani-tag { font-size:11px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); opacity:0; }
+
+/* ── SCENE 3: ABOUT AGARWOOD ── */
+.s-about { background:#070503; }
+.about-bg {
+  position:absolute; inset:0;
+  background-image:url('images/forest-origin.jpg');
+  background-size:cover; background-position:center;
+  opacity:.1; filter:sepia(50%); transform:scale(1.04);
+}
+.about-inner {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; max-width:1100px; padding:0 60px; z-index:2; align-items:center;
+}
+.about-label { font-size:10px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); margin-bottom:1.4rem; opacity:0; transform:translateX(-22px); }
+.about-h2 { font-family:var(--font-d); font-size:clamp(32px,3.8vw,52px); font-weight:400; line-height:1.2; color:var(--cream); margin-bottom:1.6rem; opacity:0; transform:translateX(-28px); }
+.about-p { font-size:15px; line-height:1.9; color:rgba(255,255,255,.44); font-weight:300; opacity:0; transform:translateX(-22px); }
+.stage-list { display:flex; flex-direction:column; gap:22px; opacity:0; transform:translateX(28px); }
+.stage-item { display:flex; gap:20px; align-items:flex-start; }
+.stage-n {
+  font-family:var(--font-d); font-size:32px; font-weight:300; line-height:1;
+  background:linear-gradient(135deg,var(--gold-light),var(--amber));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  min-width:36px;
+}
+.stage-info .stage-title { font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream); margin-bottom:4px; }
+.stage-info .stage-desc  { font-size:13px; color:rgba(255,255,255,.38); line-height:1.6; font-weight:300; }
+
+/* ── SCENE 4: PRODUCTS ── */
+.s-prod { background:var(--ivory); }
+.prod-wrap { width:100%; max-width:1200px; padding:0 56px; z-index:2; }
+.prod-head { text-align:center; margin-bottom:52px; opacity:0; transform:translateY(24px); }
+.prod-tag-sm { font-size:10px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); margin-bottom:.9rem; }
+.prod-h2 { font-family:var(--font-d); font-size:clamp(28px,3.5vw,48px); font-weight:400; color:#1a1108; letter-spacing:.06em; }
+.prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.pcard {
+  background:#fff; border-radius:1px; overflow:visible; cursor:none;
+  transform-style:preserve-3d; transition:box-shadow .45s ease;
+  opacity:0; transform:translateY(44px); will-change:transform;
+}
+.pcard:hover { box-shadow:0 36px 72px rgba(0,0,0,.12), 0 0 48px rgba(200,134,10,.07); }
+.pcard-img { position:relative; aspect-ratio:1; overflow:hidden; border-radius:1px 1px 0 0; }
+.pcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); }
+.pcard:hover .pcard-img img { transform:scale(1.07); }
+.pcard-rip { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; }
+.pcard:hover .pcard-rip { opacity:1; }
+.pcard-body { padding:22px 24px 26px; }
+.pcard-cat { font-size:9px; letter-spacing:.45em; text-transform:uppercase; color:var(--amber); margin-bottom:7px; }
+.pcard-name { font-family:var(--font-d); font-size:21px; font-weight:500; color:#1a1108; margin-bottom:8px; }
+.pcard-desc { font-size:13px; color:#999; line-height:1.75; font-weight:300; }
+.pcard-badge { margin-top:14px; }
+
+/* ── SCENE 5: STATS + VALUES ── */
+.s-values { background:linear-gradient(160deg,#0F0A05 0%,#0A0805 100%); }
+.values-inner { max-width:1100px; padding:0 60px; z-index:2; width:100%; }
+.values-top { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-bottom:72px; }
+.v-label { font-size:10px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); margin-bottom:1.2rem; opacity:0; transform:translateX(-22px); }
+.v-h2 { font-family:var(--font-d); font-size:clamp(30px,3.5vw,50px); font-weight:400; color:var(--cream); margin-bottom:1.4rem; opacity:0; transform:translateX(-24px); }
+.v-p { font-size:15px; color:rgba(255,255,255,.42); line-height:1.9; font-weight:300; opacity:0; transform:translateX(-20px); }
+.value-cards { display:flex; flex-direction:column; gap:20px; }
+.v-card { border-left:1px solid rgba(212,168,67,.25); padding-left:24px; opacity:0; transform:translateX(24px); }
+.v-card-title { font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.v-card-desc  { font-size:13px; color:rgba(255,255,255,.38); line-height:1.65; font-weight:300; }
+.stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(212,168,67,.1); border:1px solid rgba(212,168,67,.1); }
+.stat-col { background:rgba(15,10,5,.9); padding:36px 28px; text-align:center; opacity:0; transform:translateY(20px); }
+.stat-col .sn { font-family:var(--font-d); font-size:48px; font-weight:300; line-height:1; background:linear-gradient(135deg,var(--gold-light),var(--amber)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:8px; }
+.stat-col .sl { font-size:10px; letter-spacing:.35em; text-transform:uppercase; color:rgba(255,255,255,.35); }
+
+/* ── SCENE 6: BLOG PREVIEW ── */
+.s-blog { background:var(--cream); }
+.blog-wrap { width:100%; max-width:1200px; padding:0 56px; z-index:2; }
+.blog-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:48px; opacity:0; transform:translateY(20px); }
+.blog-h2 { font-family:var(--font-d); font-size:clamp(28px,3vw,44px); font-weight:400; color:#1a1108; }
+.blog-more { font-size:10px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; cursor:none; transition:color .3s; }
+.blog-more:hover { color:#8B6010; }
+.blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.bcard { background:#fff; cursor:none; opacity:0; transform:translateY(32px); transition:box-shadow .4s; }
+.bcard:hover { box-shadow:0 24px 48px rgba(0,0,0,.09); }
+.bcard-img { aspect-ratio:16/10; overflow:hidden; }
+.bcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.bcard:hover .bcard-img img { transform:scale(1.06); }
+.bcard-body { padding:20px 22px 24px; }
+.bcard-cat { font-size:9px; letter-spacing:.4em; text-transform:uppercase; color:var(--amber); margin-bottom:8px; }
+.bcard-title { font-family:var(--font-d); font-size:18px; font-weight:500; color:#1a1108; line-height:1.3; margin-bottom:10px; }
+.bcard-excerpt { font-size:13px; color:#888; line-height:1.7; font-weight:300; }
+
+/* ── SCENE 7: CONTACT CTA ── */
+.s-cta { background:transparent; }
+.cta-wrap { text-align:center; z-index:2; padding:0 40px; max-width:700px; }
+.cta-eye { font-size:10px; letter-spacing:.55em; text-transform:uppercase; color:var(--amber); margin-bottom:2rem; opacity:0; }
+.cta-h2 { font-family:var(--font-d); font-size:clamp(34px,5vw,70px); font-weight:300; color:var(--cream); margin-bottom:1.2rem; letter-spacing:.08em; line-height:1.1; opacity:0; transform:translateY(32px); }
+.cta-h2 em { background:linear-gradient(125deg,var(--gold-light),var(--amber)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-style:italic; }
+.cta-p { font-size:15px; color:rgba(255,255,255,.38); line-height:1.85; margin-bottom:3rem; opacity:0; }
+.cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.cta-foot { margin-top:56px; font-size:9px; letter-spacing:.3em; color:rgba(255,255,255,.12); text-transform:uppercase; }
+
+@media(max-width:900px){
+  .about-inner,.values-top { grid-template-columns:1fr; gap:40px; padding:0 32px; }
+  .prod-grid,.blog-grid { grid-template-columns:1fr; }
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+  .prod-wrap,.blog-wrap { padding:0 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cur"></div><div id="cur-dot"></div>
+<!-- Grain -->
+<canvas id="grain"></canvas>
+<!-- Progress -->
+<div id="prog"></div>
+<!-- WebGL -->
+<canvas id="wgl"></canvas>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Agarwooding</a>
+  <ul class="nav-links">
+    <li><a href="about-agarwood.html">About Agarwood</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-side" id="ndots">
+    <div class="ndot on" data-i="0"></div>
+    <div class="ndot" data-i="1"></div>
+    <div class="ndot" data-i="2"></div>
+    <div class="ndot" data-i="3"></div>
+    <div class="ndot" data-i="4"></div>
+    <div class="ndot" data-i="5"></div>
+    <div class="ndot" data-i="6"></div>
+  </div>
+</nav>
+
+<!-- SCENES -->
+<div class="scenes" id="scenes">
+
+  <!-- 1 · HERO -->
+  <section class="scene s-hero" id="sc0">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="video/hero.mp4" type="video/mp4"/>
+    </video>
+    <div class="hero-wrap">
+      <p class="hero-eye" id="h-eye">Premium Agarwood Specialty Brand</p>
+      <h1 class="hero-h1" id="h-h1">
+        <span class="ltr">A</span><span class="ltr">G</span><span class="ltr">A</span><span class="ltr">R</span><span class="ltr">W</span><span class="ltr">O</span><span class="ltr">O</span><span class="ltr">D</span><span class="ltr">I</span><span class="ltr">N</span><span class="ltr">G</span>
+      </h1>
+      <p class="hero-kr" id="h-kr">침향 (沈香) — 자연의 선물</p>
+      <p class="hero-sub" id="h-sub">Health Wisdom Spanning Millennia</p>
+    </div>
+    <div class="scroll-hint"><div class="s-line"></div><span>Scroll</span></div>
+  </section>
+
+  <!-- 2 · MANIFESTO -->
+  <section class="scene s-mani" id="sc1">
+    <div class="mani-wrap">
+      <div class="mani-line"></div>
+      <blockquote class="mani-q">
+        "Where the tree bleeds,<br/><em>the world's most precious fragrance</em> is born."
+      </blockquote>
+      <div class="mani-line"></div>
+      <p class="mani-tag">Agarwood &nbsp;·&nbsp; 침향 &nbsp;·&nbsp; 沈香 &nbsp;·&nbsp; Aquilaria</p>
+    </div>
+  </section>
+
+  <!-- 3 · ABOUT AGARWOOD -->
+  <section class="scene s-about" id="sc2">
+    <div class="about-bg"></div>
+    <div class="about-inner">
+      <div>
+        <p class="about-label">What is Agarwood?</p>
+        <h2 class="about-h2">A Tree's Wound Becomes the World's Rarest Gift</h2>
+        <p class="about-p">
+          Agarwood forms when an Aquilaria tree secretes resin to protect itself from injury.
+          Over decades, this resin hardens into dark, fragrant heartwood — more precious than gold.
+          Used in traditional medicine for over 3,000 years, it remains one of the most
+          sought-after natural substances on Earth.
+        </p>
+      </div>
+      <div class="stage-list" id="stages">
+        <div class="stage-item"><div class="stage-n">01</div><div class="stage-info"><div class="stage-title">Wound</div><div class="stage-desc">Natural or artificial damage to the Aquilaria tree triggers a protective response.</div></div></div>
+        <div class="stage-item"><div class="stage-n">02</div><div class="stage-info"><div class="stage-title">Infection</div><div class="stage-desc">Fungal and microbial penetration at the wound site intensifies resin production.</div></div></div>
+        <div class="stage-item"><div class="stage-n">03</div><div class="stage-info"><div class="stage-title">Resin Secretion</div><div class="stage-desc">The tree saturates injured wood with dark, aromatic oleoresin as a defence.</div></div></div>
+        <div class="stage-item"><div class="stage-n">04</div><div class="stage-info"><div class="stage-title">Maturation</div><div class="stage-desc">Over 10–40 years, resin hardens into prized agarwood — fragrant, dark, and dense.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PRODUCTS -->
+  <section class="scene s-prod" id="sc3">
+    <div class="prod-wrap">
+      <div class="prod-head">
+        <p class="prod-tag-sm">The Collection</p>
+        <h2 class="prod-h2">Pure Expressions of 침향</h2>
+      </div>
+      <div class="prod-grid">
+        <div class="pcard" data-tilt>
+          <div class="pcard-img">
+            <img src="images/capsule-product.jpg" alt="Agarwood Capsules" loading="lazy"/>
+            <canvas class="pcard-rip"></canvas>
+          </div>
+          <div class="pcard-body">
+            <p class="pcard-cat">Supplement &nbsp;·&nbsp; 침향 캡슐</p>
+            <h3 class="pcard-name">Agarwood Capsule</h3>
+            <p class="pcard-desc">Concentrated capsules for convenient daily consumption. Boost vitality and energy with pharmaceutical-grade agarwood extract.</p>
+            <div class="pcard-badge"><span class="badge badge--light">Coming Soon</span></div>
+          </div>
+        </div>
+        <div class="pcard" data-tilt>
+          <div class="pcard-img">
+            <img src="images/ampoule-product.jpg" alt="Agarwood Ampoule" loading="lazy"/>
+            <canvas class="pcard-rip"></canvas>
+          </div>
+          <div class="pcard-body">
+            <p class="pcard-cat">Skincare &nbsp;·&nbsp; 침향 앰플</p>
+            <h3 class="pcard-name">Agarwood Ampoule</h3>
+            <p class="pcard-desc">Premium liquid formula targeting deep relaxation and focus enhancement. Patented extraction technology for maximum bioavailability.</p>
+            <div class="pcard-badge"><span class="badge badge--light">Coming Soon</span></div>
+          </div>
+        </div>
+        <div class="pcard" data-tilt>
+          <div class="pcard-img">
+            <img src="images/gift-box.jpg" alt="Agarwood Gift Set" loading="lazy"/>
+            <canvas class="pcard-rip"></canvas>
+          </div>
+          <div class="pcard-body">
+            <p class="pcard-cat">Raw Material &nbsp;·&nbsp; 원목</p>
+            <h3 class="pcard-name">Premium Raw Agarwood</h3>
+            <p class="pcard-desc">Wild-sourced agarwood from Vietnam and Indonesia. Graded and certified for traditional bakhoor burning and medicinal use.</p>
+            <div class="pcard-badge"><span class="badge badge--light">Enquire</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · VALUES + STATS -->
+  <section class="scene s-values" id="sc4">
+    <div class="values-inner">
+      <div class="values-top">
+        <div>
+          <p class="v-label">Our Core Values</p>
+          <h2 class="v-h2">Nature, Quality &amp; Trust — the Three Pillars</h2>
+          <p class="v-p">
+            Every step of our process — from forest to final product — is guided by an
+            unwavering respect for nature, rigorous quality standards, and full transparency
+            toward our customers and partners.
+          </p>
+        </div>
+        <div class="value-cards">
+          <div class="v-card"><div class="v-card-title">Nature</div><div class="v-card-desc">Premium agarwood sourced from Vietnam, Indonesia and other pristine regions under sustainable cultivation frameworks.</div></div>
+          <div class="v-card"><div class="v-card-title">Quality</div><div class="v-card-desc">Rigorous ISO 22000-certified testing systems and quality certification at every production stage.</div></div>
+          <div class="v-card"><div class="v-card-title">Trust</div><div class="v-card-desc">Full traceability: transparent sourcing information and production history available for every product.</div></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-col"><div class="sn">50+</div><div class="sl">Products</div></div>
+        <div class="stat-col"><div class="sn">98%</div><div class="sl">Satisfaction</div></div>
+        <div class="stat-col"><div class="sn">10+</div><div class="sl">Global Partners</div></div>
+        <div class="stat-col"><div class="sn">2020</div><div class="sl">Est. Seoul</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · BLOG PREVIEW -->
+  <section class="scene s-blog" id="sc5">
+    <div class="blog-wrap">
+      <div class="blog-head">
+        <h2 class="blog-h2">Knowledge &amp; Wisdom</h2>
+        <a href="blog.html" class="blog-more">View all 18 articles →</a>
+      </div>
+      <div class="blog-grid">
+        <a href="blog.html" class="bcard">
+          <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+          <div class="bcard-body"><p class="bcard-cat">History</p><h3 class="bcard-title">Agarwood's 3,000-Year History</h3><p class="bcard-excerpt">From ancient Egypt through the Silk Road to modern luxury — the remarkable journey of the world's most prized aromatic.</p></div>
+        </a>
+        <a href="blog.html" class="bcard">
+          <div class="bcard-img"><img src="images/ceremonial-room.jpg" alt="" loading="lazy"/></div>
+          <div class="bcard-body"><p class="bcard-cat">Science</p><h3 class="bcard-title">Health Benefits: Scientific Evidence</h3><p class="bcard-excerpt">Validated health advantages and documented medicinal applications of agarwood across peer-reviewed research.</p></div>
+        </a>
+        <a href="blog.html" class="bcard">
+          <div class="bcard-img"><img src="images/gift-box.jpg" alt="" loading="lazy"/></div>
+          <div class="bcard-body"><p class="bcard-cat">Lifestyle</p><h3 class="bcard-title">Agarwood as a Gift for Elders</h3><p class="bcard-excerpt">Guidance on selecting premium agarwood products as meaningful, health-boosting gifts for parents and grandparents.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CTA -->
+  <section class="scene s-cta" id="sc6">
+    <div class="cta-wrap">
+      <p class="cta-eye">Experience Agarwood's Power</p>
+      <h2 class="cta-h2">Begin Your Journey<br/>into <em>침향</em></h2>
+      <p class="cta-p">
+        For private orders, wholesale inquiries, and bespoke agarwood sourcing —
+        reach us directly. Weekdays 09:00–18:00 KST.
+      </p>
+      <div class="cta-btns">
+        <a href="contact.html"            class="btn btn--gold"><span>Get in Touch</span></a>
+        <a href="about-agarwood.html"     class="btn btn--gold"><span>Discover Agarwood</span></a>
+      </div>
+      <p class="cta-foot">© 2024 Agarwooding Co., Ltd. — Seoul, South Korea</p>
+    </div>
+  </section>
+
+</div><!-- /scenes -->
+
+<script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+/* ── THREE.JS SMOKE PARTICLES ── */
+(function(){
+  const cv=document.getElementById('wgl');
+  const ren=new THREE.WebGLRenderer({canvas:cv,antialias:false,alpha:true});
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  ren.setSize(innerWidth,innerHeight);
+  ren.setClearColor(0x000000,0);
+  const sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,100);
+  cam.position.z=5;
+  const N=1000,pos=new Float32Array(N*3),life=new Float32Array(N),spd=new Float32Array(N),ang=new Float32Array(N);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*10;pos[i*3+1]=Math.random()*-8;pos[i*3+2]=(Math.random()-.5)*2;life[i]=Math.random();spd[i]=.004+Math.random()*.009;ang[i]=Math.random()*6.2832;}
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('aLife',new THREE.BufferAttribute(life,1));
+  geo.setAttribute('aSpd',new THREE.BufferAttribute(spd,1));
+  geo.setAttribute('aAng',new THREE.BufferAttribute(ang,1));
+  const vsh=`attribute float aLife;attribute float aSpd;attribute float aAng;uniform float uT;uniform float uS;varying float vA;void main(){float l=mod(aLife+uT*aSpd,1.0);vec3 p=position;p.y=-4.0+l*9.0;p.x=position.x+sin(l*6.2832+aAng)*1.1+sin(uT*.25+aAng*1.5)*.25;p.z=position.z+cos(uT*.18+aAng)*.2;vA=sin(l*3.14159)*mix(.55,.2,uS);vec4 mv=modelViewMatrix*vec4(p,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=mix(11.0,2.0,l)*(240.0/-mv.z);}`;
+  const fsh=`uniform vec3 uCol;varying float vA;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;float e=1.0-smoothstep(.28,.5,d);gl_FragColor=vec4(uCol,e*vA);}`;
+  const mat=new THREE.ShaderMaterial({vertexShader:vsh,fragmentShader:fsh,uniforms:{uT:{value:0},uCol:{value:new THREE.Color(0xC8860A)},uS:{value:0}},transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+  sc.add(new THREE.Points(geo,mat));
+  const COLS=[new THREE.Color(0xC8860A),new THREE.Color(0xD4A843),new THREE.Color(0xA06820),new THREE.Color(0xC8A060),new THREE.Color(0xB07830),new THREE.Color(0xD4A843),new THREE.Color(0xC8860A)];
+  window._setSec=s=>{const c=COLS[s];mat.uniforms.uCol.value.set(c.r,c.g,c.b);mat.uniforms.uS.value=s/6;};
+  const clk=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);mat.uniforms.uT.value=clk.getElapsedTime();ren.render(sc,cam);})();
+  window.addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);});
+})();
+
+/* ── SCROLL & SCENE SYSTEM ── */
+(function(){
+  const scenes=document.querySelectorAll('.scene');
+  const dots=document.querySelectorAll('.ndot');
+  const prog=document.getElementById('prog');
+  let cur=-1;
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting&&e.intersectionRatio>=.5){
+        const i=[...scenes].indexOf(e.target);
+        if(i===cur)return; cur=i;
+        dots.forEach((d,j)=>d.classList.toggle('on',j===i));
+        prog.style.height=(i/(scenes.length-1)*100)+'%';
+        if(window._setSec)window._setSec(i);
+        enter(i);
+      }
+    });
+  },{threshold:.5});
+  scenes.forEach(s=>io.observe(s));
+  dots.forEach((d,i)=>d.addEventListener('click',()=>scenes[i].scrollIntoView({behavior:'smooth'})));
+  setTimeout(()=>enter(0),180);
+})();
+
+/* ── ENTRANCE ANIMATIONS ── */
+const done=new Set();
+function enter(i){
+  if(done.has(i))return; done.add(i);
+  const G=gsap.to.bind(gsap), F=gsap.fromTo.bind(gsap);
+  if(i===0){
+    G('#h-eye',{opacity:1,y:0,duration:1,delay:.3,ease:'power3.out'});
+    G('.ltr',{opacity:1,y:0,filter:'blur(0px)',duration:.75,stagger:.055,delay:.6,ease:'power3.out'});
+    G('#h-kr', {opacity:1,y:0,duration:1,delay:1.7,ease:'power3.out'});
+    G('#h-sub',{opacity:1,y:0,duration:1,delay:1.95,ease:'power3.out'});
+  }
+  if(i===1){F('.mani-q',{opacity:0,y:36},{opacity:1,y:0,duration:1.2,ease:'power3.out'});F('.mani-tag',{opacity:0},{opacity:1,duration:1.4,delay:.9});}
+  if(i===2){G('.about-label',{opacity:1,x:0,duration:.9,ease:'power3.out'});G('.about-h2',{opacity:1,x:0,duration:1,delay:.15,ease:'power3.out'});G('.about-p',{opacity:1,x:0,duration:1,delay:.3,ease:'power3.out'});G('#stages',{opacity:1,x:0,duration:.8,delay:.2,ease:'power3.out'});}
+  if(i===3){G('.prod-head',{opacity:1,y:0,duration:.8,ease:'power3.out'});G('.pcard',{opacity:1,y:0,duration:.8,stagger:.13,delay:.3,ease:'power3.out'});}
+  if(i===4){G('.v-label',{opacity:1,x:0,duration:.9,ease:'power3.out'});G('.v-h2',{opacity:1,x:0,duration:1,delay:.15});G('.v-p',{opacity:1,x:0,duration:1,delay:.3});G('.v-card',{opacity:1,x:0,duration:.8,stagger:.14,delay:.2});G('.stat-col',{opacity:1,y:0,duration:.7,stagger:.1,delay:.5});}
+  if(i===5){G('.blog-head',{opacity:1,y:0,duration:.8,ease:'power3.out'});G('.bcard',{opacity:1,y:0,duration:.8,stagger:.13,delay:.3});}
+  if(i===6){G('.cta-eye',{opacity:1,duration:1});G('.cta-h2',{opacity:1,y:0,duration:1.1,delay:.3,ease:'power3.out'});G('.cta-p',{opacity:1,duration:1.1,delay:.7});G('.btn--gold',{opacity:1,y:0,duration:.8,stagger:.1,delay:1});}
+}
+
+/* ── 3D TILT ── */
+document.querySelectorAll('[data-tilt]').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const rx=((e.clientY-r.top-r.height/2)/(r.height/2))*-10;const ry=((e.clientX-r.left-r.width/2)/(r.width/2))*10;card.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(12px)`;});
+  card.addEventListener('mouseleave',()=>{ card.style.transform='perspective(900px) rotateX(0) rotateY(0) translateZ(0)'; });
+});
+
+/* ── RIPPLE ── */
+function initR(par,cv){if(!cv)return;const ctx=cv.getContext('2d');let rips=[],run=false;function rs(){cv.width=par.offsetWidth||300;cv.height=par.offsetHeight||300;}rs();window.addEventListener('resize',rs);par.addEventListener('mousemove',e=>{const rc=par.getBoundingClientRect();rips.push({x:e.clientX-rc.left,y:e.clientY-rc.top,r:0,a:.35});if(!run)draw();});function draw(){run=true;ctx.clearRect(0,0,cv.width,cv.height);rips=rips.filter(r=>r.a>.01);rips.forEach(r=>{r.r+=3.5;r.a*=.95;const g=ctx.createRadialGradient(r.x,r.y,0,r.x,r.y,r.r);g.addColorStop(0,`rgba(255,200,90,${r.a})`);g.addColorStop(1,`rgba(255,200,90,0)`);ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,6.2832);ctx.fillStyle=g;ctx.fill();});if(rips.length)requestAnimationFrame(draw);else run=false;}}
+document.querySelectorAll('.pcard-img').forEach(w=>initR(w,w.querySelector('.pcard-rip')));
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

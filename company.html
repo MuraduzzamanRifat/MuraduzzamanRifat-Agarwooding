@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Company — Our Vision &amp; Team | Agarwooding</title>
+  <meta name="description" content="Agarwooding — premium agarwood brand founded 2020. Vision, mission, core team, certifications, and company history."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+<style>
+/* Mission pillars */
+.pillar-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(212,168,67,.08); border:1px solid rgba(212,168,67,.08); }
+.pillar { background:var(--black); padding:44px 36px; border-top:2px solid transparent; transition:border-color .4s; }
+.pillar:hover { border-top-color:var(--gold); }
+.pillar-n { font-family:var(--font-d); font-size:48px; font-weight:300; color:rgba(212,168,67,.2); line-height:1; margin-bottom:12px; }
+.pillar-title { font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.pillar-desc { font-size:14px; color:var(--text-muted); line-height:1.8; font-weight:300; }
+
+/* Team cards */
+.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.team-card { position:relative; }
+.team-photo { aspect-ratio:3/4; overflow:hidden; margin-bottom:20px; position:relative; }
+.team-photo img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .7s var(--ease); }
+.team-card:hover .team-photo img { transform:scale(1.05); }
+.team-photo-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,8,5,.6) 0%,transparent 50%); }
+.team-role { font-size:9px; letter-spacing:.5em; text-transform:uppercase; color:var(--amber); margin-bottom:6px; }
+.team-name { font-family:var(--font-d); font-size:22px; font-weight:500; color:var(--cream); margin-bottom:8px; }
+.team-bio { font-size:13px; color:var(--text-muted); line-height:1.75; font-weight:300; }
+
+/* Value pillars (3 col) */
+.value-trio { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.v-trio { border:1px solid rgba(212,168,67,.12); padding:40px 32px; text-align:center; position:relative; overflow:hidden; transition:border-color .4s; }
+.v-trio::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); transform:scaleX(0); transition:transform .5s var(--ease); }
+.v-trio:hover { border-color:rgba(212,168,67,.4); }
+.v-trio:hover::after { transform:scaleX(1); }
+.v-trio-icon { font-size:36px; margin-bottom:16px; }
+.v-trio-title { font-family:var(--font-d); font-size:22px; font-weight:500; color:var(--gold); margin-bottom:10px; }
+.v-trio-desc { font-size:14px; color:var(--text-muted); line-height:1.8; font-weight:300; }
+
+/* Timeline */
+.hist-list { display:flex; flex-direction:column; gap:0; }
+.hist-item { display:grid; grid-template-columns:120px 1fr; gap:40px; padding:40px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.hist-item:last-child { border-bottom:none; }
+.hist-year { font-family:var(--font-d); font-size:42px; font-weight:300; color:rgba(212,168,67,.35); line-height:1; }
+.hist-content-title { font-family:var(--font-d); font-size:20px; font-weight:500; color:var(--cream); margin-bottom:6px; }
+.hist-content-desc { font-size:14px; color:var(--text-muted); line-height:1.75; font-weight:300; }
+
+@media(max-width:900px){
+  .team-grid { grid-template-columns:1fr; }
+  .value-trio { grid-template-columns:1fr; }
+  .pillar-grid { grid-template-columns:1fr; }
+  .hist-item { grid-template-columns:80px 1fr; gap:20px; }
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-dot"></div>
+<canvas id="grain"></canvas>
+<div id="prog"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Agarwooding</a>
+  <ul class="nav-links">
+    <li><a href="about-agarwood.html">About Agarwood</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="company.html" class="active">Company</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('images/ceremonial-room.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner max-w">
+    <p class="page-hero-tag reveal">Seoul, South Korea · Est. 2020</p>
+    <h1 class="page-hero-h1 reveal delay-1">Tradition &amp; Modernity,<br/><em>Perfectly Balanced</em></h1>
+    <p class="page-hero-sub reveal delay-2">
+      Agarwooding is a premium agarwood specialty brand leading a global wellness vision —
+      where 3,000 years of Eastern tradition meets modern science.
+    </p>
+  </div>
+</header>
+
+<!-- VISION -->
+<section class="section section--dark">
+  <div class="max-w col-2-wide">
+    <div>
+      <p class="section-tag reveal">Our Vision</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">A Global Wellness Brand Built on <em>Authenticity</em></h2>
+      <div class="gold-line reveal delay-2"></div>
+      <p class="section-lead section-lead--dark reveal delay-2">
+        We are building the world's most trusted agarwood brand — one that bridges millennia
+        of Eastern healing wisdom with the rigour of modern pharmaceutical science.
+      </p>
+      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem">
+        Founded in Seoul in 2020, Agarwooding has grown from a research project into a
+        recognised premium brand with 50+ products, 10+ global partners, and a 98%
+        customer satisfaction rate — all without compromising on quality or transparency.
+      </p>
+    </div>
+    <div class="img-frame reveal-right" style="height:460px">
+      <img src="images/forest-origin.jpg" alt="Agarwood forest origin" style="height:100%"/>
+      <div class="img-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stat-grid">
+  <div class="stat-cell reveal delay-1"><div class="n">2020</div><div class="l">Founded in Seoul</div></div>
+  <div class="stat-cell reveal delay-2"><div class="n">50+</div><div class="l">Products Developed</div></div>
+  <div class="stat-cell reveal delay-3"><div class="n">98%</div><div class="l">Customer Satisfaction</div></div>
+  <div class="stat-cell reveal delay-4"><div class="n">10+</div><div class="l">Global Partners</div></div>
+</div>
+
+<!-- MISSION -->
+<section class="section section--deep">
+  <div class="max-w">
+    <div class="text-center" style="max-width:560px;margin:0 auto 52px">
+      <p class="section-tag reveal">Our Mission</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">Four Commitments That Define <em>Everything We Do</em></h2>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal delay-1">
+        <div class="pillar-n">01</div>
+        <div class="pillar-title">Premium Sourcing</div>
+        <div class="pillar-desc">Stable sourcing of premium agarwood raw materials with rigorous quality management at every step — from forest floor to certified laboratory testing.</div>
+      </div>
+      <div class="pillar reveal delay-2">
+        <div class="pillar-n">02</div>
+        <div class="pillar-title">Science-Based Innovation</div>
+        <div class="pillar-desc">Developing innovative products grounded in peer-reviewed science. Our patented extraction method delivers measurably superior bioactive compound preservation.</div>
+      </div>
+      <div class="pillar reveal delay-3">
+        <div class="pillar-n">03</div>
+        <div class="pillar-title">Education &amp; Information</div>
+        <div class="pillar-desc">Providing accurate, evidence-based information about agarwood culture, health benefits, and the rampant counterfeiting issues plaguing the industry.</div>
+      </div>
+      <div class="pillar reveal delay-4">
+        <div class="pillar-n">04</div>
+        <div class="pillar-title">Sustainable Production</div>
+        <div class="pillar-desc">Building sustainable production systems that protect both the environment and the wild Aquilaria populations that make genuine agarwood possible.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section section--dark">
+  <div class="max-w">
+    <div class="text-center" style="max-width:500px;margin:0 auto 52px">
+      <p class="section-tag reveal">Core Values</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">What We Stand For</h2>
+    </div>
+    <div class="value-trio" data-stagger>
+      <div class="v-trio">
+        <div class="v-trio-icon">🌿</div>
+        <div class="v-trio-title">Nature</div>
+        <div class="v-trio-desc">Deep respect for the natural processes that create agarwood. We source only from sustainably managed forests and certified cultivation programs across Vietnam, Indonesia, and Cambodia.</div>
+      </div>
+      <div class="v-trio">
+        <div class="v-trio-icon">✦</div>
+        <div class="v-trio-title">Quality</div>
+        <div class="v-trio-desc">ISO 22000 certification, in-house and third-party laboratory testing, patented extraction technology, and GMP manufacturing standards — quality is non-negotiable at Agarwooding.</div>
+      </div>
+      <div class="v-trio">
+        <div class="v-trio-icon">🤝</div>
+        <div class="v-trio-title">Trust</div>
+        <div class="v-trio-desc">Full product traceability. Every batch carries transparent sourcing information, species verification, and a complete production history — so customers know exactly what they're receiving.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section section--deep">
+  <div class="max-w">
+    <div class="text-center" style="max-width:500px;margin:0 auto 56px">
+      <p class="section-tag reveal">Leadership Team</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">The People Behind <em>Agarwooding</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal delay-1">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=85&auto=format&fit=crop" alt="Kim Chul-soo CEO"/>
+          <div class="team-photo-overlay"></div>
+        </div>
+        <p class="team-role">Chief Executive Officer</p>
+        <h3 class="team-name">Kim Chul-soo</h3>
+        <p class="team-bio">20+ years of dedicated agarwood research. Kim founded Agarwooding on the conviction that the world deserves access to authentic, scientifically validated agarwood — not the counterfeits flooding the market. He personally oversees every sourcing decision and quality standard.</p>
+      </div>
+      <div class="team-card reveal delay-2">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85&auto=format&fit=crop" alt="Lee Young-hee Product Development"/>
+          <div class="team-photo-overlay"></div>
+        </div>
+        <p class="team-role">Head of Product Development</p>
+        <h3 class="team-name">Lee Young-hee</h3>
+        <p class="team-bio">Specialist in ethnopharmacology and natural product chemistry. Young-hee bridges traditional Eastern medicine with modern formulation science — the mind behind our patented extraction method and the developer of our capsule and ampoule product lines.</p>
+      </div>
+      <div class="team-card reveal delay-3">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=85&auto=format&fit=crop" alt="Park Ji-min Customer Experience"/>
+          <div class="team-photo-overlay"></div>
+        </div>
+        <p class="team-role">Customer Experience Director</p>
+        <h3 class="team-name">Park Ji-min</h3>
+        <p class="team-bio">Ji-min's singular focus is ensuring that every customer interaction reflects the care and integrity that goes into our products. From first contact to repeat purchase, she has built the systems and culture behind our 98% satisfaction rate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="section section--dark">
+  <div class="max-w col-2" style="align-items:start">
+    <div>
+      <p class="section-tag reveal">Company History</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1">Our Journey Since <em>2020</em></h2>
+      <div class="gold-line reveal delay-2"></div>
+      <p class="section-lead section-lead--dark reveal delay-2">
+        From a research-led startup to a recognised global agarwood brand — in just four years.
+      </p>
+    </div>
+    <div class="hist-list reveal-right delay-1">
+      <div class="hist-item">
+        <div class="hist-year">2020</div>
+        <div><div class="hist-content-title">Company Founded</div><div class="hist-content-desc">Agarwooding established in Seoul's Digital Valley. Research and development phase begins with a focus on authentic sourcing frameworks and extraction science.</div></div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-year">2021</div>
+        <div><div class="hist-content-title">Patent Registration</div><div class="hist-content-desc">Proprietary agarwood extraction method successfully patented in South Korea. ISO 22000 food safety certification awarded after rigorous third-party audit.</div></div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-year">2022</div>
+        <div><div class="hist-content-title">Global Partnerships</div><div class="hist-content-desc">Secured sourcing partnerships with 10+ certified agarwood farms and processors across Vietnam, Indonesia, and Cambodia. First B2B wholesale agreements signed.</div></div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-year">2023</div>
+        <div><div class="hist-content-title">Premium Brand Award</div><div class="hist-content-desc">Awarded the 2023 Premium Brand Award in South Korea. Product portfolio expands to 50+ SKUs. Customer satisfaction reaches 98% across all channels.</div></div>
+      </div>
+      <div class="hist-item">
+        <div class="hist-year">2024</div>
+        <div><div class="hist-content-title">Product Launch Preparation</div><div class="hist-content-desc">Agarwood Capsule and Ampoule lines in final development. Global e-commerce platform in preparation. Wholesale programme open to international partners.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section section--deep" style="text-align:center">
+  <div class="max-w">
+    <p class="section-tag reveal" style="text-align:center">Certifications &amp; Recognition</p>
+    <h2 class="section-h2 section-h2--dark text-center reveal delay-1">Independently <em>Verified</em></h2>
+    <div style="display:flex;justify-content:center;gap:40px;margin-top:48px;flex-wrap:wrap">
+      <div class="reveal delay-1" style="text-align:center">
+        <div style="font-family:var(--font-d);font-size:44px;font-weight:300;color:var(--gold)">ISO</div>
+        <div style="font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--amber);margin-top:4px">22000 Certified</div>
+        <div style="font-size:13px;color:var(--text-muted);max-width:180px;margin-top:8px;line-height:1.6">Food Safety Management System</div>
+      </div>
+      <div class="divider" style="width:1px;height:auto;background:rgba(212,168,67,.2)"></div>
+      <div class="reveal delay-2" style="text-align:center">
+        <div style="font-family:var(--font-d);font-size:44px;font-weight:300;color:var(--gold)">PAT</div>
+        <div style="font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--amber);margin-top:4px">Patent Registered</div>
+        <div style="font-size:13px;color:var(--text-muted);max-width:180px;margin-top:8px;line-height:1.6">Proprietary Extraction Method, KR</div>
+      </div>
+      <div class="divider" style="width:1px;height:auto;background:rgba(212,168,67,.2)"></div>
+      <div class="reveal delay-3" style="text-align:center">
+        <div style="font-family:var(--font-d);font-size:44px;font-weight:300;color:var(--gold)">2023</div>
+        <div style="font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--amber);margin-top:4px">Award Winner</div>
+        <div style="font-size:13px;color:var(--text-muted);max-width:180px;margin-top:8px;line-height:1.6">Premium Brand Award — South Korea</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <div class="foot-grid">
+      <div><div class="foot-brand">Agarwooding</div><p class="foot-tagline">Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.</p></div>
+      <div><div class="foot-h">Navigation</div><ul class="foot-links"><li><a href="about-agarwood.html">About Agarwood</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="company.html">Company</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="foot-h">Company</div><ul class="foot-links"><li><a href="company.html">Vision &amp; Mission</a></li><li><a href="company.html">Our Team</a></li><li><a href="company.html">History</a></li><li><a href="company.html">Certifications</a></li></ul></div>
+      <div><div class="foot-h">Contact</div><p class="foot-contact-item"><span>Email:</span> marketing@try-n.com</p><p class="foot-contact-item"><span>Phone:</span> 070-8873-4003</p><p class="foot-contact-item"><span>Hours:</span> Weekdays 09:00–18:00</p><p class="foot-contact-item" style="margin-top:8px">서울특별시 금천구 디지털로9길 68, 1410호</p></div>
+    </div>
+    <div class="foot-bottom"><span class="foot-copy">© 2024 Agarwooding Co., Ltd.</span><div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

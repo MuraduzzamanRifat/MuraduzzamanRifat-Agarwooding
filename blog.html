@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Agarwood Knowledge &amp; Wisdom | Agarwooding</title>
+  <meta name="description" content="18 in-depth articles on agarwood history, science, health benefits, authenticity, and lifestyle — by Agarwooding."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+<style>
+/* Filter tabs */
+.filter-bar {
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:48px;
+}
+.filter-btn {
+  padding:8px 22px; font-size:10px; letter-spacing:.38em;
+  text-transform:uppercase; border:1px solid rgba(212,168,67,.2);
+  color:rgba(255,255,255,.4); background:none; cursor:none;
+  font-family:var(--font-b); transition:all .3s;
+}
+.filter-btn.on,
+.filter-btn:hover { border-color:var(--gold); color:var(--gold); background:rgba(212,168,67,.06); }
+
+/* Featured post */
+.featured {
+  display:grid; grid-template-columns:1.4fr 1fr;
+  min-height:440px; margin-bottom:3px;
+  position:relative; overflow:hidden;
+}
+.featured-img { position:relative; overflow:hidden; }
+.featured-img img { width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+.featured:hover .featured-img img { transform:scale(1.05); }
+.featured-img-ov { position:absolute; inset:0; background:linear-gradient(to right,transparent 60%,var(--black) 100%); }
+.featured-body {
+  background:var(--black); padding:52px 48px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.featured-badge { display:inline-block; padding:4px 14px; border:1px solid rgba(212,168,67,.3); font-size:9px; letter-spacing:.45em; text-transform:uppercase; color:var(--amber); margin-bottom:1.4rem; }
+.featured-title { font-family:var(--font-d); font-size:clamp(24px,3vw,38px); font-weight:400; color:var(--cream); line-height:1.2; margin-bottom:1rem; }
+.featured-excerpt { font-size:14px; color:var(--text-muted); line-height:1.8; font-weight:300; margin-bottom:2rem; }
+.featured-meta { font-size:11px; letter-spacing:.3em; color:rgba(255,255,255,.25); text-transform:uppercase; }
+
+/* Blog grid */
+.blog-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+.bcard {
+  background:var(--deep); cursor:none;
+  transition:box-shadow .4s, transform .4s;
+  position:relative; overflow:hidden;
+}
+.bcard::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); transform:scaleX(0); transition:transform .5s var(--ease); }
+.bcard:hover { box-shadow:0 24px 48px rgba(0,0,0,.3); transform:translateY(-4px); }
+.bcard:hover::before { transform:scaleX(1); }
+.bcard-img { aspect-ratio:16/10; overflow:hidden; }
+.bcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .65s var(--ease); }
+.bcard:hover .bcard-img img { transform:scale(1.07); }
+.bcard-body { padding:22px 24px 28px; }
+.bcard-cat {
+  font-size:9px; letter-spacing:.45em; text-transform:uppercase;
+  margin-bottom:8px; display:inline-block;
+}
+.cat-history  { color:#D4A843; }
+.cat-science  { color:#8EC9E8; }
+.cat-lifestyle{ color:#A8C890; }
+.bcard-title { font-family:var(--font-d); font-size:18px; font-weight:500; color:var(--cream); line-height:1.3; margin-bottom:10px; }
+.bcard-excerpt { font-size:13px; color:var(--text-muted); line-height:1.7; font-weight:300; }
+.bcard-meta { font-size:10px; letter-spacing:.3em; color:rgba(255,255,255,.18); text-transform:uppercase; margin-top:14px; }
+
+/* Category sections */
+.cat-heading {
+  display:flex; align-items:center; gap:16px; margin-bottom:28px;
+}
+.cat-heading-label { font-size:10px; letter-spacing:.5em; text-transform:uppercase; }
+.cat-heading-line { flex:1; height:1px; background:rgba(212,168,67,.1); }
+
+@media(max-width:900px){ .blog-grid { grid-template-columns:1fr; } .featured { grid-template-columns:1fr; } .featured-img { min-height:260px; } .featured-img-ov { background:linear-gradient(to top,var(--black) 0%,transparent 50%); } }
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-dot"></div>
+<canvas id="grain"></canvas>
+<div id="prog"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Agarwooding</a>
+  <ul class="nav-links">
+    <li><a href="about-agarwood.html">About Agarwood</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="company.html">Company</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('images/calligraphy-heritage.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-inner max-w">
+    <p class="page-hero-tag reveal">18 Articles · History · Science · Lifestyle</p>
+    <h1 class="page-hero-h1 reveal delay-1">Knowledge &amp;<br/><em>Wisdom</em></h1>
+    <p class="page-hero-sub reveal delay-2">
+      In-depth guides, historical research, and science-backed insights into the world of agarwood —
+      written by our team of specialists.
+    </p>
+  </div>
+</header>
+
+<section class="section section--dark">
+  <div class="max-w">
+
+    <!-- FEATURED -->
+    <p class="section-tag reveal" style="margin-bottom:20px">Featured Article</p>
+    <a href="#" class="featured reveal-scale" style="display:grid;text-decoration:none;margin-bottom:56px">
+      <div class="featured-img">
+        <img src="images/ceremonial-room.jpg" alt="3000 year history"/>
+        <div class="featured-img-ov"></div>
+      </div>
+      <div class="featured-body">
+        <span class="featured-badge">History · Long Read</span>
+        <h2 class="featured-title">Agarwood's 3,000-Year History: From Ancient Egypt to Modern Luxury</h2>
+        <p class="featured-excerpt">A comprehensive timeline tracing how the world's most prized aromatic wood travelled from Southeast Asian forests through ancient trade routes, royal courts, Buddhist temples, and finally to the global luxury market.</p>
+        <div class="btn-row" style="margin-top:0;margin-bottom:1.4rem">
+          <span class="btn btn--gold" style="cursor:none"><span>Read Article</span></span>
+        </div>
+        <p class="featured-meta">History · 12 min read</p>
+      </div>
+    </a>
+
+    <!-- FILTER -->
+    <div class="filter-bar reveal">
+      <button type="button" class="filter-btn on" onclick="filterPosts('all', this)">All Articles</button>
+      <button type="button" class="filter-btn" onclick="filterPosts('history', this)">History</button>
+      <button type="button" class="filter-btn" onclick="filterPosts('science', this)">Science</button>
+      <button type="button" class="filter-btn" onclick="filterPosts('lifestyle', this)">Lifestyle</button>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="cat-heading reveal">
+      <span class="cat-heading-label" style="color:var(--gold)">History</span>
+      <div class="cat-heading-line"></div>
+    </div>
+    <div class="blog-grid" style="margin-bottom:56px" id="history-grid">
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Naming Confusion &amp; Authenticity: 침향, 沈香, 기남, 가라</h3><p class="bcard-excerpt">The many names behind genuine agarwood — and how naming confusion is used to deceive buyers across Asia.</p><p class="bcard-meta">8 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-2">
+        <div class="bcard-img"><img src="images/ceremonial-room.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Cultural Status of Agarwood in Eastern Tradition</h3><p class="bcard-excerpt">How agarwood became the most spiritually significant aromatic material across Buddhism, Islam, and Hinduism.</p><p class="bcard-meta">9 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-3">
+        <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Goryeo Dynasty &amp; the Maehyangbi Culture</h3><p class="bcard-excerpt">The unique Korean Buddhist tradition of burying agarwood as sacred offerings — and its historical documentation.</p><p class="bcard-meta">7 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Joseon Royal Medical Records &amp; 침향</h3><p class="bcard-excerpt">Documented royal consumption of agarwood in the official Joseon Sillok annals — what kings used it for and why.</p><p class="bcard-meta">6 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-2">
+        <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Li Shizhen's Bencaogangmu: 27 Years of Research</h3><p class="bcard-excerpt">How the world's greatest pre-modern pharmacopoeia classified and validated agarwood's medicinal properties.</p><p class="bcard-meta">8 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-3">
+        <div class="bcard-img"><img src="images/forest-origin.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Donuibogam &amp; UNESCO Heritage Medicine</h3><p class="bcard-excerpt">Heo Jun's landmark medical text — registered as UNESCO world heritage — and its treatment of 침향.</p><p class="bcard-meta">7 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/forest-origin.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-history">History</p><h3 class="bcard-title">Aquilaria Agallocha: Scientific Species Verification</h3><p class="bcard-excerpt">Botanical authentication of genuine Aquilaria species — and why species identification is the first line of defence against counterfeiting.</p><p class="bcard-meta">6 min read</p></div>
+      </a>
+    </div>
+
+    <!-- SCIENCE -->
+    <div class="cat-heading reveal">
+      <span class="cat-heading-label" style="color:#8EC9E8">Science</span>
+      <div class="cat-heading-line"></div>
+    </div>
+    <div class="blog-grid" style="margin-bottom:56px" id="science-grid">
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/ampoule-editorial.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-science">Science</p><h3 class="bcard-title">Health Benefits: Scientific Evidence Review</h3><p class="bcard-excerpt">A peer-reviewed overview of agarwood's validated therapeutic properties — anti-inflammatory, anxiolytic, and neuroactive effects confirmed.</p><p class="bcard-meta">11 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-2">
+        <div class="bcard-img"><img src="images/ampoule-product.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-science">Science</p><h3 class="bcard-title">Chronic Inflammation &amp; Agarwood's Therapeutic Role</h3><p class="bcard-excerpt">Inflammation as the root cause of chronic disease — and how agarwood sesquiterpenes and chromones address the underlying pathways.</p><p class="bcard-meta">10 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-3">
+        <div class="bcard-img"><img src="images/capsule-product.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-science">Science</p><h3 class="bcard-title">Beginner's Guide Part 1: Formation, Grading &amp; Chemistry</h3><p class="bcard-excerpt">From the definition of agarwood to the chemistry of its bioactive compounds — a foundational introduction for newcomers.</p><p class="bcard-meta">9 min read</p></div>
+      </a>
+    </div>
+
+    <!-- LIFESTYLE -->
+    <div class="cat-heading reveal">
+      <span class="cat-heading-label" style="color:#A8C890">Lifestyle</span>
+      <div class="cat-heading-line"></div>
+    </div>
+    <div class="blog-grid" id="lifestyle-grid">
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/gift-box.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Agarwood as a Gift for Parents &amp; Elders</h3><p class="bcard-excerpt">Guidance on selecting premium agarwood products as meaningful, culturally rich health gifts for grandparents and parents.</p><p class="bcard-meta">5 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-2">
+        <div class="bcard-img"><img src="images/ampoule-editorial.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Usage Methods &amp; Selection Guide</h3><p class="bcard-excerpt">A practical guide to using agarwood — incense, tea, oil, capsules — with selection criteria matched to your goals and budget.</p><p class="bcard-meta">7 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-3">
+        <div class="bcard-img"><img src="images/gift-box.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Why Is Agarwood So Expensive?</h3><p class="bcard-excerpt">A scientific analysis of the factors driving agarwood's price — rarity, formation time, grading, and the economics of sustainable supply.</p><p class="bcard-meta">8 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/calligraphy-heritage.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Authentic Agarwood Certification Guide</h3><p class="bcard-excerpt">HACCP, organic certification, species identification — what to look for when verifying that you're buying genuine agarwood.</p><p class="bcard-meta">6 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-2">
+        <div class="bcard-img"><img src="images/capsule-product.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Vietnamese Tourist Shop Counterfeits</h3><p class="bcard-excerpt">How fragrance-grade low-quality products are relabelled as edible health supplements — and how to protect yourself.</p><p class="bcard-meta">7 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-3">
+        <div class="bcard-img"><img src="images/forest-origin.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Modern Cultivation &amp; Sustainability</h3><p class="bcard-excerpt">How scientific cultivation methods are making sustainable agarwood farming possible — and what it means for the future of the industry.</p><p class="bcard-meta">9 min read</p></div>
+      </a>
+      <a href="#" class="bcard reveal delay-1">
+        <div class="bcard-img"><img src="images/ampoule-product.jpg" alt="" loading="lazy"/></div>
+        <div class="bcard-body"><p class="bcard-cat cat-lifestyle">Lifestyle</p><h3 class="bcard-title">Product Comparison Guide Part 2</h3><p class="bcard-excerpt">Selecting between raw chips, oils, incense, capsules and ampoules — criteria across efficacy, budget, and intended use.</p><p class="bcard-meta">6 min read</p></div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="max-w">
+    <div class="foot-grid">
+      <div><div class="foot-brand">Agarwooding</div><p class="foot-tagline">Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.</p></div>
+      <div><div class="foot-h">Navigation</div><ul class="foot-links"><li><a href="about-agarwood.html">About Agarwood</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Blog</a></li><li><a href="company.html">Company</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="foot-h">Blog Categories</div><ul class="foot-links"><li><a href="blog.html">History (7)</a></li><li><a href="blog.html">Science (3)</a></li><li><a href="blog.html">Lifestyle (7)</a></li><li><a href="blog.html">Featured (1)</a></li></ul></div>
+      <div><div class="foot-h">Contact</div><p class="foot-contact-item"><span>Email:</span> marketing@try-n.com</p><p class="foot-contact-item"><span>Phone:</span> 070-8873-4003</p><p class="foot-contact-item"><span>Hours:</span> Weekdays 09:00–18:00</p></div>
+    </div>
+    <div class="foot-bottom"><span class="foot-copy">© 2024 Agarwooding Co., Ltd.</span><div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+function filterPosts(cat, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const grids = { history:'history-grid', science:'science-grid', lifestyle:'lifestyle-grid' };
+  if(cat==='all'){
+    Object.values(grids).forEach(id=>{ const g=document.getElementById(id); if(g){ g.style.display='grid'; g.previousElementSibling.style.display='flex'; } });
+  } else {
+    Object.entries(grids).forEach(([k,id])=>{
+      const g=document.getElementById(id); const h=g&&g.previousElementSibling;
+      if(g){ g.style.display=k===cat?'grid':'none'; if(h) h.style.display=k===cat?'flex':'none'; }
+    });
+  }
+}
+</script>
+</body>
+</html>
