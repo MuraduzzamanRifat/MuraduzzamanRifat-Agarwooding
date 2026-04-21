@@ -26,7 +26,7 @@
 .contact-method {
   display:flex; align-items:center; gap:16px; padding:22px 24px;
   border:1px solid rgba(212,168,67,.12); margin-bottom:10px;
-  cursor:none; transition:border-color .4s, background .4s;
+  cursor:pointer; transition:border-color .4s, background .4s;
   text-decoration:none;
 }
 .contact-method:hover { border-color:rgba(212,168,67,.4); background:rgba(212,168,67,.04); }
@@ -57,7 +57,7 @@
 .field select:focus { border-color:rgba(212,168,67,.7); background:rgba(212,168,67,.04); }
 .field input::placeholder,
 .field textarea::placeholder { color:rgba(255,255,255,.22); }
-.field select { cursor:none; color:rgba(255,255,255,.5); }
+.field select { cursor:pointer; color:rgba(255,255,255,.5); }
 .field select option { background:#1a1108; color:#fff; }
 .field textarea { resize:vertical; min-height:150px; line-height:1.7; }
 
@@ -68,7 +68,7 @@
   padding:18px 40px; background:linear-gradient(135deg,var(--amber),var(--gold-light));
   border:none; font-family:var(--font-b); font-size:11px;
   letter-spacing:.38em; text-transform:uppercase; color:var(--black);
-  cursor:none; font-weight:500; transition:opacity .3s, transform .3s;
+  cursor:pointer; font-weight:500; transition:opacity .3s, transform .3s;
   margin-top:8px;
 }
 .submit-btn:hover { opacity:.9; transform:translateY(-1px); }

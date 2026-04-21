@@ -37,7 +37,7 @@ body { overflow: hidden; }
 .nav-side { display: flex; flex-direction: column; gap: 7px; }
 .ndot {
   width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(212,168,67,.3); cursor: none;
+  background: rgba(212,168,67,.3); cursor: pointer;
   transition: background .3s, transform .3s;
 }
 .ndot.on { background: var(--gold); transform: scale(1.6); }
@@ -130,7 +130,7 @@ body { overflow: hidden; }
 .prod-h2 { font-family:var(--font-d); font-size:clamp(28px,3.5vw,48px); font-weight:400; color:#1a1108; letter-spacing:.06em; }
 .prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
 .pcard {
-  background:#fff; border-radius:1px; overflow:visible; cursor:none;
+  background:#fff; border-radius:1px; overflow:visible; cursor:pointer;
   transform-style:preserve-3d; transition:box-shadow .45s ease;
   opacity:0; transform:translateY(44px); will-change:transform;
 }
@@ -167,10 +167,10 @@ body { overflow: hidden; }
 .blog-wrap { width:100%; max-width:1200px; padding:0 56px; z-index:2; }
 .blog-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:48px; opacity:0; transform:translateY(20px); }
 .blog-h2 { font-family:var(--font-d); font-size:clamp(28px,3vw,44px); font-weight:400; color:#1a1108; }
-.blog-more { font-size:10px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; cursor:none; transition:color .3s; }
+.blog-more { font-size:10px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; cursor:pointer; transition:color .3s; }
 .blog-more:hover { color:#8B6010; }
 .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-.bcard { background:#fff; cursor:none; opacity:0; transform:translateY(32px); transition:box-shadow .4s; }
+.bcard { background:#fff; cursor:pointer; opacity:0; transform:translateY(32px); transition:box-shadow .4s; }
 .bcard:hover { box-shadow:0 24px 48px rgba(0,0,0,.09); }
 .bcard-img { aspect-ratio:16/10; overflow:hidden; }
 .bcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
