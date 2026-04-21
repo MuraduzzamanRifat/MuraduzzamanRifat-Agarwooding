@@ -86,17 +86,8 @@ document.querySelectorAll('[data-stagger]').forEach(parent=>{
   });
 });
 
-// ── PRODUCT CARD 3D TILT ──────────────────────
+// ── PRODUCT CARD HOVER ────────────────────────
 document.querySelectorAll('[data-tilt]').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r  = card.getBoundingClientRect();
-    const rx = ((e.clientY-r.top  -r.height/2)/(r.height/2))*-10;
-    const ry = ((e.clientX-r.left -r.width/2) /(r.width/2))  *10;
-    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
-  });
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateZ(0)';
-  });
 });
 
 // ── RIPPLE EFFECT ─────────────────────────────
