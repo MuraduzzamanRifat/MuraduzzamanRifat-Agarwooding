@@ -75,40 +75,7 @@ body { overflow: hidden; }
   background: linear-gradient(to bottom, rgba(10,8,5,.55) 0%, rgba(10,8,5,.20) 45%, rgba(10,8,5,.65) 100%);
   z-index: 1;
 }
-.s-hero .hero-wrap { z-index: 2; }
 .s-hero .scroll-hint { z-index: 2; }
-.hero-wrap { text-align:center; z-index:2; padding:0 24px; }
-.hero-eye {
-  font-size:11px; letter-spacing:.55em; color:var(--amber);
-  text-transform:uppercase; margin-bottom:2rem;
-  opacity:0; transform:translateY(18px);
-}
-.hero-h1 {
-  font-family:var(--font-d); font-size:clamp(50px,9.5vw,136px);
-  font-weight:300; letter-spacing:.28em; line-height:1;
-  background:linear-gradient(120deg,#F0C870 0%,#D4A843 35%,#A86A08 65%,#F0C870 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text; background-size:220% 220%;
-  animation:goldShimmer 5s ease infinite; margin-bottom:2rem;
-}
-.hero-h1:hover { animation:aberr .6s ease, goldShimmer 5s ease infinite; }
-@keyframes aberr {
-  0%   { filter:none; }
-  25%  { filter:drop-shadow(-4px 0 0 rgba(200,86,10,.55)) drop-shadow(4px 0 0 rgba(50,180,200,.45)); }
-  60%  { filter:drop-shadow(-6px 0 0 rgba(200,86,10,.6))  drop-shadow(6px 0 0 rgba(50,180,200,.5)); }
-  100% { filter:none; }
-}
-.ltr { display:inline-block; opacity:0; transform:translateY(28px); filter:blur(8px); }
-.hero-kr {
-  font-family:var(--font-d); font-style:italic; font-size:clamp(14px,1.6vw,20px);
-  color:rgba(255,255,255,.35); letter-spacing:.18em; margin-bottom:.6rem;
-  opacity:0; transform:translateY(16px);
-}
-.hero-sub {
-  font-family:var(--font-d); font-style:italic; font-size:clamp(15px,1.8vw,22px);
-  color:rgba(255,255,255,.42); letter-spacing:.12em;
-  opacity:0; transform:translateY(18px);
-}
 
 /* ── SCENE 2: MANIFESTO ── */
 .s-mani { background:linear-gradient(160deg,#130D07 0%,#0A0805 55%,#1C1208 100%); }
