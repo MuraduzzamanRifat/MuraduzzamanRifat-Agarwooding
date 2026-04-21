@@ -34,31 +34,6 @@ if(grainCv){
   setInterval(()=> gx.drawImage(frames[fi++%FRAMES],0,0), 1000/12);
 }
 
-// ── CUSTOM CURSOR ─────────────────────────────
-const cur = document.getElementById('cur');
-const dot = document.getElementById('cur-dot');
-if(cur && dot){
-  let cx=-100,cy=-100,dx=-100,dy=-100;
-
-  document.addEventListener('mousemove',e=>{
-    cx=e.clientX; cy=e.clientY;
-    dot.style.left=cx+'px'; dot.style.top=cy+'px';
-  });
-
-  (function tick(){
-    dx+=(cx-dx)*.11; dy+=(cy-dy)*.11;
-    cur.style.left=dx+'px'; cur.style.top=dy+'px';
-    requestAnimationFrame(tick);
-  })();
-
-  const hovers = document.querySelectorAll(
-    'a,button,input,textarea,select,.pcard,.gi,.nav-dot,label,[role="button"]'
-  );
-  hovers.forEach(el=>{
-    el.addEventListener('mouseenter',()=> cur.classList.add('h'));
-    el.addEventListener('mouseleave',()=> cur.classList.remove('h'));
-  });
-}
 
 // ── NAV SCROLL BEHAVIOUR ──────────────────────
 const nav = document.querySelector('.nav');
