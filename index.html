@@ -453,12 +453,7 @@ const done=new Set();
 function enter(i){
   if(done.has(i))return; done.add(i);
   const G=gsap.to.bind(gsap), F=gsap.fromTo.bind(gsap);
-  if(i===0){
-    G('#h-eye',{opacity:1,y:0,duration:1,delay:.3,ease:'power3.out'});
-    G('.ltr',{opacity:1,y:0,filter:'blur(0px)',duration:.75,stagger:.055,delay:.6,ease:'power3.out'});
-    G('#h-kr', {opacity:1,y:0,duration:1,delay:1.7,ease:'power3.out'});
-    G('#h-sub',{opacity:1,y:0,duration:1,delay:1.95,ease:'power3.out'});
-  }
+  if(i===0){}
   if(i===1){F('.mani-q',{opacity:0,y:36},{opacity:1,y:0,duration:1.2,ease:'power3.out'});F('.mani-tag',{opacity:0},{opacity:1,duration:1.4,delay:.9});}
   if(i===2){G('.about-label',{opacity:1,x:0,duration:.9,ease:'power3.out'});G('.about-h2',{opacity:1,x:0,duration:1,delay:.15,ease:'power3.out'});G('.about-p',{opacity:1,x:0,duration:1,delay:.3,ease:'power3.out'});G('#stages',{opacity:1,x:0,duration:.8,delay:.2,ease:'power3.out'});}
   if(i===3){G('.prod-head',{opacity:1,y:0,duration:.8,ease:'power3.out'});G('.pcard',{opacity:1,y:0,duration:.8,stagger:.13,delay:.3,ease:'power3.out'});}
