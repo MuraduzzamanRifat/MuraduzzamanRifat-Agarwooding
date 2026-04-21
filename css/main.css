@@ -136,7 +136,7 @@ footer {
 .page-hero-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  opacity: .12; filter: sepia(40%);
+  opacity: .45;
   transform: scale(1.04);
 }
 .page-hero-overlay {
