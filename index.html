@@ -490,7 +490,7 @@ document.querySelectorAll('.pcard-img').forEach(w=>initR(w,w.querySelector('.pca
   };
   const setHTML = (sel, val) => {
     const el = document.querySelector(sel);
-    if(el && val != null && val !== '') el.innerHTML = val;
+    if(el && val != null && val !== '') el.innerHTML = window.sanitizeCmsHtml ? window.sanitizeCmsHtml(val) : val;
   };
 
   try{

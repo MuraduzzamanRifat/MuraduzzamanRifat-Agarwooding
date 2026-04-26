@@ -307,7 +307,7 @@
     if(v){
       if(v.image) { const img = document.querySelector('[data-vision-image]'); if(img) { img.src = v.image; img.alt = (v.headline||'').replace(/<[^>]+>/g,''); } }
       if(v.label)    { const el = document.querySelector('[data-vision-label]');    if(el) el.textContent = v.label; }
-      if(v.headline) { const el = document.querySelector('[data-vision-headline]'); if(el) el.innerHTML = v.headline; }
+      if(v.headline) { const el = document.querySelector('[data-vision-headline]'); if(el) el.innerHTML = window.sanitizeCmsHtml ? window.sanitizeCmsHtml(v.headline) : v.headline; }
       if(v.body1)    { const el = document.querySelector('[data-vision-body1]');    if(el) el.textContent = v.body1; }
       if(v.body2)    { const el = document.querySelector('[data-vision-body2]');    if(el) el.textContent = v.body2; }
     }

@@ -361,7 +361,7 @@
     const intro = (await CMS.pageSection('about'))?.intro;
     if(!intro) return;
     const setText = (sel, val) => { const el = document.querySelector(sel); if(el && val) el.textContent = val; };
-    const setHTML = (sel, val) => { const el = document.querySelector(sel); if(el && val) el.innerHTML = val; };
+    const setHTML = (sel, val) => { const el = document.querySelector(sel); if(el && val) el.innerHTML = window.sanitizeCmsHtml ? window.sanitizeCmsHtml(val) : val; };
     if(intro.image)    { const img = document.querySelector('[data-intro-image]'); if(img) { img.src = intro.image; img.alt = intro.headline?.replace(/<[^>]+>/g,'') || ''; } }
     if(intro.label)    setText('[data-intro-label]', intro.label);
     if(intro.headline) setHTML('[data-intro-headline]', intro.headline);

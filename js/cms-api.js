@@ -3,6 +3,33 @@
    Reads content/site.json. No backend.
 ═══════════════════════════════════════════════ */
 
+/**
+ * Sanitize CMS-supplied HTML — allow only an audited tag whitelist.
+ * Strips <script>, on* handlers, javascript: URLs, and any tag not on
+ * the allowlist. This is a defense-in-depth measure; primary security
+ * is GitHub PAT + commit history.
+ */
+window.sanitizeCmsHtml = function (raw) {
+  if (raw == null || raw === '') return '';
+  const ALLOWED = new Set(['em','strong','i','b','br','span']);
+  const tpl = document.createElement('template');
+  tpl.innerHTML = String(raw);
+  const walker = document.createTreeWalker(tpl.content, NodeFilter.SHOW_ELEMENT, null);
+  const toRemove = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    const tag = node.tagName.toLowerCase();
+    if (!ALLOWED.has(tag)) { toRemove.push(node); continue; }
+    // Strip ALL attributes — no class, no style, no data-* — keep tags only
+    for (const a of Array.from(node.attributes)) node.removeAttribute(a.name);
+  }
+  toRemove.forEach(n => {
+    while (n.firstChild) n.parentNode.insertBefore(n.firstChild, n);
+    n.parentNode.removeChild(n);
+  });
+  return tpl.innerHTML;
+};
+
 window.CMS = (function () {
   const SOURCE = 'content/site.json';
   const ADMIN_URL = 'admin/';
@@ -116,11 +143,11 @@ window.CMS = (function () {
     if (pageName && data.pageHeroes && data.pageHeroes[pageName]) {
       const ph = data.pageHeroes[pageName];
       const bg = document.querySelector('.page-hero-bg');
-      if (bg && ph.image) bg.style.backgroundImage = `url('${ph.image}')`;
+      if (bg && ph.image) bg.style.backgroundImage = `url('${encodeURI(ph.image)}')`;
       const eb = document.querySelector('.page-hero-tag');
       if (eb && ph.eyebrow) eb.textContent = ph.eyebrow;
       const h1 = document.querySelector('.page-hero-h1');
-      if (h1 && ph.headline) h1.innerHTML = ph.headline;
+      if (h1 && ph.headline) h1.innerHTML = sanitizeCmsHtml(ph.headline);
       const sub = document.querySelector('.page-hero-sub');
       if (sub && ph.sub) sub.textContent = ph.sub;
     }

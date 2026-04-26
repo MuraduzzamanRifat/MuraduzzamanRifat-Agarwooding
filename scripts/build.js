@@ -19,6 +19,49 @@ const path = require('path');
 const ROOT = process.cwd();
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
 
+/* ── Schema validation — fails the build if site.json is malformed ── */
+function fail(msg) {
+  console.error(`[build] SCHEMA ERROR: ${msg}`);
+  process.exit(1);
+}
+function requireStr(obj, path) {
+  const val = path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
+  if (typeof val !== 'string') fail(`${path} must be a string (got ${typeof val})`);
+}
+function requireArr(obj, path) {
+  const val = path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
+  if (!Array.isArray(val)) fail(`${path} must be an array (got ${typeof val})`);
+}
+// Required top-level keys
+['meta','pageHeroes','footer','hero','company'].forEach(k => {
+  if (!data[k] || typeof data[k] !== 'object') fail(`top-level "${k}" object missing`);
+});
+// Required strings
+['footer.tagline','footer.copyright','company.email','company.phone'].forEach(p => requireStr(data, p));
+// Per-page meta must have title + description
+['home','about','products','blog','company','contact'].forEach(page => {
+  if (data.meta[page]) {
+    requireStr(data.meta, `${page}.title`);
+    requireStr(data.meta, `${page}.description`);
+  }
+});
+// Arrays
+['blogPosts','products'].forEach(k => requireArr(data, k));
+// Reject any keys that look like injection attempts (defense-in-depth)
+function scanForScripts(obj, path = '') {
+  if (typeof obj === 'string') {
+    if (/<script\b/i.test(obj) || /javascript:/i.test(obj) || /\bon\w+\s*=/i.test(obj)) {
+      fail(`Suspicious payload at ${path}: ${obj.slice(0, 80)}…`);
+    }
+    return;
+  }
+  if (obj && typeof obj === 'object') {
+    Object.entries(obj).forEach(([k, v]) => scanForScripts(v, path ? `${path}.${k}` : k));
+  }
+}
+scanForScripts(data);
+console.log('[build] ✓ schema validation passed');
+
 const PAGES = {
   'index.html':          'home',
   'about-agarwood.html': 'about',
