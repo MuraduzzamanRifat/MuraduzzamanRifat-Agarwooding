@@ -477,6 +477,111 @@ document.querySelectorAll('.pcard-img').forEach(w=>initR(w,w.querySelector('.pca
 </script>
 <script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ── HOMEPAGE CMS HYDRATION ─────────────────────
+   Maps every editable CMS field to its DOM target on the homepage.
+   Static HTML is kept as fallback if CMS load fails.
+*/
+(async function hydrateHome(){
+  if(!window.CMS) return;
+  const setText = (sel, val) => {
+    const el = document.querySelector(sel);
+    if(el && val != null && val !== '') el.textContent = val;
+  };
+  const setHTML = (sel, val) => {
+    const el = document.querySelector(sel);
+    if(el && val != null && val !== '') el.innerHTML = val;
+  };
+
+  try{
+    const [hero, scenes, products, posts] = await Promise.all([
+      CMS.hero(), CMS.load().then(d => d.homeScenes || {}), CMS.products(), CMS.blogPosts({ limit: 3 })
+    ]);
+
+    /* ── CTA scene (eyebrow + buttons from hero.*; headline/body from homeScenes.cta) ── */
+    if(hero){
+      setText('.cta-eye', hero.eyebrow);
+      // CTA buttons (label + href)
+      const btns = document.querySelectorAll('.cta-btns .btn');
+      if(btns[0] && hero.ctaPrimary){
+        if(hero.ctaPrimary.href)  btns[0].href = hero.ctaPrimary.href;
+        if(hero.ctaPrimary.label){
+          const span = btns[0].querySelector('span');
+          if(span) span.textContent = hero.ctaPrimary.label;
+        }
+      }
+      if(btns[1] && hero.ctaSecondary){
+        if(hero.ctaSecondary.href) btns[1].href = hero.ctaSecondary.href;
+        if(hero.ctaSecondary.label){
+          const span = btns[1].querySelector('span');
+          if(span) span.textContent = hero.ctaSecondary.label;
+        }
+      }
+    }
+    if(scenes.cta?.headline) setHTML('.cta-h2', scenes.cta.headline);
+    if(scenes.cta?.body)     setText('.cta-p',  scenes.cta.body);
+    if(scenes.cta?.footer)   setText('.cta-foot', scenes.cta.footer);
+
+    /* ── Manifesto ── */
+    if(scenes.manifesto?.quote) setHTML('.mani-q', scenes.manifesto.quote);
+    if(scenes.manifesto?.tag)   setHTML('.mani-tag', scenes.manifesto.tag);
+
+    /* ── About scene head ── */
+    if(scenes.about?.label)    setText('.about-label', scenes.about.label);
+    if(scenes.about?.headline) setText('.about-h2',    scenes.about.headline);
+    if(scenes.about?.body)     setText('.about-p',     scenes.about.body);
+
+    /* ── Products scene head ── */
+    if(scenes.products?.label)    setText('.prod-tag-sm', scenes.products.label);
+    if(scenes.products?.headline) setText('.prod-h2',     scenes.products.headline);
+
+    /* ── Products scene cards (top 3 from CMS products[]) ── */
+    if(products && products.length){
+      const cards = document.querySelectorAll('.s-prod .pcard');
+      products.slice(0, cards.length).forEach((p, i) => {
+        const card = cards[i];
+        const img = card.querySelector('.pcard-img img');
+        if(img && p.image) { img.src = p.image; img.alt = p.name || ''; }
+        const cat = card.querySelector('.pcard-cat');
+        if(cat) cat.textContent = `${p.productType || 'Product'}  ·  ${p.koreanName || ''}`;
+        const name = card.querySelector('.pcard-name');
+        if(name) name.textContent = p.name || '';
+        const desc = card.querySelector('.pcard-desc');
+        if(desc) desc.textContent = p.description || '';
+        const badge = card.querySelector('.pcard-badge .badge');
+        if(badge) badge.textContent = p.statusLabel || (p.status === 'available' ? 'Available' : 'Coming Soon');
+      });
+    }
+
+    /* ── Values scene head ── */
+    if(scenes.values?.label)    setText('.v-label', scenes.values.label);
+    if(scenes.values?.headline) setHTML('.v-h2',    scenes.values.headline);
+    if(scenes.values?.body)     setText('.v-p',     scenes.values.body);
+
+    /* ── Blog scene ── */
+    if(scenes.blog?.headline) setHTML('.blog-h2',   scenes.blog.headline);
+    if(scenes.blog?.viewAll)  setText('.blog-more', scenes.blog.viewAll);
+
+    /* ── Blog preview cards (top 3 from CMS blogPosts[]) ── */
+    if(posts && posts.length){
+      const cards = document.querySelectorAll('.s-blog .bcard');
+      posts.slice(0, cards.length).forEach((p, i) => {
+        const card = cards[i];
+        const img = card.querySelector('.bcard-img img');
+        if(img && p.image) { img.src = p.image; img.alt = p.title || ''; }
+        const cat = card.querySelector('.bcard-cat');
+        if(cat && p.category) cat.textContent = p.category.charAt(0).toUpperCase() + p.category.slice(1);
+        const t = card.querySelector('.bcard-title');
+        if(t) t.textContent = p.title || '';
+        const e = card.querySelector('.bcard-excerpt');
+        if(e) e.textContent = p.excerpt || '';
+      });
+    }
+  }catch(err){
+    console.warn('[home] CMS hydration failed (static kept):', err.message);
+  }
+})();
+</script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>
     <li><a href="about-agarwood.html">About Agarwood</a></li>

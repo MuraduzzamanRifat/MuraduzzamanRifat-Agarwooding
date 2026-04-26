@@ -58,7 +58,13 @@
           <span class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
           </span>
-          <span class="lbl">Hero & Homepage</span>
+          <span class="lbl">Hero & CTA</span>
+        </button>
+        <button type="button" class="nav-item" data-view="homeScenes">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M8 4v16"/></svg>
+          </span>
+          <span class="lbl">Home Scenes</span>
         </button>
         <button type="button" class="nav-item" data-view="blog">
           <span class="ic">
@@ -477,7 +483,8 @@ document.querySelectorAll('.nav-item[data-view]').forEach(item => {
 
 const VIEW_TITLES = {
   dashboard:  { title: 'Welcome back', sub: 'Track your content updates and stats from one place.' },
-  hero:       { title: 'Hero & Homepage', sub: 'Top-of-page brand statement and the blog featured article.' },
+  hero:       { title: 'Hero & CTA', sub: 'Eyebrow + buttons that drive the homepage CTA scene + blog featured article.' },
+  homeScenes: { title: 'Home Scenes', sub: 'Editorial copy for each scroll-snap section on the homepage (manifesto, about, products head, values, blog head, CTA).' },
   blog:       { title: 'Blog Posts', sub: 'Manage your editorial library — articles by category.' },
   products:   { title: 'Products', sub: 'Manage your product catalog — order, status, descriptions.' },
   pageHeroes: { title: 'Page Heroes', sub: 'Hero block at the top of each subpage — image, eyebrow, headline, sub.' },
@@ -504,6 +511,7 @@ function renderView(view){
   const host = document.getElementById('view-host');
   if(view === 'dashboard')  host.innerHTML = renderDashboard();
   if(view === 'hero')       host.innerHTML = renderHero();
+  if(view === 'homeScenes') host.innerHTML = renderHomeScenes();
   if(view === 'blog')       host.innerHTML = renderBlog();
   if(view === 'products')   host.innerHTML = renderProducts();
   if(view === 'pageHeroes') host.innerHTML = renderPageHeroes();
@@ -1109,6 +1117,73 @@ function capturePageHeroes(){
   });
 }
 
+/* ============ HOME SCENES ============ */
+function renderHomeScenes(){
+  const s = data.homeScenes || {};
+  const m = s.manifesto || {};
+  const a = s.about || {};
+  const p = s.products || {};
+  const v = s.values || {};
+  const b = s.blog || {};
+  const c = s.cta || {};
+  return `
+    <div class="card">
+      <div class="card-head"><div class="card-h">Manifesto scene</div><span class="cat-pill">scroll #2</span></div>
+      <div class="field"><label>Quote (HTML allowed — &lt;br/&gt; for line break, &lt;em&gt; for italic)</label><textarea data-bind id="hs-mani-quote">${esc(m.quote||'')}</textarea></div>
+      <div class="field"><label>Tag line (HTML allowed)</label><input type="text" data-bind id="hs-mani-tag" value="${esc(m.tag||'')}"/></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">About Agarwood scene</div><span class="cat-pill">scroll #3</span></div>
+      <div class="field"><label>Section label</label><input type="text" data-bind id="hs-about-label" value="${esc(a.label||'')}"/></div>
+      <div class="field"><label>Headline</label><input type="text" data-bind id="hs-about-h" value="${esc(a.headline||'')}"/></div>
+      <div class="field"><label>Body paragraph</label><textarea data-bind id="hs-about-body">${esc(a.body||'')}</textarea></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">Products scene head</div><span class="cat-pill">scroll #4</span></div>
+      <p style="color:var(--fg3);font-size:.78rem;margin-bottom:.8rem">The 3 product cards on the homepage are pulled automatically from your <strong>Products</strong> list.</p>
+      <div class="field"><label>Section label</label><input type="text" data-bind id="hs-prod-label" value="${esc(p.label||'')}"/></div>
+      <div class="field"><label>Headline</label><input type="text" data-bind id="hs-prod-h" value="${esc(p.headline||'')}"/></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">Values scene head</div><span class="cat-pill">scroll #5</span></div>
+      <div class="field"><label>Section label</label><input type="text" data-bind id="hs-val-label" value="${esc(v.label||'')}"/></div>
+      <div class="field"><label>Headline (HTML allowed)</label><input type="text" data-bind id="hs-val-h" value="${esc(v.headline||'')}"/></div>
+      <div class="field"><label>Body paragraph</label><textarea data-bind id="hs-val-body">${esc(v.body||'')}</textarea></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">Blog preview head</div><span class="cat-pill">scroll #6</span></div>
+      <p style="color:var(--fg3);font-size:.78rem;margin-bottom:.8rem">The 3 blog cards on the homepage are pulled automatically from your <strong>Blog Posts</strong> list (top 3 most recent).</p>
+      <div class="field"><label>Headline (HTML allowed)</label><input type="text" data-bind id="hs-blog-h" value="${esc(b.headline||'')}"/></div>
+      <div class="field"><label>"View all" link text</label><input type="text" data-bind id="hs-blog-more" value="${esc(b.viewAll||'')}"/></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">CTA scene</div><span class="cat-pill">scroll #7</span></div>
+      <p style="color:var(--fg3);font-size:.78rem;margin-bottom:.8rem">The eyebrow tag and CTA buttons are configured in <strong>Hero &amp; CTA</strong>. The headline / body / footer below override them only on the homepage CTA scene.</p>
+      <div class="field"><label>Headline (HTML allowed)</label><input type="text" data-bind id="hs-cta-h" value="${esc(c.headline||'')}" placeholder="e.g. Begin Your Journey<br/>into <em>침향</em>"/></div>
+      <div class="field"><label>Body paragraph</label><textarea data-bind id="hs-cta-body">${esc(c.body||'')}</textarea></div>
+      <div class="field"><label>Footer line</label><input type="text" data-bind id="hs-cta-foot" value="${esc(c.footer||'')}"/></div>
+    </div>
+  `;
+}
+function captureHomeScenes(){
+  data.homeScenes = data.homeScenes || {};
+  data.homeScenes.manifesto = { quote: val('hs-mani-quote'),  tag:      val('hs-mani-tag') };
+  data.homeScenes.about     = { label: val('hs-about-label'), headline: val('hs-about-h'),  body: val('hs-about-body') };
+  data.homeScenes.products  = { label: val('hs-prod-label'),  headline: val('hs-prod-h') };
+  data.homeScenes.values    = { label: val('hs-val-label'),   headline: val('hs-val-h'),    body: val('hs-val-body') };
+  data.homeScenes.blog      = { headline: val('hs-blog-h'),   viewAll:  val('hs-blog-more') };
+  data.homeScenes.cta       = {
+    headline: val('hs-cta-h'),
+    body:     val('hs-cta-body'),
+    footer:   val('hs-cta-foot')
+  };
+}
+
 /* ============ GENERIC LIST VIEW ============ */
 const LIST_SCHEMAS = {
   team: {
@@ -1361,6 +1436,7 @@ function captureView(view){
   if(view === 'products')   captureProducts();
   if(view === 'company')    captureCompany();
   if(view === 'pageHeroes') capturePageHeroes();
+  if(view === 'homeScenes') captureHomeScenes();
   if(view === 'team')       captureList('team');
   if(view === 'milestones') captureList('milestones');
   if(view === 'faq')        captureList('faq');

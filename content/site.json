@@ -75,6 +75,34 @@
       "href": "company.html"
     }
   },
+  "homeScenes": {
+    "manifesto": {
+      "quote": "\"Where the tree bleeds,<br/><em>the world's most precious fragrance</em> is born.\"",
+      "tag": "Agarwood &nbsp;·&nbsp; 침향 &nbsp;·&nbsp; 沈香 &nbsp;·&nbsp; Aquilaria"
+    },
+    "about": {
+      "label": "What is Agarwood?",
+      "headline": "A Tree's Wound Becomes the World's Rarest Gift",
+      "body": "Agarwood forms when an Aquilaria tree secretes resin to protect itself from injury. Over decades, this resin hardens into dark, fragrant heartwood — more precious than gold. Used in traditional medicine for over 3,000 years, it remains one of the most sought-after natural substances on Earth."
+    },
+    "products": {
+      "label": "The Collection",
+      "headline": "Pure Expressions of 침향"
+    },
+    "values": {
+      "label": "Our Core Values",
+      "headline": "Nature, Quality &amp; Trust — the Three Pillars",
+      "body": "Every step of our process — from forest to final product — is guided by an unwavering respect for nature, rigorous quality standards, and full transparency toward our customers and partners."
+    },
+    "blog": {
+      "headline": "Knowledge &amp; Wisdom",
+      "viewAll": "View all 18 articles →"
+    },
+    "cta": {
+      "useHeroFields": true,
+      "footer": "© 2024 Agarwooding Co., Ltd. — Seoul, South Korea"
+    }
+  },
   "company": {
     "name": "Agarwooding Co., Ltd.",
     "tagline": "Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.",
