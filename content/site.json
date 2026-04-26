@@ -204,7 +204,7 @@
   ],
   "blogFeatured": {
     "id": "feat-3000-year-history",
-    "title": "Agarwood's 3,000-Year History: From Ancient Egypt to Modern Luxury",
+    "title": "Agarwood's 3,000-Year History: From Ancient Egypt to Modern Luxury by mj",
     "excerpt": "A comprehensive timeline tracing how the world's most prized aromatic wood travelled from Southeast Asian forests through ancient trade routes, royal courts, Buddhist temples, and finally to the global luxury market.",
     "category": "history",
     "categoryLabel": "History",
@@ -404,7 +404,7 @@
     }
   ],
   "_meta": {
-    "version": 3,
+    "version": 4,
     "lastUpdated": "2026-04-26",
     "schema": "agarwooding-cms-v2"
   }
