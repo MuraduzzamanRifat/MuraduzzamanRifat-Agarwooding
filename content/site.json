@@ -1,11 +1,29 @@
 {
   "meta": {
-    "home":      { "title": "Agarwooding — Premium Agarwood Specialty Brand", "description": "Premium agarwood capsules, ampoules and raw materials sourced from Vietnam, Indonesia and pristine Southeast Asian forests." },
-    "about":     { "title": "About Agarwood — 침향 (沈香) | Agarwooding", "description": "Discover what agarwood is, how it forms, 3,000-year history, unique properties, grading, and health benefits." },
-    "products":  { "title": "Products — Agarwood Capsules & Ampoules | Agarwooding", "description": "Premium agarwood capsules for vitality, ampoules for relaxation and focus, plus wholesale raw material." },
-    "blog":      { "title": "Knowledge & Wisdom — Agarwood Articles | Agarwooding", "description": "In-depth guides, historical research and science-backed insights into agarwood." },
-    "company":   { "title": "Company — Our Vision & Team | Agarwooding", "description": "Premium agarwood brand founded 2020 in Seoul. Vision, mission, core team, and certifications." },
-    "contact":   { "title": "Contact Us | Agarwooding", "description": "Contact Agarwooding for product enquiries, wholesale partnerships, bespoke sourcing or general questions." }
+    "home": {
+      "title": "Agarwooding — Premium Agarwood Specialty Brand",
+      "description": "Premium agarwood capsules, ampoules and raw materials sourced from Vietnam, Indonesia and pristine Southeast Asian forests."
+    },
+    "about": {
+      "title": "About Agarwood — 침향 (沈香) | Agarwooding",
+      "description": "Discover what agarwood is, how it forms, 3,000-year history, unique properties, grading, and health benefits."
+    },
+    "products": {
+      "title": "Products — Agarwood Capsules & Ampoules | Agarwooding",
+      "description": "Premium agarwood capsules for vitality, ampoules for relaxation and focus, plus wholesale raw material."
+    },
+    "blog": {
+      "title": "Knowledge & Wisdom — Agarwood Articles | Agarwooding",
+      "description": "In-depth guides, historical research and science-backed insights into agarwood."
+    },
+    "company": {
+      "title": "Company — Our Vision & Team | Agarwooding",
+      "description": "Premium agarwood brand founded 2020 in Seoul. Vision, mission, core team, and certifications."
+    },
+    "contact": {
+      "title": "Contact Us | Agarwooding",
+      "description": "Contact Agarwooding for product enquiries, wholesale partnerships, bespoke sourcing or general questions."
+    }
   },
   "pageHeroes": {
     "about": {
@@ -44,12 +62,18 @@
     "copyright": "© 2024 Agarwooding Co., Ltd."
   },
   "hero": {
-    "eyebrow": "Premium Agarwood Specialty Brand",
+    "eyebrow": "Premium Agarwood Specialty Brand By Mj",
     "headline": "Agarwooding",
     "headlineKr": "침향의 정수",
     "tagline": "Where ancient tradition meets modern science.",
-    "ctaPrimary": { "label": "Discover Products", "href": "products.html" },
-    "ctaSecondary": { "label": "Our Story", "href": "company.html" }
+    "ctaPrimary": {
+      "label": "Discover Products",
+      "href": "products.html"
+    },
+    "ctaSecondary": {
+      "label": "Our Story",
+      "href": "company.html"
+    }
   },
   "company": {
     "name": "Agarwooding Co., Ltd.",
@@ -62,32 +86,121 @@
     "addressEn": "1410, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, South Korea"
   },
   "team": [
-    { "id": "t01", "name": "Kim Chul-soo", "role": "Founder & CEO", "bio": "20+ years of experience in traditional Korean medicine and natural product development. Founded Agarwooding to bring authentic agarwood to global markets.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" },
-    { "id": "t02", "name": "Lee Young-hee", "role": "Head of Product Development", "bio": "PhD in pharmaceutical chemistry. Leads our patented extraction process and product formulation, with peer-reviewed publications on agarwood bioactivity.", "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" },
-    { "id": "t03", "name": "Park Ji-min", "role": "Customer Experience Director", "bio": "Multilingual specialist managing our customer experience and education initiatives across Korean, English, Chinese and Japanese markets.", "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop" }
+    {
+      "id": "t01",
+      "name": "Kim Chul-soo",
+      "role": "Founder & CEO",
+      "bio": "20+ years of experience in traditional Korean medicine and natural product development. Founded Agarwooding to bring authentic agarwood to global markets.",
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop"
+    },
+    {
+      "id": "t02",
+      "name": "Lee Young-hee",
+      "role": "Head of Product Development",
+      "bio": "PhD in pharmaceutical chemistry. Leads our patented extraction process and product formulation, with peer-reviewed publications on agarwood bioactivity.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
+    },
+    {
+      "id": "t03",
+      "name": "Park Ji-min",
+      "role": "Customer Experience Director",
+      "bio": "Multilingual specialist managing our customer experience and education initiatives across Korean, English, Chinese and Japanese markets.",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop"
+    }
   ],
   "milestones": [
-    { "id": "m01", "year": "2020", "title": "Company Founded", "description": "Agarwooding Co., Ltd. established in Seoul with a mission to bring premium agarwood to global wellness markets." },
-    { "id": "m02", "year": "2021", "title": "Patent Registered", "description": "Patented extraction technology developed in partnership with Korea Institute of Oriental Medicine." },
-    { "id": "m03", "year": "2022", "title": "International Partnerships", "description": "Established direct sourcing partnerships in Vietnam, Indonesia, and Cambodia for authentic, traceable agarwood." },
-    { "id": "m04", "year": "2023", "title": "Premium Brand Award", "description": "Recognised with the Korea Premium Brand Award for innovation in traditional medicine modernisation." },
-    { "id": "m05", "year": "2024", "title": "Product Launch Preparation", "description": "Final preparations for the launch of our flagship Agarwood Capsule and Ampoule product lines." }
+    {
+      "id": "m01",
+      "year": "2020",
+      "title": "Company Founded",
+      "description": "Agarwooding Co., Ltd. established in Seoul with a mission to bring premium agarwood to global wellness markets."
+    },
+    {
+      "id": "m02",
+      "year": "2021",
+      "title": "Patent Registered",
+      "description": "Patented extraction technology developed in partnership with Korea Institute of Oriental Medicine."
+    },
+    {
+      "id": "m03",
+      "year": "2022",
+      "title": "International Partnerships",
+      "description": "Established direct sourcing partnerships in Vietnam, Indonesia, and Cambodia for authentic, traceable agarwood."
+    },
+    {
+      "id": "m04",
+      "year": "2023",
+      "title": "Premium Brand Award",
+      "description": "Recognised with the Korea Premium Brand Award for innovation in traditional medicine modernisation."
+    },
+    {
+      "id": "m05",
+      "year": "2024",
+      "title": "Product Launch Preparation",
+      "description": "Final preparations for the launch of our flagship Agarwood Capsule and Ampoule product lines."
+    }
   ],
   "certifications": [
-    { "id": "c01", "label": "ISO 22000", "title": "Food Safety Certified", "description": "Comprehensive food safety management system covering every stage from raw material sourcing to final packaging." },
-    { "id": "c02", "label": "Patent", "title": "Patented Extraction", "description": "Our proprietary low-temperature extraction process is patent-registered with the Korean Intellectual Property Office." },
-    { "id": "c03", "label": "Award 2023", "title": "Premium Brand Award", "description": "Recognised by the Korea Premium Brand Award for excellence in traditional medicine modernisation." }
+    {
+      "id": "c01",
+      "label": "ISO 22000",
+      "title": "Food Safety Certified",
+      "description": "Comprehensive food safety management system covering every stage from raw material sourcing to final packaging."
+    },
+    {
+      "id": "c02",
+      "label": "Patent",
+      "title": "Patented Extraction",
+      "description": "Our proprietary low-temperature extraction process is patent-registered with the Korean Intellectual Property Office."
+    },
+    {
+      "id": "c03",
+      "label": "Award 2023",
+      "title": "Premium Brand Award",
+      "description": "Recognised by the Korea Premium Brand Award for excellence in traditional medicine modernisation."
+    }
   ],
   "sourcing": [
-    { "id": "s01", "country": "Vietnam", "type": "Aquilaria Crassna", "description": "The northern highlands of Vietnam — premium-grade Aquilaria crassna with exceptional resin density. Our Vietnamese partners hold 15+ years of cultivation expertise." },
-    { "id": "s02", "country": "Indonesia", "type": "Aquilaria Malaccensis", "description": "Sumatra and Kalimantan rainforests — naturally-formed Aquilaria malaccensis, considered among the finest aromatic profiles in the world." },
-    { "id": "s03", "country": "Cambodia", "type": "Aquilaria Crassna", "description": "Cambodian highland forests — renowned for distinctive deep, complex fragrance profiles preferred in Middle Eastern and East Asian markets." }
+    {
+      "id": "s01",
+      "country": "Vietnam",
+      "type": "Aquilaria Crassna",
+      "description": "The northern highlands of Vietnam — premium-grade Aquilaria crassna with exceptional resin density. Our Vietnamese partners hold 15+ years of cultivation expertise."
+    },
+    {
+      "id": "s02",
+      "country": "Indonesia",
+      "type": "Aquilaria Malaccensis",
+      "description": "Sumatra and Kalimantan rainforests — naturally-formed Aquilaria malaccensis, considered among the finest aromatic profiles in the world."
+    },
+    {
+      "id": "s03",
+      "country": "Cambodia",
+      "type": "Aquilaria Crassna",
+      "description": "Cambodian highland forests — renowned for distinctive deep, complex fragrance profiles preferred in Middle Eastern and East Asian markets."
+    }
   ],
   "faq": [
-    { "id": "f01", "question": "Do you ship internationally?", "answer": "Yes — we ship worldwide. Shipping costs and delivery times vary by destination. Contact us for a detailed quote based on your location and order size." },
-    { "id": "f02", "question": "What is your minimum wholesale order?", "answer": "Wholesale and B2B orders typically start at 10kg of raw material or 100 units of finished product. Contact our partnerships team to discuss your specific requirements." },
-    { "id": "f03", "question": "Can I verify product authenticity?", "answer": "Every product comes with a certificate of authenticity, species verification documentation, and a unique tracking number. We also provide HACCP and ISO 22000 documentation upon request." },
-    { "id": "f04", "question": "When will capsules and ampoules be available?", "answer": "Both products are currently in final development. Subscribe to our newsletter or submit a contact form with category 'Product Information' to be notified at launch." }
+    {
+      "id": "f01",
+      "question": "Do you ship internationally?",
+      "answer": "Yes — we ship worldwide. Shipping costs and delivery times vary by destination. Contact us for a detailed quote based on your location and order size."
+    },
+    {
+      "id": "f02",
+      "question": "What is your minimum wholesale order?",
+      "answer": "Wholesale and B2B orders typically start at 10kg of raw material or 100 units of finished product. Contact our partnerships team to discuss your specific requirements."
+    },
+    {
+      "id": "f03",
+      "question": "Can I verify product authenticity?",
+      "answer": "Every product comes with a certificate of authenticity, species verification documentation, and a unique tracking number. We also provide HACCP and ISO 22000 documentation upon request."
+    },
+    {
+      "id": "f04",
+      "question": "When will capsules and ampoules be available?",
+      "answer": "Both products are currently in final development. Subscribe to our newsletter or submit a contact form with category 'Product Information' to be notified at launch."
+    }
   ],
   "blogFeatured": {
     "id": "feat-3000-year-history",
@@ -100,23 +213,142 @@
     "badge": "History · Long Read"
   },
   "blogPosts": [
-    { "id": "h01", "category": "history", "title": "Naming Confusion & Authenticity: 침향, 沈香, 기남, 가라", "excerpt": "The many names behind genuine agarwood — and how naming confusion is used to deceive buyers across Asia.", "readTime": "8 min read", "image": "images/calligraphy-heritage.jpg" },
-    { "id": "h02", "category": "history", "title": "Cultural Status of Agarwood in Eastern Tradition", "excerpt": "How agarwood became the most spiritually significant aromatic material across Buddhism, Islam, and Hinduism.", "readTime": "9 min read", "image": "images/ceremonial-room.jpg" },
-    { "id": "h03", "category": "history", "title": "Goryeo Dynasty & the Maehyangbi Culture", "excerpt": "The unique Korean Buddhist tradition of burying agarwood as sacred offerings — and its historical documentation.", "readTime": "7 min read", "image": "images/calligraphy-heritage.jpg" },
-    { "id": "h04", "category": "history", "title": "Joseon Royal Medical Records & 침향", "excerpt": "Documented royal consumption of agarwood in the official Joseon Sillok annals — what kings used it for and why.", "readTime": "6 min read", "image": "images/calligraphy-heritage.jpg" },
-    { "id": "h05", "category": "history", "title": "Li Shizhen's Bencaogangmu: 27 Years of Research", "excerpt": "How the world's greatest pre-modern pharmacopoeia classified and validated agarwood's medicinal properties.", "readTime": "8 min read", "image": "images/calligraphy-heritage.jpg" },
-    { "id": "h06", "category": "history", "title": "Donuibogam & UNESCO Heritage Medicine", "excerpt": "Heo Jun's landmark medical text — registered as UNESCO world heritage — and its treatment of 침향.", "readTime": "7 min read", "image": "images/forest-origin.jpg" },
-    { "id": "h07", "category": "history", "title": "Aquilaria Agallocha: Scientific Species Verification", "excerpt": "Botanical authentication of genuine Aquilaria species — and why species identification is the first line of defence against counterfeiting.", "readTime": "6 min read", "image": "images/forest-origin.jpg" },
-    { "id": "s01", "category": "science", "title": "Health Benefits: Scientific Evidence Review", "excerpt": "A peer-reviewed overview of agarwood's validated therapeutic properties — anti-inflammatory, anxiolytic, and neuroactive effects confirmed.", "readTime": "11 min read", "image": "images/ampoule-editorial.jpg" },
-    { "id": "s02", "category": "science", "title": "Chronic Inflammation & Agarwood's Therapeutic Role", "excerpt": "Inflammation as the root cause of chronic disease — and how agarwood sesquiterpenes and chromones address the underlying pathways.", "readTime": "10 min read", "image": "images/ampoule-product.jpg" },
-    { "id": "s03", "category": "science", "title": "Beginner's Guide Part 1: Formation, Grading & Chemistry", "excerpt": "From the definition of agarwood to the chemistry of its bioactive compounds — a foundational introduction for newcomers.", "readTime": "9 min read", "image": "images/capsule-product.jpg" },
-    { "id": "l01", "category": "lifestyle", "title": "Agarwood as a Gift for Parents & Elders", "excerpt": "Guidance on selecting premium agarwood products as meaningful, culturally rich health gifts for grandparents and parents.", "readTime": "5 min read", "image": "images/gift-box.jpg" },
-    { "id": "l02", "category": "lifestyle", "title": "Usage Methods & Selection Guide", "excerpt": "A practical guide to using agarwood — incense, tea, oil, capsules — with selection criteria matched to your goals and budget.", "readTime": "7 min read", "image": "images/ampoule-editorial.jpg" },
-    { "id": "l03", "category": "lifestyle", "title": "Why Is Agarwood So Expensive?", "excerpt": "A scientific analysis of the factors driving agarwood's price — rarity, formation time, grading, and the economics of sustainable supply.", "readTime": "8 min read", "image": "images/gift-box.jpg" },
-    { "id": "l04", "category": "lifestyle", "title": "Authentic Agarwood Certification Guide", "excerpt": "HACCP, organic certification, species identification — what to look for when verifying that you're buying genuine agarwood.", "readTime": "6 min read", "image": "images/calligraphy-heritage.jpg" },
-    { "id": "l05", "category": "lifestyle", "title": "Vietnamese Tourist Shop Counterfeits", "excerpt": "How fragrance-grade low-quality products are relabelled as edible health supplements — and how to protect yourself.", "readTime": "7 min read", "image": "images/capsule-product.jpg" },
-    { "id": "l06", "category": "lifestyle", "title": "Modern Cultivation & Sustainability", "excerpt": "How scientific cultivation methods are making sustainable agarwood farming possible — and what it means for the future of the industry.", "readTime": "9 min read", "image": "images/forest-origin.jpg" },
-    { "id": "l07", "category": "lifestyle", "title": "Product Comparison Guide Part 2", "excerpt": "Selecting between raw chips, oils, incense, capsules and ampoules — criteria across efficacy, budget, and intended use.", "readTime": "6 min read", "image": "images/ampoule-product.jpg" }
+    {
+      "id": "h01",
+      "category": "history",
+      "title": "Naming Confusion & Authenticity: 침향, 沈香, 기남, 가라",
+      "excerpt": "The many names behind genuine agarwood — and how naming confusion is used to deceive buyers across Asia.",
+      "readTime": "8 min read",
+      "image": "images/calligraphy-heritage.jpg"
+    },
+    {
+      "id": "h02",
+      "category": "history",
+      "title": "Cultural Status of Agarwood in Eastern Tradition",
+      "excerpt": "How agarwood became the most spiritually significant aromatic material across Buddhism, Islam, and Hinduism.",
+      "readTime": "9 min read",
+      "image": "images/ceremonial-room.jpg"
+    },
+    {
+      "id": "h03",
+      "category": "history",
+      "title": "Goryeo Dynasty & the Maehyangbi Culture",
+      "excerpt": "The unique Korean Buddhist tradition of burying agarwood as sacred offerings — and its historical documentation.",
+      "readTime": "7 min read",
+      "image": "images/calligraphy-heritage.jpg"
+    },
+    {
+      "id": "h04",
+      "category": "history",
+      "title": "Joseon Royal Medical Records & 침향",
+      "excerpt": "Documented royal consumption of agarwood in the official Joseon Sillok annals — what kings used it for and why.",
+      "readTime": "6 min read",
+      "image": "images/calligraphy-heritage.jpg"
+    },
+    {
+      "id": "h05",
+      "category": "history",
+      "title": "Li Shizhen's Bencaogangmu: 27 Years of Research",
+      "excerpt": "How the world's greatest pre-modern pharmacopoeia classified and validated agarwood's medicinal properties.",
+      "readTime": "8 min read",
+      "image": "images/calligraphy-heritage.jpg"
+    },
+    {
+      "id": "h06",
+      "category": "history",
+      "title": "Donuibogam & UNESCO Heritage Medicine",
+      "excerpt": "Heo Jun's landmark medical text — registered as UNESCO world heritage — and its treatment of 침향.",
+      "readTime": "7 min read",
+      "image": "images/forest-origin.jpg"
+    },
+    {
+      "id": "h07",
+      "category": "history",
+      "title": "Aquilaria Agallocha: Scientific Species Verification",
+      "excerpt": "Botanical authentication of genuine Aquilaria species — and why species identification is the first line of defence against counterfeiting.",
+      "readTime": "6 min read",
+      "image": "images/forest-origin.jpg"
+    },
+    {
+      "id": "s01",
+      "category": "science",
+      "title": "Health Benefits: Scientific Evidence Review",
+      "excerpt": "A peer-reviewed overview of agarwood's validated therapeutic properties — anti-inflammatory, anxiolytic, and neuroactive effects confirmed.",
+      "readTime": "11 min read",
+      "image": "images/ampoule-editorial.jpg"
+    },
+    {
+      "id": "s02",
+      "category": "science",
+      "title": "Chronic Inflammation & Agarwood's Therapeutic Role",
+      "excerpt": "Inflammation as the root cause of chronic disease — and how agarwood sesquiterpenes and chromones address the underlying pathways.",
+      "readTime": "10 min read",
+      "image": "images/ampoule-product.jpg"
+    },
+    {
+      "id": "s03",
+      "category": "science",
+      "title": "Beginner's Guide Part 1: Formation, Grading & Chemistry",
+      "excerpt": "From the definition of agarwood to the chemistry of its bioactive compounds — a foundational introduction for newcomers.",
+      "readTime": "9 min read",
+      "image": "images/capsule-product.jpg"
+    },
+    {
+      "id": "l01",
+      "category": "lifestyle",
+      "title": "Agarwood as a Gift for Parents & Elders",
+      "excerpt": "Guidance on selecting premium agarwood products as meaningful, culturally rich health gifts for grandparents and parents.",
+      "readTime": "5 min read",
+      "image": "images/gift-box.jpg"
+    },
+    {
+      "id": "l02",
+      "category": "lifestyle",
+      "title": "Usage Methods & Selection Guide",
+      "excerpt": "A practical guide to using agarwood — incense, tea, oil, capsules — with selection criteria matched to your goals and budget.",
+      "readTime": "7 min read",
+      "image": "images/ampoule-editorial.jpg"
+    },
+    {
+      "id": "l03",
+      "category": "lifestyle",
+      "title": "Why Is Agarwood So Expensive?",
+      "excerpt": "A scientific analysis of the factors driving agarwood's price — rarity, formation time, grading, and the economics of sustainable supply.",
+      "readTime": "8 min read",
+      "image": "images/gift-box.jpg"
+    },
+    {
+      "id": "l04",
+      "category": "lifestyle",
+      "title": "Authentic Agarwood Certification Guide",
+      "excerpt": "HACCP, organic certification, species identification — what to look for when verifying that you're buying genuine agarwood.",
+      "readTime": "6 min read",
+      "image": "images/calligraphy-heritage.jpg"
+    },
+    {
+      "id": "l05",
+      "category": "lifestyle",
+      "title": "Vietnamese Tourist Shop Counterfeits",
+      "excerpt": "How fragrance-grade low-quality products are relabelled as edible health supplements — and how to protect yourself.",
+      "readTime": "7 min read",
+      "image": "images/capsule-product.jpg"
+    },
+    {
+      "id": "l06",
+      "category": "lifestyle",
+      "title": "Modern Cultivation & Sustainability",
+      "excerpt": "How scientific cultivation methods are making sustainable agarwood farming possible — and what it means for the future of the industry.",
+      "readTime": "9 min read",
+      "image": "images/forest-origin.jpg"
+    },
+    {
+      "id": "l07",
+      "category": "lifestyle",
+      "title": "Product Comparison Guide Part 2",
+      "excerpt": "Selecting between raw chips, oils, incense, capsules and ampoules — criteria across efficacy, budget, and intended use.",
+      "readTime": "6 min read",
+      "image": "images/ampoule-product.jpg"
+    }
   ],
   "products": [
     {
@@ -126,7 +358,12 @@
       "koreanName": "침향 캡슐",
       "productType": "Daily Wellness Supplement",
       "description": "Premium agarwood extract in convenient capsule form — formulated for daily consumption with standardized active sesquiterpene content.",
-      "benefits": ["Anti-inflammatory", "Stress reduction", "Cognitive support", "Daily wellness"],
+      "benefits": [
+        "Anti-inflammatory",
+        "Stress reduction",
+        "Cognitive support",
+        "Daily wellness"
+      ],
       "status": "in-development",
       "statusLabel": "In Development",
       "image": "images/capsule-product.jpg"
@@ -138,7 +375,12 @@
       "koreanName": "침향 앰플",
       "productType": "Concentrated Liquid Extract",
       "description": "High-potency agarwood liquid extract in single-serving ampoules — pharmaceutical-grade extraction preserves the full terpene profile.",
-      "benefits": ["Maximum bioavailability", "Pharmaceutical extraction", "Single-serve format", "Premium grade"],
+      "benefits": [
+        "Maximum bioavailability",
+        "Pharmaceutical extraction",
+        "Single-serve format",
+        "Premium grade"
+      ],
       "status": "in-development",
       "statusLabel": "In Development",
       "image": "images/ampoule-product.jpg"
@@ -150,14 +392,19 @@
       "koreanName": "침향 원료",
       "productType": "Wholesale Raw Material",
       "description": "Authenticated raw agarwood for B2B partners — Vietnamese and Indonesian sources, certified species verification, full traceability.",
-      "benefits": ["Species verified", "Full traceability", "Wholesale pricing", "Direct-source"],
+      "benefits": [
+        "Species verified",
+        "Full traceability",
+        "Wholesale pricing",
+        "Direct-source"
+      ],
       "status": "available",
       "statusLabel": "Available B2B",
       "image": "images/forest-origin.jpg"
     }
   ],
   "_meta": {
-    "version": 2,
+    "version": 3,
     "lastUpdated": "2026-04-26",
     "schema": "agarwooding-cms-v2"
   }
