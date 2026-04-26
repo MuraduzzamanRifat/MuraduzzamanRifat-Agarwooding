@@ -248,6 +248,7 @@
   </div>
 </footer>
 
+<script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
 <script>
 function filterPosts(cat, btn){
@@ -263,6 +264,73 @@ function filterPosts(cat, btn){
     });
   }
 }
+
+/* ── CMS HYDRATION ── */
+(async function hydrateBlog(){
+  if(!window.CMS) return;
+  try{
+    const [posts, featured] = await Promise.all([CMS.blogPosts(), CMS.blogFeatured()]);
+    const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const labels = { history:'History', science:'Science', lifestyle:'Lifestyle', culture:'Culture' };
+
+    // Featured
+    if(featured){
+      const f = document.querySelector('.featured');
+      if(f){
+        const img = f.querySelector('.featured-img img'); if(img && featured.image) img.src = featured.image;
+        const badge = f.querySelector('.featured-badge'); if(badge) badge.textContent = featured.badge || (labels[featured.category] + ' · Long Read');
+        const title = f.querySelector('.featured-title'); if(title) title.textContent = featured.title || '';
+        const excerpt = f.querySelector('.featured-excerpt'); if(excerpt) excerpt.textContent = featured.excerpt || '';
+        const meta = f.querySelector('.featured-meta'); if(meta) meta.textContent = `${labels[featured.category]||featured.category} · ${featured.readTime||''}`;
+      }
+    }
+
+    // Posts grouped by category
+    const groups = { history: [], science: [], lifestyle: [] };
+    posts.forEach(p => { if(groups[p.category]) groups[p.category].push(p); });
+
+    function card(p, idx){
+      const d = (idx % 3) + 1;
+      return `<a href="#" class="bcard reveal delay-${d}">
+        <div class="bcard-img"><img src="${esc(p.image)}" alt="" loading="lazy"/></div>
+        <div class="bcard-body">
+          <p class="bcard-cat cat-${esc(p.category)}">${esc(labels[p.category]||p.category)}</p>
+          <h3 class="bcard-title">${esc(p.title)}</h3>
+          <p class="bcard-excerpt">${esc(p.excerpt)}</p>
+          <p class="bcard-meta">${esc(p.readTime||'')}</p>
+        </div>
+      </a>`;
+    }
+
+    Object.entries(groups).forEach(([cat, arr]) => {
+      const grid = document.getElementById(cat + '-grid');
+      if(!grid) return;
+      if(arr.length === 0){
+        grid.style.display = 'none';
+        if(grid.previousElementSibling) grid.previousElementSibling.style.display = 'none';
+      } else {
+        grid.innerHTML = arr.map(card).join('');
+      }
+    });
+
+    // Update tag count + footer counts
+    const tag = document.querySelector('.page-hero-tag');
+    if(tag) tag.textContent = `${posts.length} Articles · History · Science · Lifestyle`;
+    const counts = { history: groups.history.length, science: groups.science.length, lifestyle: groups.lifestyle.length };
+    const footLinks = document.querySelectorAll('.foot-links');
+    if(footLinks[1]){
+      const items = footLinks[1].querySelectorAll('a');
+      if(items[0]) items[0].textContent = `History (${counts.history})`;
+      if(items[1]) items[1].textContent = `Science (${counts.science})`;
+      if(items[2]) items[2].textContent = `Lifestyle (${counts.lifestyle})`;
+    }
+
+    // Re-trigger reveal observer for the new cards (main.js IntersectionObserver only catches initial DOM)
+    document.querySelectorAll('.bcard.reveal').forEach(el => el.classList.add('on'));
+  }catch(err){
+    console.warn('[blog] CMS hydration failed, keeping static fallback:', err.message);
+  }
+})();
 </script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>

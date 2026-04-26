@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Agarwooding CMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --black:#0A0805; --black2:#15110B; --black3:#1F1810; --black4:#2A2218;
+  --gold:#D4A843; --gold-light:#E5C063; --gold-dim:rgba(212,168,67,.18);
+  --gold-glow:rgba(212,168,67,.08); --gold-ring:rgba(212,168,67,.35);
+  --cream:#F4EBD8; --ivory:#FBF6EA;
+  --fg:#FBF6EA; --fg2:rgba(251,246,234,.70); --fg3:rgba(251,246,234,.45); --fg4:rgba(251,246,234,.22);
+  --border:rgba(212,168,67,.18); --border2:rgba(212,168,67,.08);
+  --radius:6px; --radius-lg:10px;
+  --success:#5CA873; --success-bg:rgba(92,168,115,.12);
+  --error:#C0392B; --error-bg:rgba(192,57,43,.12);
+  --sidebar-w:240px; --header-h:64px;
+  --font-d:'Playfair Display',serif; --font-b:'DM Sans',system-ui,sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-size:14px}
+body{font-family:var(--font-b);background:var(--black);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-light)}
+button,input,textarea,select{font:inherit;color:inherit}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--black2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+
+/* LOGIN */
+#login{display:none;position:fixed;inset:0;background:var(--black);z-index:9999;align-items:center;justify-content:center;padding:1rem}
+#login.active{display:flex}
+.login-card{background:var(--black2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;width:100%;max-width:440px;position:relative;overflow:hidden}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.login-brand{display:flex;align-items:center;gap:.65rem;margin-bottom:1.75rem}
+.login-brand .mark{font-family:var(--font-d);font-size:1.6rem;font-style:italic;color:var(--gold)}
+.login-brand .name{font-family:var(--font-d);font-size:1.25rem;font-weight:500;letter-spacing:.04em}
+.login-brand .name em{font-style:italic;color:var(--gold)}
+.login-h{font-family:var(--font-d);font-size:1.5rem;font-weight:400;margin-bottom:.4rem}
+.login-sub{color:var(--fg2);font-size:.85rem;margin-bottom:1.6rem;line-height:1.55}
+.login-sub a{font-size:.82rem}
+label{display:block;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg3);margin-bottom:.4rem;font-weight:500}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=password],textarea,select{
+  width:100%;background:var(--black);border:1px solid var(--border);border-radius:var(--radius);padding:.7rem .85rem;color:var(--fg);transition:border-color 150ms,background 150ms;font-size:.92rem
+}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold-ring);background:var(--black3)}
+textarea{min-height:84px;resize:vertical;font-family:var(--font-b);line-height:1.55}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gold);color:var(--black);padding:.75rem 1.4rem;border:none;border-radius:var(--radius);font-weight:500;letter-spacing:.06em;cursor:pointer;transition:background 150ms,transform 100ms;font-size:.85rem;text-transform:uppercase}
+.btn:hover{background:var(--gold-light)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--fg2)}
+.btn-ghost:hover{border-color:var(--gold-ring);color:var(--fg);background:var(--gold-glow)}
+.btn-danger{background:transparent;border:1px solid rgba(192,57,43,.4);color:#E58371}
+.btn-danger:hover{background:rgba(192,57,43,.18);color:#FFB4A8}
+.btn-w{width:100%;justify-content:center;padding:.85rem 1.2rem}
+
+/* APP LAYOUT */
+#app{display:none;min-height:100vh}
+#app.active{display:block}
+.layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh}
+aside.side{background:var(--black2);border-right:1px solid var(--border2);position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.side-brand{padding:1.4rem 1.4rem;border-bottom:1px solid var(--border2)}
+.side-brand .mark{font-family:var(--font-d);font-style:italic;color:var(--gold);font-size:1.5rem}
+.side-brand .name{font-family:var(--font-d);font-size:1.1rem;letter-spacing:.04em;display:block;margin-top:.2rem}
+.side-brand .name em{font-style:italic;color:var(--gold)}
+.side-nav{padding:1rem .6rem;flex:1;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .9rem;color:var(--fg2);border-radius:var(--radius);cursor:pointer;font-size:.86rem;letter-spacing:.04em;transition:background 120ms,color 120ms;border:1px solid transparent}
+.nav-item:hover{color:var(--fg);background:var(--gold-glow)}
+.nav-item.active{color:var(--gold);background:var(--gold-glow);border-color:var(--border)}
+.nav-item .ic{font-size:1.05rem;width:1.1rem;display:inline-block;text-align:center}
+.side-foot{padding:1rem 1.4rem;border-top:1px solid var(--border2);font-size:.78rem;color:var(--fg3);display:flex;flex-direction:column;gap:.4rem}
+.side-foot button{background:none;border:none;color:var(--fg3);text-align:left;padding:0;cursor:pointer;font-size:.78rem}
+.side-foot button:hover{color:var(--gold)}
+
+main.main{display:flex;flex-direction:column;min-height:100vh}
+header.head{height:var(--header-h);border-bottom:1px solid var(--border2);background:var(--black);display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;position:sticky;top:0;z-index:50}
+.head-title{font-family:var(--font-d);font-size:1.15rem;letter-spacing:.04em;font-weight:500}
+.head-actions{display:flex;align-items:center;gap:.75rem}
+.dirty-dot{display:none;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-glow)}
+.dirty .dirty-dot{display:inline-block}
+.dirty-text{display:none;color:var(--gold);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.dirty .dirty-text{display:inline}
+
+.content{padding:1.8rem 2.2rem;flex:1;overflow-y:auto;max-width:1200px;width:100%}
+.section-title{font-family:var(--font-d);font-size:1.35rem;font-weight:400;margin-bottom:.3rem;color:var(--gold)}
+.section-sub{color:var(--fg3);font-size:.85rem;margin-bottom:1.8rem;letter-spacing:.04em}
+
+.field{margin-bottom:1.1rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+@media(max-width:768px){.row,.row3{grid-template-columns:1fr}}
+
+.card{background:var(--black2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.4rem;margin-bottom:1rem;position:relative}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.6rem}
+.card-h{font-family:var(--font-d);font-size:1rem;color:var(--gold-light);font-weight:500;letter-spacing:.03em;flex:1}
+.cat-pill{display:inline-block;padding:.2rem .55rem;border-radius:99px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:var(--gold-glow);color:var(--gold);border:1px solid var(--border)}
+.cat-pill.history{background:rgba(212,168,67,.1);color:#D4A843}
+.cat-pill.science{background:rgba(142,201,232,.1);color:#8EC9E8}
+.cat-pill.lifestyle{background:rgba(168,200,144,.1);color:#A8C890}
+.cat-pill.culture{background:rgba(216,175,212,.1);color:#D8AFD4}
+
+.add-btn{width:100%;padding:1rem;border:1px dashed var(--border);background:transparent;color:var(--fg3);border-radius:var(--radius-lg);cursor:pointer;font-family:var(--font-b);transition:border-color 150ms,color 150ms,background 150ms}
+.add-btn:hover{border-color:var(--gold-ring);color:var(--gold);background:var(--gold-glow)}
+
+.toast-wrap{position:fixed;top:1.2rem;right:1.2rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;max-width:360px}
+.toast{background:var(--black3);border:1px solid var(--border);border-left:3px solid var(--gold);padding:.8rem 1.1rem;border-radius:var(--radius);font-size:.85rem;animation:toast-in 220ms ease;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.toast.success{border-left-color:var(--success)}
+.toast.error{border-left-color:var(--error)}
+.toast .t{font-weight:500;margin-bottom:.15rem}
+.toast .m{color:var(--fg2);font-size:.78rem}
+@keyframes toast-in{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+@keyframes toast-out{to{opacity:0;transform:translateX(20px)}}
+
+.skeleton{padding:3rem;text-align:center;color:var(--fg3);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+.help-link{color:var(--gold);font-size:.78rem;letter-spacing:.04em}
+.benefits-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+.benefit-tag{background:var(--gold-glow);border:1px solid var(--border);color:var(--fg2);padding:.2rem .6rem;border-radius:99px;font-size:.74rem;display:inline-flex;align-items:center;gap:.3rem}
+.benefit-tag button{background:none;border:none;color:var(--fg3);cursor:pointer;padding:0;font-size:.9rem;line-height:1}
+.benefit-tag button:hover{color:var(--error)}
+.tag-input-row{display:flex;gap:.5rem;margin-top:.4rem}
+.tag-input-row input{flex:1}
+.tag-input-row button{padding:.5rem .9rem;font-size:.78rem}
+
+.move-actions{display:flex;gap:.3rem}
+.move-btn{background:transparent;border:1px solid var(--border2);color:var(--fg3);padding:.3rem .55rem;border-radius:var(--radius);cursor:pointer;font-size:.7rem}
+.move-btn:hover{border-color:var(--gold-ring);color:var(--gold)}
+
+@media(max-width:880px){
+  .layout{grid-template-columns:1fr}
+  aside.side{position:fixed;left:-260px;top:0;width:260px;z-index:100;transition:left 250ms}
+  aside.side.open{left:0}
+  .menu-toggle{display:inline-flex!important}
+  .content{padding:1.4rem 1rem}
+}
+.menu-toggle{display:none;background:none;border:none;color:var(--gold);font-size:1.4rem;cursor:pointer;padding:0 0 0 .2rem}
+</style>
+</head>
+<body>
+
+<!-- ───────── LOGIN ───────── -->
+<div id="login" class="active">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="mark">A</span>
+      <span class="name">Agar<em>wooding</em></span>
+    </div>
+    <h1 class="login-h">CMS Access</h1>
+    <p class="login-sub">
+      Enter a GitHub Personal Access Token with <code style="color:var(--gold)">repo</code> scope.
+      <br/>
+      <a class="help-link" href="https://github.com/settings/tokens/new?scopes=repo&description=Agarwooding%20CMS" target="_blank" rel="noopener">→ Create a token</a>
+    </p>
+    <div class="field">
+      <label for="token">Personal Access Token</label>
+      <input type="password" id="token" placeholder="ghp_..." autocomplete="off"/>
+    </div>
+    <button type="button" class="btn btn-w" id="login-btn">Unlock</button>
+    <p style="margin-top:1rem;font-size:.72rem;color:var(--fg4);line-height:1.55">
+      Token is stored only in your browser's localStorage. Never sent anywhere except api.github.com.
+    </p>
+  </div>
+</div>
+
+<!-- ───────── APP ───────── -->
+<div id="app">
+  <div class="layout">
+
+    <aside class="side" id="side">
+      <div class="side-brand">
+        <span class="mark">A</span>
+        <span class="name">Agar<em>wooding</em> CMS</span>
+      </div>
+      <nav class="side-nav">
+        <div class="nav-item active" data-view="hero"><span class="ic">◆</span> Hero & Homepage</div>
+        <div class="nav-item" data-view="blog"><span class="ic">◫</span> Blog Posts</div>
+        <div class="nav-item" data-view="products"><span class="ic">◉</span> Products</div>
+        <div class="nav-item" data-view="company"><span class="ic">▲</span> Company Info</div>
+      </nav>
+      <div class="side-foot">
+        <span id="user-info">—</span>
+        <button type="button" id="view-site">↗ View site</button>
+        <button type="button" id="logout">Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="head" id="head">
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <button type="button" class="menu-toggle" id="menu-toggle">≡</button>
+          <span class="head-title" id="view-title">Hero &amp; Homepage</span>
+        </div>
+        <div class="head-actions">
+          <span class="dirty-dot"></span>
+          <span class="dirty-text">Unsaved</span>
+          <button type="button" class="btn btn-ghost" id="reload-btn">Reload</button>
+          <button type="button" class="btn" id="save-btn">Save → GitHub</button>
+        </div>
+      </header>
+      <div class="content" id="view-host">
+        <div class="skeleton">Loading content…</div>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<script>
+'use strict';
+
+/* ============ CONFIG ============ */
+const REPO_OWNER  = 'MuraduzzamanRifat';
+const REPO_NAME   = 'MuraduzzamanRifat-Agarwooding';
+const REPO_BRANCH = 'main';
+const CONTENT_PATH = 'content/site.json';
+const SITE_URL = `https://${REPO_OWNER.toLowerCase()}.github.io/${REPO_NAME}/`;
+
+/* ============ GH CLIENT ============ */
+class GH {
+  constructor(token){
+    this.token = token;
+    this.base = 'https://api.github.com';
+    this.owner = REPO_OWNER;
+    this.repo = REPO_NAME;
+    this.branch = REPO_BRANCH;
+  }
+  headers(){
+    return {
+      'Authorization': `Bearer ${this.token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    };
+  }
+  async user(){
+    const r = await fetch(`${this.base}/user`, { headers: this.headers() });
+    if(!r.ok) throw new Error('Invalid token or insufficient permissions');
+    return r.json();
+  }
+  async getFile(path){
+    const r = await fetch(`${this.base}/repos/${this.owner}/${this.repo}/contents/${path}?ref=${this.branch}`, {
+      headers: this.headers()
+    });
+    if(!r.ok){
+      if(r.status === 404) return { content: null, sha: null };
+      throw new Error(`GitHub ${r.status}: ${(await r.text()).slice(0,180)}`);
+    }
+    const d = await r.json();
+    const bin = atob(d.content.replace(/\n/g,''));
+    const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+    const txt = new TextDecoder('utf-8').decode(bytes);
+    return { content: JSON.parse(txt), sha: d.sha };
+  }
+  async putFile(path, content, sha, message){
+    const json = JSON.stringify(content, null, 2);
+    const encoded = btoa(unescape(encodeURIComponent(json)));
+    const body = { message, content: encoded, branch: this.branch };
+    if(sha) body.sha = sha;
+    const r = await fetch(`${this.base}/repos/${this.owner}/${this.repo}/contents/${path}`, {
+      method: 'PUT', headers: this.headers(), body: JSON.stringify(body)
+    });
+    if(!r.ok){
+      const e = await r.json().catch(() => ({ message: r.statusText }));
+      throw new Error(e.message || r.statusText);
+    }
+    return r.json();
+  }
+}
+
+/* ============ STATE ============ */
+let gh = null;
+let data = null;
+let sha = null;
+let dirty = false;
+let currentView = 'hero';
+
+/* ============ TOAST ============ */
+function toast(type, title, msg){
+  const el = document.createElement('div');
+  el.className = `toast ${type||''}`;
+  el.innerHTML = `<div class="t">${esc(title)}</div>${msg?`<div class="m">${esc(msg)}</div>`:''}`;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => { el.style.animation = 'toast-out 220ms ease forwards'; setTimeout(() => el.remove(), 250); }, 3800);
+}
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ============ DIRTY ============ */
+function setDirty(v){
+  dirty = v;
+  document.getElementById('head').classList.toggle('dirty', v);
+}
+
+/* ============ LOGIN ============ */
+async function tryLogin(token){
+  try{
+    gh = new GH(token);
+    const user = await gh.user();
+    localStorage.setItem('agw_token', token);
+    document.getElementById('user-info').textContent = '@' + user.login;
+    document.getElementById('login').classList.remove('active');
+    document.getElementById('app').classList.add('active');
+    await loadContent();
+  }catch(err){
+    toast('error', 'Login failed', err.message);
+    gh = null;
+  }
+}
+document.getElementById('login-btn').addEventListener('click', () => {
+  const tok = document.getElementById('token').value.trim();
+  if(!tok) return toast('error', 'Token required', '');
+  tryLogin(tok);
+});
+document.getElementById('token').addEventListener('keydown', e => {
+  if(e.key === 'Enter') document.getElementById('login-btn').click();
+});
+document.getElementById('logout').addEventListener('click', () => {
+  if(dirty && !confirm('Unsaved changes will be lost. Sign out anyway?')) return;
+  localStorage.removeItem('agw_token');
+  location.reload();
+});
+document.getElementById('view-site').addEventListener('click', () => window.open(SITE_URL, '_blank'));
+
+/* ============ LOAD ============ */
+async function loadContent(){
+  document.getElementById('view-host').innerHTML = '<div class="skeleton">Loading content…</div>';
+  try{
+    const r = await gh.getFile(CONTENT_PATH);
+    if(!r.content){
+      toast('error', 'content/site.json not found', 'Create the file first by pushing the seed JSON to your repo.');
+      data = { hero:{}, company:{}, blogPosts:[], products:[], blogFeatured:{} };
+      sha = null;
+    } else {
+      data = r.content;
+      sha = r.sha;
+    }
+    setDirty(false);
+    renderView(currentView);
+  }catch(err){
+    toast('error', 'Failed to load', err.message);
+  }
+}
+document.getElementById('reload-btn').addEventListener('click', () => {
+  if(dirty && !confirm('Unsaved changes will be lost. Reload anyway?')) return;
+  loadContent();
+});
+
+/* ============ SAVE ============ */
+async function save(){
+  if(!gh || !data) return;
+  const btn = document.getElementById('save-btn');
+  const orig = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try{
+    captureView(currentView);
+    data._meta = data._meta || {};
+    data._meta.lastUpdated = new Date().toISOString().slice(0,10);
+    data._meta.version = (data._meta.version || 1) + 1;
+    const msg = `cms: update ${currentView} via admin panel`;
+    const r = await gh.putFile(CONTENT_PATH, data, sha, msg);
+    sha = r.content.sha;
+    setDirty(false);
+    toast('success', 'Saved', 'Your changes will be live in ~30 seconds (after Pages rebuild).');
+  }catch(err){
+    toast('error', 'Save failed', err.message);
+  }finally{
+    btn.disabled = false; btn.textContent = orig;
+  }
+}
+document.getElementById('save-btn').addEventListener('click', save);
+
+/* ============ NAV ============ */
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if(dirty && !confirm('Unsaved changes will be lost. Switch view anyway?')) return;
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    const v = item.dataset.view;
+    currentView = v;
+    document.getElementById('view-title').textContent = item.textContent.trim();
+    document.getElementById('side').classList.remove('open');
+    setDirty(false);
+    renderView(v);
+  });
+});
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('side').classList.toggle('open');
+});
+
+/* ============ RENDER ============ */
+function renderView(view){
+  const host = document.getElementById('view-host');
+  if(view === 'hero')     host.innerHTML = renderHero();
+  if(view === 'blog')     host.innerHTML = renderBlog();
+  if(view === 'products') host.innerHTML = renderProducts();
+  if(view === 'company')  host.innerHTML = renderCompany();
+  attachInputs();
+}
+
+function attachInputs(){
+  document.querySelectorAll('[data-bind]').forEach(el => {
+    el.addEventListener('input', () => setDirty(true));
+    el.addEventListener('change', () => setDirty(true));
+  });
+}
+
+/* ============ HERO ============ */
+function renderHero(){
+  const h = data.hero || {};
+  const f = data.blogFeatured || {};
+  return `
+    <h2 class="section-title">Hero & Homepage</h2>
+    <p class="section-sub">Top-of-page brand statement and the blog featured article.</p>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">Hero</div></div>
+      <div class="field"><label>Eyebrow tag</label><input type="text" data-bind id="hero-eyebrow" value="${esc(h.eyebrow||'')}"/></div>
+      <div class="row">
+        <div class="field"><label>Headline (English)</label><input type="text" data-bind id="hero-headline" value="${esc(h.headline||'')}"/></div>
+        <div class="field"><label>Headline (Korean)</label><input type="text" data-bind id="hero-headlineKr" value="${esc(h.headlineKr||'')}"/></div>
+      </div>
+      <div class="field"><label>Tagline</label><input type="text" data-bind id="hero-tagline" value="${esc(h.tagline||'')}"/></div>
+      <div class="row">
+        <div class="field"><label>Primary CTA label</label><input type="text" data-bind id="cta1-label" value="${esc(h.ctaPrimary?.label||'')}"/></div>
+        <div class="field"><label>Primary CTA href</label><input type="text" data-bind id="cta1-href" value="${esc(h.ctaPrimary?.href||'')}"/></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Secondary CTA label</label><input type="text" data-bind id="cta2-label" value="${esc(h.ctaSecondary?.label||'')}"/></div>
+        <div class="field"><label>Secondary CTA href</label><input type="text" data-bind id="cta2-href" value="${esc(h.ctaSecondary?.href||'')}"/></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div class="card-h">Featured blog post</div></div>
+      <div class="field"><label>Title</label><input type="text" data-bind id="feat-title" value="${esc(f.title||'')}"/></div>
+      <div class="field"><label>Excerpt</label><textarea data-bind id="feat-excerpt">${esc(f.excerpt||'')}</textarea></div>
+      <div class="row3">
+        <div class="field"><label>Category</label>
+          <select data-bind id="feat-category">
+            <option value="history"${f.category==='history'?' selected':''}>History</option>
+            <option value="science"${f.category==='science'?' selected':''}>Science</option>
+            <option value="lifestyle"${f.category==='lifestyle'?' selected':''}>Lifestyle</option>
+            <option value="culture"${f.category==='culture'?' selected':''}>Culture</option>
+          </select>
+        </div>
+        <div class="field"><label>Read time</label><input type="text" data-bind id="feat-readtime" value="${esc(f.readTime||'')}"/></div>
+        <div class="field"><label>Badge text</label><input type="text" data-bind id="feat-badge" value="${esc(f.badge||'')}"/></div>
+      </div>
+      <div class="field"><label>Image path</label><input type="text" data-bind id="feat-image" value="${esc(f.image||'')}" placeholder="images/ceremonial-room.jpg"/></div>
+    </div>
+  `;
+}
+function captureHero(){
+  data.hero = data.hero || {};
+  data.hero.eyebrow = val('hero-eyebrow');
+  data.hero.headline = val('hero-headline');
+  data.hero.headlineKr = val('hero-headlineKr');
+  data.hero.tagline = val('hero-tagline');
+  data.hero.ctaPrimary = { label: val('cta1-label'), href: val('cta1-href') };
+  data.hero.ctaSecondary = { label: val('cta2-label'), href: val('cta2-href') };
+  data.blogFeatured = data.blogFeatured || {};
+  data.blogFeatured.id = data.blogFeatured.id || 'feat-' + Date.now().toString(36);
+  data.blogFeatured.title = val('feat-title');
+  data.blogFeatured.excerpt = val('feat-excerpt');
+  data.blogFeatured.category = val('feat-category');
+  data.blogFeatured.categoryLabel = val('feat-category').charAt(0).toUpperCase() + val('feat-category').slice(1);
+  data.blogFeatured.readTime = val('feat-readtime');
+  data.blogFeatured.badge = val('feat-badge');
+  data.blogFeatured.image = val('feat-image');
+}
+
+/* ============ BLOG ============ */
+function renderBlog(){
+  const posts = data.blogPosts || [];
+  return `
+    <h2 class="section-title">Blog Posts <span style="color:var(--fg3);font-size:.85rem">· ${posts.length} articles</span></h2>
+    <p class="section-sub">Each card below is editable. Save commits all changes at once.</p>
+    <div id="blog-list">
+      ${posts.map((p, i) => blogCard(p, i, posts.length)).join('')}
+    </div>
+    <button type="button" class="add-btn" id="add-blog">+ Add a new blog post</button>
+  `;
+}
+function blogCard(p, i, total){
+  return `
+  <div class="card" data-bp-i="${i}">
+    <div class="card-head">
+      <span class="cat-pill ${esc(p.category||'history')}">${esc(p.category||'history')}</span>
+      <div class="card-h">${esc(p.title || '(untitled)')}</div>
+      <div class="move-actions">
+        <button type="button" class="move-btn" onclick="moveBP(${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button type="button" class="move-btn" onclick="moveBP(${i},1)" ${i===total-1?'disabled':''}>↓</button>
+        <button type="button" class="move-btn btn-danger" onclick="delBP(${i})" style="border-color:rgba(192,57,43,.4);color:#E58371">×</button>
+      </div>
+    </div>
+    <div class="field"><label>Title</label><input type="text" data-bind data-bp="title" value="${esc(p.title||'')}"/></div>
+    <div class="field"><label>Excerpt</label><textarea data-bind data-bp="excerpt">${esc(p.excerpt||'')}</textarea></div>
+    <div class="row3">
+      <div class="field"><label>Category</label>
+        <select data-bind data-bp="category">
+          <option value="history"${p.category==='history'?' selected':''}>History</option>
+          <option value="science"${p.category==='science'?' selected':''}>Science</option>
+          <option value="lifestyle"${p.category==='lifestyle'?' selected':''}>Lifestyle</option>
+          <option value="culture"${p.category==='culture'?' selected':''}>Culture</option>
+        </select>
+      </div>
+      <div class="field"><label>Read time</label><input type="text" data-bind data-bp="readTime" value="${esc(p.readTime||'')}" placeholder="6 min read"/></div>
+      <div class="field"><label>Image path</label><input type="text" data-bind data-bp="image" value="${esc(p.image||'')}" placeholder="images/forest-origin.jpg"/></div>
+    </div>
+  </div>
+  `;
+}
+function captureBlog(){
+  const cards = document.querySelectorAll('[data-bp-i]');
+  data.blogPosts = Array.from(cards).map((c, i) => {
+    const old = data.blogPosts?.[parseInt(c.dataset.bpI,10)] || {};
+    return {
+      id: old.id || 'bp_' + Date.now().toString(36) + '_' + i,
+      title:    c.querySelector('[data-bp="title"]').value.trim(),
+      excerpt:  c.querySelector('[data-bp="excerpt"]').value.trim(),
+      category: c.querySelector('[data-bp="category"]').value,
+      readTime: c.querySelector('[data-bp="readTime"]').value.trim(),
+      image:    c.querySelector('[data-bp="image"]').value.trim(),
+    };
+  });
+}
+window.moveBP = function(i, dir){
+  captureBlog();
+  const j = i + dir;
+  if(j < 0 || j >= data.blogPosts.length) return;
+  [data.blogPosts[i], data.blogPosts[j]] = [data.blogPosts[j], data.blogPosts[i]];
+  setDirty(true);
+  renderView('blog');
+};
+window.delBP = function(i){
+  if(!confirm('Delete this blog post?')) return;
+  captureBlog();
+  data.blogPosts.splice(i,1);
+  setDirty(true);
+  renderView('blog');
+};
+function bindBlogAdd(){
+  const b = document.getElementById('add-blog');
+  if(b) b.addEventListener('click', () => {
+    captureBlog();
+    data.blogPosts = data.blogPosts || [];
+    data.blogPosts.unshift({ id:'bp_'+Date.now().toString(36), title:'New post', excerpt:'', category:'history', readTime:'6 min read', image:'images/calligraphy-heritage.jpg' });
+    setDirty(true);
+    renderView('blog');
+  });
+}
+
+/* ============ PRODUCTS ============ */
+function renderProducts(){
+  const items = data.products || [];
+  return `
+    <h2 class="section-title">Products <span style="color:var(--fg3);font-size:.85rem">· ${items.length} items</span></h2>
+    <p class="section-sub">Manage your product catalog. Order = display order.</p>
+    <div id="prod-list">
+      ${items.map((p, i) => prodCard(p, i, items.length)).join('')}
+    </div>
+    <button type="button" class="add-btn" id="add-prod">+ Add a new product</button>
+  `;
+}
+function prodCard(p, i, total){
+  const benefits = Array.isArray(p.benefits) ? p.benefits : [];
+  return `
+  <div class="card" data-pr-i="${i}">
+    <div class="card-head">
+      <span class="cat-pill">${esc(p.status||'in-development')}</span>
+      <div class="card-h">${esc(p.name || '(unnamed)')}</div>
+      <div class="move-actions">
+        <button type="button" class="move-btn" onclick="movePR(${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button type="button" class="move-btn" onclick="movePR(${i},1)" ${i===total-1?'disabled':''}>↓</button>
+        <button type="button" class="move-btn btn-danger" onclick="delPR(${i})" style="border-color:rgba(192,57,43,.4);color:#E58371">×</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Name (English)</label><input type="text" data-bind data-pr="name" value="${esc(p.name||'')}"/></div>
+      <div class="field"><label>Name (Korean)</label><input type="text" data-bind data-pr="koreanName" value="${esc(p.koreanName||'')}"/></div>
+    </div>
+    <div class="field"><label>Product type</label><input type="text" data-bind data-pr="productType" value="${esc(p.productType||'')}" placeholder="e.g. Daily Wellness Supplement"/></div>
+    <div class="field"><label>Description</label><textarea data-bind data-pr="description">${esc(p.description||'')}</textarea></div>
+    <div class="row">
+      <div class="field"><label>Status</label>
+        <select data-bind data-pr="status">
+          <option value="in-development"${p.status==='in-development'?' selected':''}>In Development</option>
+          <option value="available"${p.status==='available'?' selected':''}>Available</option>
+          <option value="discontinued"${p.status==='discontinued'?' selected':''}>Discontinued</option>
+        </select>
+      </div>
+      <div class="field"><label>Status label (custom)</label><input type="text" data-bind data-pr="statusLabel" value="${esc(p.statusLabel||'')}" placeholder="In Development"/></div>
+    </div>
+    <div class="field"><label>Image path</label><input type="text" data-bind data-pr="image" value="${esc(p.image||'')}" placeholder="images/capsule-product.jpg"/></div>
+    <div class="field"><label>Benefits</label>
+      <div class="benefits-list" data-pr-benefits="${i}">
+        ${benefits.map((b, bi) => `<span class="benefit-tag">${esc(b)} <button type="button" onclick="removeBenefit(${i},${bi})">×</button></span>`).join('')}
+      </div>
+      <div class="tag-input-row">
+        <input type="text" id="ben-in-${i}" placeholder="Add a benefit and press Enter"/>
+        <button type="button" class="btn btn-ghost" onclick="addBenefit(${i})">Add</button>
+      </div>
+    </div>
+  </div>
+  `;
+}
+function captureProducts(){
+  const cards = document.querySelectorAll('[data-pr-i]');
+  data.products = Array.from(cards).map((c, i) => {
+    const old = data.products?.[parseInt(c.dataset.prI,10)] || {};
+    return {
+      id: old.id || 'pr_' + Date.now().toString(36) + '_' + i,
+      sortOrder: i + 1,
+      name:        c.querySelector('[data-pr="name"]').value.trim(),
+      koreanName:  c.querySelector('[data-pr="koreanName"]').value.trim(),
+      productType: c.querySelector('[data-pr="productType"]').value.trim(),
+      description: c.querySelector('[data-pr="description"]').value.trim(),
+      status:      c.querySelector('[data-pr="status"]').value,
+      statusLabel: c.querySelector('[data-pr="statusLabel"]').value.trim(),
+      image:       c.querySelector('[data-pr="image"]').value.trim(),
+      benefits:    old.benefits || [],
+    };
+  });
+}
+window.movePR = function(i, dir){
+  captureProducts();
+  const j = i + dir;
+  if(j < 0 || j >= data.products.length) return;
+  [data.products[i], data.products[j]] = [data.products[j], data.products[i]];
+  setDirty(true);
+  renderView('products');
+};
+window.delPR = function(i){
+  if(!confirm('Delete this product?')) return;
+  captureProducts();
+  data.products.splice(i,1);
+  setDirty(true);
+  renderView('products');
+};
+window.addBenefit = function(i){
+  captureProducts();
+  const inp = document.getElementById('ben-in-'+i);
+  const v = inp.value.trim();
+  if(!v) return;
+  data.products[i].benefits = data.products[i].benefits || [];
+  data.products[i].benefits.push(v);
+  setDirty(true);
+  renderView('products');
+};
+window.removeBenefit = function(i, bi){
+  captureProducts();
+  data.products[i].benefits.splice(bi, 1);
+  setDirty(true);
+  renderView('products');
+};
+function bindProdAdd(){
+  const b = document.getElementById('add-prod');
+  if(b) b.addEventListener('click', () => {
+    captureProducts();
+    data.products = data.products || [];
+    data.products.push({ id:'pr_'+Date.now().toString(36), sortOrder:(data.products.length||0)+1, name:'New product', koreanName:'', productType:'', description:'', status:'in-development', statusLabel:'In Development', image:'', benefits:[] });
+    setDirty(true);
+    renderView('products');
+  });
+  // wire Enter on benefit inputs
+  document.querySelectorAll('[id^=ben-in-]').forEach(inp => {
+    inp.addEventListener('keydown', e => {
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        addBenefit(parseInt(inp.id.split('-')[2],10));
+      }
+    });
+  });
+}
+
+/* ============ COMPANY ============ */
+function renderCompany(){
+  const c = data.company || {};
+  return `
+    <h2 class="section-title">Company Info</h2>
+    <p class="section-sub">Used in the footer of every page.</p>
+    <div class="card">
+      <div class="card-head"><div class="card-h">Brand & contact</div></div>
+      <div class="field"><label>Company name</label><input type="text" data-bind id="co-name" value="${esc(c.name||'')}"/></div>
+      <div class="field"><label>Tagline (footer)</label><textarea data-bind id="co-tagline">${esc(c.tagline||'')}</textarea></div>
+      <div class="row">
+        <div class="field"><label>Email</label><input type="email" data-bind id="co-email" value="${esc(c.email||'')}"/></div>
+        <div class="field"><label>Phone (display)</label><input type="text" data-bind id="co-phone" value="${esc(c.phone||'')}"/></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Phone (raw / tel:)</label><input type="text" data-bind id="co-phoneRaw" value="${esc(c.phoneRaw||'')}" placeholder="+8270-8873-4003"/></div>
+        <div class="field"><label>Hours</label><input type="text" data-bind id="co-hours" value="${esc(c.hours||'')}"/></div>
+      </div>
+      <div class="field"><label>Address (Korean)</label><input type="text" data-bind id="co-address" value="${esc(c.address||'')}"/></div>
+      <div class="field"><label>Address (English)</label><input type="text" data-bind id="co-addressEn" value="${esc(c.addressEn||'')}"/></div>
+    </div>
+  `;
+}
+function captureCompany(){
+  data.company = {
+    name:      val('co-name'),
+    tagline:   val('co-tagline'),
+    email:     val('co-email'),
+    phone:     val('co-phone'),
+    phoneRaw:  val('co-phoneRaw'),
+    hours:     val('co-hours'),
+    address:   val('co-address'),
+    addressEn: val('co-addressEn'),
+  };
+}
+
+/* ============ HELPERS ============ */
+function val(id){ const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+function captureView(view){
+  if(view === 'hero')     captureHero();
+  if(view === 'blog')     captureBlog();
+  if(view === 'products') captureProducts();
+  if(view === 'company')  captureCompany();
+}
+
+// Re-bind add buttons after each render
+const _rv = renderView;
+renderView = function(v){
+  _rv(v);
+  if(v === 'blog') bindBlogAdd();
+  if(v === 'products') bindProdAdd();
+};
+
+// Warn before leaving with unsaved changes
+window.addEventListener('beforeunload', e => {
+  if(dirty){ e.preventDefault(); e.returnValue = ''; }
+});
+
+/* ============ INIT ============ */
+const stored = localStorage.getItem('agw_token');
+if(stored){
+  tryLogin(stored);
+} else {
+  document.getElementById('token').focus();
+}
+</script>
+</body>
+</html>

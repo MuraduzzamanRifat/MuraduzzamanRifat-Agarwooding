@@ -131,21 +131,62 @@ document.querySelectorAll('[data-ripple]').forEach(el=>{
   if(cv) initRipple(el, cv);
 });
 
-// ── CONTACT FORM SUBMIT ───────────────────────
+// ── CONTACT FORM SUBMIT (mailto: — opens user's mail client) ──
 const form = document.getElementById('contact-form');
 if(form){
-  form.addEventListener('submit', e=>{
+  form.addEventListener('submit', async e=>{
     e.preventDefault();
-    const btn  = form.querySelector('button[type="submit"]');
+    const btn = form.querySelector('button[type="submit"]');
     const orig = btn.innerHTML;
-    btn.innerHTML = '<span>Sending…</span>';
-    btn.disabled  = true;
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+
+    let to = 'marketing@try-n.com';
+    try {
+      if(window.CMS){
+        const co = await window.CMS.company();
+        if(co.email) to = co.email;
+      }
+    } catch(_) {}
+
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const category = form.category.value;
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    const subj = `[${category}] ${subject}`;
+    const body =
+`Name: ${name}
+Email: ${email}
+Phone: ${phone || '—'}
+Category: ${category}
+
+${message}
+`;
+
+    btn.innerHTML = '<span>Opening mail…</span>';
+    btn.disabled = true;
+    location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
     setTimeout(()=>{
-      btn.innerHTML = '<span>Message Sent ✓</span>';
-      form.reset();
-      setTimeout(()=>{ btn.innerHTML=orig; btn.disabled=false; }, 3500);
-    }, 1200);
+      btn.innerHTML = '<span>Mail client opened ✓</span>';
+      setTimeout(()=>{ btn.innerHTML = orig; btn.disabled = false; }, 3500);
+    }, 800);
   });
+}
+
+// ── CMS ADMIN BADGE ──────────────────────────
+if(window.CMS){
+  const legal = document.querySelector('.foot-legal');
+  if(legal){
+    const a = document.createElement('a');
+    a.href = window.CMS.ADMIN_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = 'Admin';
+    a.style.opacity = '.55';
+    legal.appendChild(a);
+  }
 }
 
 // ── HAMBURGER MENU ───────────────────────────

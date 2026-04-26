@@ -475,6 +475,7 @@ document.querySelectorAll('[data-tilt]').forEach(card=>{
 function initR(par,cv){if(!cv)return;const ctx=cv.getContext('2d');let rips=[],run=false;function rs(){cv.width=par.offsetWidth||300;cv.height=par.offsetHeight||300;}rs();window.addEventListener('resize',rs);par.addEventListener('mousemove',e=>{const rc=par.getBoundingClientRect();rips.push({x:e.clientX-rc.left,y:e.clientY-rc.top,r:0,a:.35});if(!run)draw();});function draw(){run=true;ctx.clearRect(0,0,cv.width,cv.height);rips=rips.filter(r=>r.a>.01);rips.forEach(r=>{r.r+=3.5;r.a*=.95;const g=ctx.createRadialGradient(r.x,r.y,0,r.x,r.y,r.r);g.addColorStop(0,`rgba(255,200,90,${r.a})`);g.addColorStop(1,`rgba(255,200,90,0)`);ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,6.2832);ctx.fillStyle=g;ctx.fill();});if(rips.length)requestAnimationFrame(draw);else run=false;}}
 document.querySelectorAll('.pcard-img').forEach(w=>initR(w,w.querySelector('.pcard-rip')));
 </script>
+<script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>

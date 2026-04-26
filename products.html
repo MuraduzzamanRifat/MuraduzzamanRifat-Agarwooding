@@ -249,7 +249,34 @@
     <div class="foot-bottom"><span class="foot-copy">© 2024 Agarwooding Co., Ltd.</span><div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
   </div>
 </footer>
+<script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ── CMS HYDRATION ── */
+(async function hydrateProducts(){
+  if(!window.CMS) return;
+  try{
+    const items = await CMS.products();
+    const blocks = document.querySelectorAll('.prod-feature');
+    items.slice(0, blocks.length).forEach((p, i) => {
+      const b = blocks[i];
+      const img = b.querySelector('.prod-feature-img img');     if(img && p.image) img.src = p.image;
+      if(img && p.name) img.alt = p.name;
+      const status = b.querySelector('.status-pill span:last-child'); if(status) status.textContent = p.statusLabel || p.status || '';
+      const tag = b.querySelector('.prod-feature-tag');         if(tag && p.productType) tag.textContent = `${p.productType} · 0${i+1}`;
+      const name = b.querySelector('.prod-feature-name');       if(name) name.textContent = p.name || '';
+      const kr = b.querySelector('.prod-feature-kr');           if(kr) kr.textContent = p.koreanName || '';
+      const desc = b.querySelector('.prod-feature-desc');       if(desc) desc.textContent = p.description || '';
+      const ul = b.querySelector('.benefit-list');
+      if(ul && Array.isArray(p.benefits) && p.benefits.length){
+        ul.innerHTML = p.benefits.map(x => `<li>${String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;')}</li>`).join('');
+      }
+    });
+  }catch(err){
+    console.warn('[products] CMS hydration failed, keeping static fallback:', err.message);
+  }
+})();
+</script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>
     <li><a href="about-agarwood.html">About Agarwood</a></li>

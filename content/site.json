@@ -1,0 +1,92 @@
+{
+  "hero": {
+    "eyebrow": "Premium Agarwood Specialty Brand",
+    "headline": "Agarwooding",
+    "headlineKr": "침향의 정수",
+    "tagline": "Where ancient tradition meets modern science.",
+    "ctaPrimary": { "label": "Discover Products", "href": "products.html" },
+    "ctaSecondary": { "label": "Our Story", "href": "company.html" }
+  },
+  "company": {
+    "name": "Agarwooding Co., Ltd.",
+    "tagline": "Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.",
+    "email": "marketing@try-n.com",
+    "phone": "070-8873-4003",
+    "phoneRaw": "+8270-8873-4003",
+    "hours": "Weekdays 09:00–18:00",
+    "address": "서울특별시 금천구 디지털로9길 68, 1410호",
+    "addressEn": "1410, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, South Korea"
+  },
+  "blogFeatured": {
+    "id": "feat-3000-year-history",
+    "title": "Agarwood's 3,000-Year History: From Ancient Egypt to Modern Luxury",
+    "excerpt": "A comprehensive timeline tracing how the world's most prized aromatic wood travelled from Southeast Asian forests through ancient trade routes, royal courts, Buddhist temples, and finally to the global luxury market.",
+    "category": "history",
+    "categoryLabel": "History",
+    "readTime": "12 min read",
+    "image": "images/ceremonial-room.jpg",
+    "badge": "History · Long Read"
+  },
+  "blogPosts": [
+    { "id": "h01", "category": "history", "title": "Naming Confusion & Authenticity: 침향, 沈香, 기남, 가라", "excerpt": "The many names behind genuine agarwood — and how naming confusion is used to deceive buyers across Asia.", "readTime": "8 min read", "image": "images/calligraphy-heritage.jpg" },
+    { "id": "h02", "category": "history", "title": "Cultural Status of Agarwood in Eastern Tradition", "excerpt": "How agarwood became the most spiritually significant aromatic material across Buddhism, Islam, and Hinduism.", "readTime": "9 min read", "image": "images/ceremonial-room.jpg" },
+    { "id": "h03", "category": "history", "title": "Goryeo Dynasty & the Maehyangbi Culture", "excerpt": "The unique Korean Buddhist tradition of burying agarwood as sacred offerings — and its historical documentation.", "readTime": "7 min read", "image": "images/calligraphy-heritage.jpg" },
+    { "id": "h04", "category": "history", "title": "Joseon Royal Medical Records & 침향", "excerpt": "Documented royal consumption of agarwood in the official Joseon Sillok annals — what kings used it for and why.", "readTime": "6 min read", "image": "images/calligraphy-heritage.jpg" },
+    { "id": "h05", "category": "history", "title": "Li Shizhen's Bencaogangmu: 27 Years of Research", "excerpt": "How the world's greatest pre-modern pharmacopoeia classified and validated agarwood's medicinal properties.", "readTime": "8 min read", "image": "images/calligraphy-heritage.jpg" },
+    { "id": "h06", "category": "history", "title": "Donuibogam & UNESCO Heritage Medicine", "excerpt": "Heo Jun's landmark medical text — registered as UNESCO world heritage — and its treatment of 침향.", "readTime": "7 min read", "image": "images/forest-origin.jpg" },
+    { "id": "h07", "category": "history", "title": "Aquilaria Agallocha: Scientific Species Verification", "excerpt": "Botanical authentication of genuine Aquilaria species — and why species identification is the first line of defence against counterfeiting.", "readTime": "6 min read", "image": "images/forest-origin.jpg" },
+    { "id": "s01", "category": "science", "title": "Health Benefits: Scientific Evidence Review", "excerpt": "A peer-reviewed overview of agarwood's validated therapeutic properties — anti-inflammatory, anxiolytic, and neuroactive effects confirmed.", "readTime": "11 min read", "image": "images/ampoule-editorial.jpg" },
+    { "id": "s02", "category": "science", "title": "Chronic Inflammation & Agarwood's Therapeutic Role", "excerpt": "Inflammation as the root cause of chronic disease — and how agarwood sesquiterpenes and chromones address the underlying pathways.", "readTime": "10 min read", "image": "images/ampoule-product.jpg" },
+    { "id": "s03", "category": "science", "title": "Beginner's Guide Part 1: Formation, Grading & Chemistry", "excerpt": "From the definition of agarwood to the chemistry of its bioactive compounds — a foundational introduction for newcomers.", "readTime": "9 min read", "image": "images/capsule-product.jpg" },
+    { "id": "l01", "category": "lifestyle", "title": "Agarwood as a Gift for Parents & Elders", "excerpt": "Guidance on selecting premium agarwood products as meaningful, culturally rich health gifts for grandparents and parents.", "readTime": "5 min read", "image": "images/gift-box.jpg" },
+    { "id": "l02", "category": "lifestyle", "title": "Usage Methods & Selection Guide", "excerpt": "A practical guide to using agarwood — incense, tea, oil, capsules — with selection criteria matched to your goals and budget.", "readTime": "7 min read", "image": "images/ampoule-editorial.jpg" },
+    { "id": "l03", "category": "lifestyle", "title": "Why Is Agarwood So Expensive?", "excerpt": "A scientific analysis of the factors driving agarwood's price — rarity, formation time, grading, and the economics of sustainable supply.", "readTime": "8 min read", "image": "images/gift-box.jpg" },
+    { "id": "l04", "category": "lifestyle", "title": "Authentic Agarwood Certification Guide", "excerpt": "HACCP, organic certification, species identification — what to look for when verifying that you're buying genuine agarwood.", "readTime": "6 min read", "image": "images/calligraphy-heritage.jpg" },
+    { "id": "l05", "category": "lifestyle", "title": "Vietnamese Tourist Shop Counterfeits", "excerpt": "How fragrance-grade low-quality products are relabelled as edible health supplements — and how to protect yourself.", "readTime": "7 min read", "image": "images/capsule-product.jpg" },
+    { "id": "l06", "category": "lifestyle", "title": "Modern Cultivation & Sustainability", "excerpt": "How scientific cultivation methods are making sustainable agarwood farming possible — and what it means for the future of the industry.", "readTime": "9 min read", "image": "images/forest-origin.jpg" },
+    { "id": "l07", "category": "lifestyle", "title": "Product Comparison Guide Part 2", "excerpt": "Selecting between raw chips, oils, incense, capsules and ampoules — criteria across efficacy, budget, and intended use.", "readTime": "6 min read", "image": "images/ampoule-product.jpg" }
+  ],
+  "products": [
+    {
+      "id": "p01",
+      "sortOrder": 1,
+      "name": "Agarwood Capsules",
+      "koreanName": "침향 캡슐",
+      "productType": "Daily Wellness Supplement",
+      "description": "Premium agarwood extract in convenient capsule form — formulated for daily consumption with standardized active sesquiterpene content.",
+      "benefits": ["Anti-inflammatory", "Stress reduction", "Cognitive support", "Daily wellness"],
+      "status": "in-development",
+      "statusLabel": "In Development",
+      "image": "images/capsule-product.jpg"
+    },
+    {
+      "id": "p02",
+      "sortOrder": 2,
+      "name": "Agarwood Ampoules",
+      "koreanName": "침향 앰플",
+      "productType": "Concentrated Liquid Extract",
+      "description": "High-potency agarwood liquid extract in single-serving ampoules — pharmaceutical-grade extraction preserves the full terpene profile.",
+      "benefits": ["Maximum bioavailability", "Pharmaceutical extraction", "Single-serve format", "Premium grade"],
+      "status": "in-development",
+      "statusLabel": "In Development",
+      "image": "images/ampoule-product.jpg"
+    },
+    {
+      "id": "p03",
+      "sortOrder": 3,
+      "name": "Premium Raw Agarwood",
+      "koreanName": "침향 원료",
+      "productType": "Wholesale Raw Material",
+      "description": "Authenticated raw agarwood for B2B partners — Vietnamese and Indonesian sources, certified species verification, full traceability.",
+      "benefits": ["Species verified", "Full traceability", "Wholesale pricing", "Direct-source"],
+      "status": "available",
+      "statusLabel": "Available B2B",
+      "image": "images/forest-origin.jpg"
+    }
+  ],
+  "_meta": {
+    "version": 1,
+    "lastUpdated": "2026-04-26",
+    "schema": "agarwooding-cms-v1"
+  }
+}
