@@ -494,9 +494,19 @@ document.querySelectorAll('.pcard-img').forEach(w=>initR(w,w.querySelector('.pca
   };
 
   try{
-    const [hero, scenes, products, posts] = await Promise.all([
-      CMS.hero(), CMS.load().then(d => d.homeScenes || {}), CMS.products(), CMS.blogPosts({ limit: 3 })
+    const [hero, scenes, products, posts, homeSec] = await Promise.all([
+      CMS.hero(),
+      CMS.load().then(d => d.homeScenes || {}),
+      CMS.products(),
+      CMS.blogPosts({ limit: 3 }),
+      CMS.pageSection('home')
     ]);
+
+    /* ── About scene background image ── */
+    if(homeSec?.aboutBg){
+      const bg = document.querySelector('.about-bg');
+      if(bg) bg.style.backgroundImage = `url('${homeSec.aboutBg}')`;
+    }
 
     /* ── CTA scene (eyebrow + buttons from hero.*; headline/body from homeScenes.cta) ── */
     if(hero){

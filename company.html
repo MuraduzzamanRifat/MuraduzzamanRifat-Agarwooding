@@ -92,21 +92,21 @@
 <section class="section section--dark">
   <div class="max-w col-2-wide">
     <div>
-      <p class="section-tag reveal">Our Vision</p>
-      <h2 class="section-h2 section-h2--dark reveal delay-1">A Global Wellness Brand Built on <em>Authenticity</em></h2>
+      <p class="section-tag reveal" data-vision-label>Our Vision</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1" data-vision-headline>A Global Wellness Brand Built on <em>Authenticity</em></h2>
       <div class="gold-line reveal delay-2"></div>
-      <p class="section-lead section-lead--dark reveal delay-2">
+      <p class="section-lead section-lead--dark reveal delay-2" data-vision-body1>
         We are building the world's most trusted agarwood brand — one that bridges millennia
         of Eastern healing wisdom with the rigour of modern pharmaceutical science.
       </p>
-      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem">
+      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem" data-vision-body2>
         Founded in Seoul in 2020, Agarwooding has grown from a research project into a
         recognised premium brand with 50+ products, 10+ global partners, and a 98%
         customer satisfaction rate — all without compromising on quality or transparency.
       </p>
     </div>
     <div class="img-frame reveal-right" style="height:460px">
-      <img src="images/forest-origin.jpg" alt="Agarwood forest origin" style="height:100%"/>
+      <img src="images/forest-origin.jpg" alt="Agarwood forest origin" style="height:100%" data-vision-image/>
       <div class="img-overlay"></div>
     </div>
   </div>
@@ -295,12 +295,22 @@
 <script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
 <script>
-/* ── CMS HYDRATION: team + milestones ── */
+/* ── CMS HYDRATION: vision section + team + milestones ── */
 (async function hydrateCompany(){
   if(!window.CMS) return;
   const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   try{
-    const [team, milestones] = await Promise.all([CMS.team(), CMS.milestones()]);
+    const [team, milestones, sec] = await Promise.all([CMS.team(), CMS.milestones(), CMS.pageSection('company')]);
+
+    /* Vision section */
+    const v = sec?.vision;
+    if(v){
+      if(v.image) { const img = document.querySelector('[data-vision-image]'); if(img) { img.src = v.image; img.alt = (v.headline||'').replace(/<[^>]+>/g,''); } }
+      if(v.label)    { const el = document.querySelector('[data-vision-label]');    if(el) el.textContent = v.label; }
+      if(v.headline) { const el = document.querySelector('[data-vision-headline]'); if(el) el.innerHTML = v.headline; }
+      if(v.body1)    { const el = document.querySelector('[data-vision-body1]');    if(el) el.textContent = v.body1; }
+      if(v.body2)    { const el = document.querySelector('[data-vision-body2]');    if(el) el.textContent = v.body2; }
+    }
 
     if(team.length){
       const grid = document.querySelector('.team-grid');

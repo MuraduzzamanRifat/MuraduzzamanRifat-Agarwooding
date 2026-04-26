@@ -100,19 +100,19 @@
 </header>
 
 <!-- WHAT IS AGARWOOD -->
-<section class="section section--dark">
+<section class="section section--dark" id="about-intro">
   <div class="max-w col-2-wide">
     <div>
-      <p class="section-tag reveal">The Essence</p>
-      <h2 class="section-h2 section-h2--dark reveal delay-1">A Wound That Creates <em>Wonder</em></h2>
+      <p class="section-tag reveal" data-intro-label>The Essence</p>
+      <h2 class="section-h2 section-h2--dark reveal delay-1" data-intro-headline>A Wound That Creates <em>Wonder</em></h2>
       <div class="gold-line reveal delay-2"></div>
-      <p class="section-lead section-lead--dark reveal delay-2">
+      <p class="section-lead section-lead--dark reveal delay-2" data-intro-body1>
         Agarwood — known as 침향 (沈香) in Korean and Chinese medicine — forms when specific Aquilaria
         trees are wounded by fungal infection or physical damage. In response, the tree saturates
         its injured heartwood with a dark, aromatic resin. Over decades, this resin hardens into
         one of the rarest, most valuable natural substances on Earth.
       </p>
-      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem">
+      <p class="section-lead section-lead--dark reveal delay-3" style="margin-top:1rem" data-intro-body2>
         The result is a wood so dense it sinks in water — its name literally meaning "sinking wood"
         (沈香). It has been traded along the Silk Road, burned in royal palaces, and documented in
         the world's oldest medical texts. Today, the finest Grade A agarwood commands over
@@ -120,7 +120,7 @@
       </p>
     </div>
     <div class="img-frame reveal-right" style="height:480px">
-      <img src="images/ceremonial-room.jpg" alt="Agarwood ceremonial" style="height:100%"/>
+      <img src="images/ceremonial-room.jpg" alt="Agarwood ceremonial" style="height:100%" data-intro-image/>
       <div class="img-overlay"></div>
     </div>
   </div>
@@ -353,6 +353,25 @@
 
 <script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ── CMS HYDRATION: intro section image + headline + body ── */
+(async function hydrateAboutIntro(){
+  if(!window.CMS) return;
+  try{
+    const intro = (await CMS.pageSection('about'))?.intro;
+    if(!intro) return;
+    const setText = (sel, val) => { const el = document.querySelector(sel); if(el && val) el.textContent = val; };
+    const setHTML = (sel, val) => { const el = document.querySelector(sel); if(el && val) el.innerHTML = val; };
+    if(intro.image)    { const img = document.querySelector('[data-intro-image]'); if(img) { img.src = intro.image; img.alt = intro.headline?.replace(/<[^>]+>/g,'') || ''; } }
+    if(intro.label)    setText('[data-intro-label]', intro.label);
+    if(intro.headline) setHTML('[data-intro-headline]', intro.headline);
+    if(intro.body1)    setText('[data-intro-body1]', intro.body1);
+    if(intro.body2)    setText('[data-intro-body2]', intro.body2);
+  }catch(err){
+    console.warn('[about intro] hydration failed:', err.message);
+  }
+})();
+</script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>
     <li><a href="about-agarwood.html">About Agarwood</a></li>

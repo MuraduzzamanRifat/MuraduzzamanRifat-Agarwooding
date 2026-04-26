@@ -75,6 +75,29 @@
       "href": "company.html"
     }
   },
+  "pageSections": {
+    "home": {
+      "aboutBg": "images/forest-origin.jpg"
+    },
+    "about": {
+      "intro": {
+        "image": "images/ceremonial-room.jpg",
+        "label": "What is Agarwood?",
+        "headline": "A Wound That Creates <em>Wonder</em>",
+        "body1": "Agarwood — also known as oud, eaglewood, or aloeswood — is the dark, fragrant heartwood that forms in Aquilaria trees as a defensive response to injury and microbial infection. The healthy wood is pale and odourless. Only when wounded does the tree produce the aromatic resin that has captivated civilisations for over 3,000 years.",
+        "body2": "The result is a wood so dense it sinks in water — its name literally meaning \"sinking wood\" (沈香). It has been traded along the Silk Road, burned in royal palaces, and documented in the world's oldest medical texts. Today, the finest Grade A agarwood commands over $100,000 per kilogram."
+      }
+    },
+    "company": {
+      "vision": {
+        "image": "images/forest-origin.jpg",
+        "label": "Our Vision",
+        "headline": "A Global Wellness Brand Built on <em>Authenticity</em>",
+        "body1": "We are building the world's most trusted agarwood brand — one that bridges millennia of Eastern healing wisdom with the rigour of modern pharmaceutical science.",
+        "body2": "Founded in Seoul in 2020, Agarwooding has grown from a research project into a recognised premium brand with 50+ products, 10+ global partners, and a 98% customer satisfaction rate — all without compromising on quality or transparency."
+      }
+    }
+  },
   "homeScenes": {
     "manifesto": {
       "quote": "\"Where the tree bleeds,<br/><em>the world's most precious fragrance</em> is born.\"",

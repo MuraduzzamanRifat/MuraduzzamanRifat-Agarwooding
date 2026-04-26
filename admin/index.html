@@ -86,6 +86,12 @@
           </span>
           <span class="lbl">Page Heroes</span>
         </button>
+        <button type="button" class="nav-item" data-view="pageSections">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          </span>
+          <span class="lbl">Page Sections</span>
+        </button>
         <button type="button" class="nav-item" data-view="team">
           <span class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -488,6 +494,7 @@ const VIEW_TITLES = {
   blog:       { title: 'Blog Posts', sub: 'Manage your editorial library — articles by category.' },
   products:   { title: 'Products', sub: 'Manage your product catalog — order, status, descriptions.' },
   pageHeroes: { title: 'Page Heroes', sub: 'Hero block at the top of each subpage — image, eyebrow, headline, sub.' },
+  pageSections: { title: 'Page Sections', sub: 'Editorial sections inside each page — image + headline + body. Covers the homepage about background, the "What is Agarwood?" section, and the company Vision section.' },
   team:       { title: 'Team', sub: 'Leadership team shown on the company page.' },
   milestones: { title: 'Milestones', sub: 'Company history timeline shown on the company page.' },
   faq:        { title: 'FAQ', sub: 'Frequently asked questions on the contact page.' },
@@ -512,6 +519,7 @@ function renderView(view){
   if(view === 'dashboard')  host.innerHTML = renderDashboard();
   if(view === 'hero')       host.innerHTML = renderHero();
   if(view === 'homeScenes') host.innerHTML = renderHomeScenes();
+  if(view === 'pageSections') host.innerHTML = renderPageSections();
   if(view === 'blog')       host.innerHTML = renderBlog();
   if(view === 'products')   host.innerHTML = renderProducts();
   if(view === 'pageHeroes') host.innerHTML = renderPageHeroes();
@@ -1117,6 +1125,68 @@ function capturePageHeroes(){
   });
 }
 
+/* ============ PAGE SECTIONS (in-page editorial blocks) ============ */
+function renderPageSections(){
+  const ps = data.pageSections || {};
+  const home = ps.home || {};
+  const about = ps.about?.intro || {};
+  const company = ps.company?.vision || {};
+  return `
+    <div class="card">
+      <div class="card-head">
+        <span class="cat-pill">index.html</span>
+        <div class="card-h">Homepage About-scene background</div>
+      </div>
+      <p style="color:var(--fg3);font-size:.78rem;margin-bottom:.8rem">The full-bleed image behind the "What is Agarwood?" scene on the homepage (scroll #3).</p>
+      <div class="field"><label>Background image</label>${imageInputRow('ps-home-aboutBg', home.aboutBg, 'images/forest-origin.jpg')}</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="cat-pill">about-agarwood.html</span>
+        <div class="card-h">"What is Agarwood?" intro section</div>
+      </div>
+      <div class="field"><label>Section image</label>${imageInputRow('ps-about-intro-image', about.image, 'images/ceremonial-room.jpg')}</div>
+      <div class="field"><label>Section label / tag</label><input type="text" data-bind id="ps-about-intro-label" value="${esc(about.label||'')}" placeholder="e.g. The Essence"/></div>
+      <div class="field"><label>Headline (HTML allowed — &lt;em&gt; for italic gold accent)</label><input type="text" data-bind id="ps-about-intro-headline" value="${esc(about.headline||'')}"/></div>
+      <div class="field"><label>Body paragraph 1</label><textarea data-bind id="ps-about-intro-body1">${esc(about.body1||'')}</textarea></div>
+      <div class="field"><label>Body paragraph 2</label><textarea data-bind id="ps-about-intro-body2">${esc(about.body2||'')}</textarea></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="cat-pill">company.html</span>
+        <div class="card-h">"Our Vision" section</div>
+      </div>
+      <div class="field"><label>Section image</label>${imageInputRow('ps-company-vision-image', company.image, 'images/forest-origin.jpg')}</div>
+      <div class="field"><label>Section label / tag</label><input type="text" data-bind id="ps-company-vision-label" value="${esc(company.label||'')}" placeholder="e.g. Our Vision"/></div>
+      <div class="field"><label>Headline (HTML allowed)</label><input type="text" data-bind id="ps-company-vision-headline" value="${esc(company.headline||'')}"/></div>
+      <div class="field"><label>Body paragraph 1</label><textarea data-bind id="ps-company-vision-body1">${esc(company.body1||'')}</textarea></div>
+      <div class="field"><label>Body paragraph 2</label><textarea data-bind id="ps-company-vision-body2">${esc(company.body2||'')}</textarea></div>
+    </div>
+  `;
+}
+function capturePageSections(){
+  data.pageSections = data.pageSections || {};
+  data.pageSections.home = { aboutBg: val('ps-home-aboutBg') };
+  data.pageSections.about = data.pageSections.about || {};
+  data.pageSections.about.intro = {
+    image:    val('ps-about-intro-image'),
+    label:    val('ps-about-intro-label'),
+    headline: val('ps-about-intro-headline'),
+    body1:    val('ps-about-intro-body1'),
+    body2:    val('ps-about-intro-body2')
+  };
+  data.pageSections.company = data.pageSections.company || {};
+  data.pageSections.company.vision = {
+    image:    val('ps-company-vision-image'),
+    label:    val('ps-company-vision-label'),
+    headline: val('ps-company-vision-headline'),
+    body1:    val('ps-company-vision-body1'),
+    body2:    val('ps-company-vision-body2')
+  };
+}
+
 /* ============ HOME SCENES ============ */
 function renderHomeScenes(){
   const s = data.homeScenes || {};
@@ -1437,6 +1507,7 @@ function captureView(view){
   if(view === 'company')    captureCompany();
   if(view === 'pageHeroes') capturePageHeroes();
   if(view === 'homeScenes') captureHomeScenes();
+  if(view === 'pageSections') capturePageSections();
   if(view === 'team')       captureList('team');
   if(view === 'milestones') captureList('milestones');
   if(view === 'faq')        captureList('faq');

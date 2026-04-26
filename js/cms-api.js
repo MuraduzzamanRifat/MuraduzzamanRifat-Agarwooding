@@ -47,6 +47,10 @@ window.CMS = (function () {
     async pageHeroes()   { return (await load()).pageHeroes || {}; },
     async pageHero(name) { return ((await load()).pageHeroes || {})[name] || null; },
     async pageMeta(name) { return ((await load()).meta || {})[name] || null; },
+    async pageSection(page, key) {
+      const sec = ((await load()).pageSections || {})[page] || {};
+      return key ? (sec[key] || null) : sec;
+    },
     async team()         { return (await load()).team || []; },
     async milestones()   { return (await load()).milestones || []; },
     async certifications(){ return (await load()).certifications || []; },
