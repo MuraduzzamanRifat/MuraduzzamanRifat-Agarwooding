@@ -76,6 +76,24 @@ window.CMS = (function () {
    every page (footer tagline + copyright, page-hero block,
    meta tags). No-op if elements not present.
 */
+
+// Insert anti-flash style as early as possible — body invisible until
+// hydration finishes (or 1.5s timeout). Skip when data-page not set
+// (admin pages, etc) so they don't get hidden unnecessarily.
+(function antiFlash(){
+  const pageName = (document.body?.dataset?.page || document.documentElement.dataset.page || '').trim();
+  if (!pageName) return;
+  const style = document.createElement('style');
+  style.id = 'cms-antiflash';
+  style.textContent = 'body[data-cms-loading]{opacity:0!important;transition:opacity .25s ease}body{opacity:1;transition:opacity .25s ease}';
+  document.head.appendChild(style);
+  document.documentElement.addEventListener('DOMContentLoaded', () => {
+    document.body.setAttribute('data-cms-loading', '1');
+  }, { once: true });
+  // Fail-safe: never hide for more than 1.5s
+  setTimeout(() => document.body && document.body.removeAttribute('data-cms-loading'), 1500);
+})();
+
 (async function autoHydrate(){
   if (!window.CMS) return;
   try {
@@ -122,5 +140,8 @@ window.CMS = (function () {
     });
   } catch (err) {
     console.warn('[CMS auto-hydrate] failed (keeping static):', err.message);
+  } finally {
+    // Reveal the page now that hydration is done (or failed gracefully)
+    if (document.body) document.body.removeAttribute('data-cms-loading');
   }
 })();
