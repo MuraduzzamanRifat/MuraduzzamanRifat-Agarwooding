@@ -62,7 +62,7 @@
     "copyright": "© 2024 Agarwooding Co., Ltd."
   },
   "hero": {
-    "eyebrow": "Premium Agarwood Specialty Brand By Mj",
+    "eyebrow": "Premium Agarwood Specialty Brand",
     "headline": "Agarwooding",
     "headlineKr": "침향의 정수",
     "tagline": "Where ancient tradition meets modern science.",
@@ -456,7 +456,7 @@
     }
   ],
   "_meta": {
-    "version": 5,
+    "version": 6,
     "lastUpdated": "2026-04-26",
     "schema": "agarwooding-cms-v2"
   }
