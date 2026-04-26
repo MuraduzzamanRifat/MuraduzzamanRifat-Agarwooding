@@ -95,11 +95,12 @@
       "body": "Every step of our process — from forest to final product — is guided by an unwavering respect for nature, rigorous quality standards, and full transparency toward our customers and partners."
     },
     "blog": {
-      "headline": "Knowledge &amp; Wisdom",
+      "headline": "Knowledge &amp; Wisdom mj",
       "viewAll": "View all 18 articles →"
     },
     "cta": {
-      "useHeroFields": true,
+      "headline": "",
+      "body": "",
       "footer": "© 2024 Agarwooding Co., Ltd. — Seoul, South Korea"
     }
   },
@@ -432,7 +433,7 @@
     }
   ],
   "_meta": {
-    "version": 4,
+    "version": 5,
     "lastUpdated": "2026-04-26",
     "schema": "agarwooding-cms-v2"
   }
