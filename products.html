@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="products">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -272,6 +272,31 @@
         ul.innerHTML = p.benefits.map(x => `<li>${String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;')}</li>`).join('');
       }
     });
+
+    /* Certifications */
+    const [certs, sources] = await Promise.all([CMS.certifications(), CMS.sourcing()]);
+    const escH = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const certGrid = document.querySelector('.cert-grid');
+    if(certGrid && certs.length){
+      const ico = ['🏆','✦','★'];
+      certGrid.innerHTML = certs.map((c, i) => `
+        <div class="cert-card">
+          <div class="cert-icon">${ico[i] || '✦'}</div>
+          <div class="cert-name">${escH(c.label)}</div>
+          <div class="cert-desc">${escH(c.description)}</div>
+        </div>
+      `).join('');
+    }
+    const srcGrid = document.querySelector('.source-grid');
+    if(srcGrid && sources.length){
+      srcGrid.innerHTML = sources.map((s, i) => `
+        <div class="source-cell reveal delay-${(i%3)+1} on">
+          <div class="source-country">${escH(s.country)}</div>
+          <div class="source-type">${escH(s.type)}</div>
+          <div class="source-desc">${escH(s.description)}</div>
+        </div>
+      `).join('');
+    }
   }catch(err){
     console.warn('[products] CMS hydration failed, keeping static fallback:', err.message);
   }

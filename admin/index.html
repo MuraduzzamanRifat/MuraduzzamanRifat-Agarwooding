@@ -870,6 +870,17 @@ main.main {
 .tag-input-row input { flex: 1; }
 .tag-input-row button { padding: .55rem .9rem; font-size: .76rem; }
 
+[data-upload-wrap] { display: flex; gap: .5rem; align-items: center; }
+[data-upload-wrap] input[type=text] { flex: 1; }
+.upload-inline {
+  padding: .55rem .85rem !important;
+  font-size: .7rem !important;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
 /* ============ TOAST ============ */
 .toast-wrap {
   position: fixed;
@@ -1015,11 +1026,58 @@ main.main {
           <span class="lbl">Products</span>
           <span class="badge" id="prod-count">0</span>
         </button>
+        <button type="button" class="nav-item" data-view="pageHeroes">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 17l5-5 4 4 3-3 6 6"/></svg>
+          </span>
+          <span class="lbl">Page Heroes</span>
+        </button>
+        <button type="button" class="nav-item" data-view="team">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="lbl">Team</span>
+          <span class="badge" id="team-count">0</span>
+        </button>
+        <button type="button" class="nav-item" data-view="milestones">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </span>
+          <span class="lbl">Milestones</span>
+          <span class="badge" id="ms-count">0</span>
+        </button>
+        <button type="button" class="nav-item" data-view="faq">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          </span>
+          <span class="lbl">FAQ</span>
+          <span class="badge" id="faq-count">0</span>
+        </button>
+        <button type="button" class="nav-item" data-view="sourcing">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </span>
+          <span class="lbl">Sourcing Locations</span>
+        </button>
+        <button type="button" class="nav-item" data-view="certs">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
+          </span>
+          <span class="lbl">Certifications</span>
+        </button>
         <button type="button" class="nav-item" data-view="company">
           <span class="ic">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
           </span>
           <span class="lbl">Company Info</span>
+        </button>
+
+        <div class="side-section">Settings</div>
+        <button type="button" class="nav-item" data-view="settings">
+          <span class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="lbl">Site Settings</span>
         </button>
 
         <div class="side-section">Tools</div>
@@ -1162,6 +1220,25 @@ class GH {
     if(!r.ok) return [];
     return r.json();
   }
+  async uploadImage(file){
+    const sanitized = file.name.toLowerCase().replace(/[^a-z0-9._-]/g,'-').replace(/-+/g,'-');
+    const path = `images/uploads/${Date.now()}-${sanitized}`;
+    const base64 = await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(',')[1]);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(file);
+    });
+    const body = { message: `cms: upload image ${sanitized}`, content: base64, branch: this.branch };
+    const r = await fetch(`${this.base}/repos/${this.owner}/${this.repo}/contents/${path}`, {
+      method: 'PUT', headers: this.headers(), body: JSON.stringify(body)
+    });
+    if(!r.ok){
+      const e = await r.json().catch(() => ({ message: r.statusText }));
+      throw new Error(e.message || r.statusText);
+    }
+    return path;
+  }
 }
 
 /* ============ STATE ============ */
@@ -1283,8 +1360,12 @@ document.getElementById('reload-btn').addEventListener('click', () => {
 });
 
 function updateBadges(){
-  document.getElementById('blog-count').textContent = (data.blogPosts || []).length;
-  document.getElementById('prod-count').textContent = (data.products || []).length;
+  const set = (id, n) => { const el = document.getElementById(id); if(el) el.textContent = n; };
+  set('blog-count', (data.blogPosts || []).length);
+  set('prod-count', (data.products || []).length);
+  set('team-count', (data.team || []).length);
+  set('ms-count',   (data.milestones || []).length);
+  set('faq-count',  (data.faq || []).length);
 }
 
 /* ============ SAVE ============ */
@@ -1327,11 +1408,18 @@ document.querySelectorAll('.nav-item[data-view]').forEach(item => {
 });
 
 const VIEW_TITLES = {
-  dashboard: { title: 'Welcome back', sub: 'Track your content updates and stats from one place.' },
-  hero:      { title: 'Hero & Homepage', sub: 'Top-of-page brand statement and the blog featured article.' },
-  blog:      { title: 'Blog Posts', sub: 'Manage your editorial library — articles by category.' },
-  products:  { title: 'Products', sub: 'Manage your product catalog — order, status, descriptions.' },
-  company:   { title: 'Company Info', sub: 'Brand, contact details, and address — used across all page footers.' }
+  dashboard:  { title: 'Welcome back', sub: 'Track your content updates and stats from one place.' },
+  hero:       { title: 'Hero & Homepage', sub: 'Top-of-page brand statement and the blog featured article.' },
+  blog:       { title: 'Blog Posts', sub: 'Manage your editorial library — articles by category.' },
+  products:   { title: 'Products', sub: 'Manage your product catalog — order, status, descriptions.' },
+  pageHeroes: { title: 'Page Heroes', sub: 'Hero block at the top of each subpage — image, eyebrow, headline, sub.' },
+  team:       { title: 'Team', sub: 'Leadership team shown on the company page.' },
+  milestones: { title: 'Milestones', sub: 'Company history timeline shown on the company page.' },
+  faq:        { title: 'FAQ', sub: 'Frequently asked questions on the contact page.' },
+  sourcing:   { title: 'Sourcing Locations', sub: 'Origin countries shown on the products page.' },
+  certs:      { title: 'Certifications', sub: 'Certifications shown on the products & company pages.' },
+  company:    { title: 'Company Info', sub: 'Brand, contact details, and address — used across all page footers.' },
+  settings:   { title: 'Site Settings', sub: 'Footer text, copyright, and per-page meta tags (title + description).' }
 };
 function updateWelcome(){
   const v = VIEW_TITLES[currentView];
@@ -1345,12 +1433,21 @@ function updateWelcome(){
 /* ============ RENDER ============ */
 function renderView(view){
   const host = document.getElementById('view-host');
-  if(view === 'dashboard') host.innerHTML = renderDashboard();
-  if(view === 'hero')      host.innerHTML = renderHero();
-  if(view === 'blog')      host.innerHTML = renderBlog();
-  if(view === 'products')  host.innerHTML = renderProducts();
-  if(view === 'company')   host.innerHTML = renderCompany();
+  if(view === 'dashboard')  host.innerHTML = renderDashboard();
+  if(view === 'hero')       host.innerHTML = renderHero();
+  if(view === 'blog')       host.innerHTML = renderBlog();
+  if(view === 'products')   host.innerHTML = renderProducts();
+  if(view === 'pageHeroes') host.innerHTML = renderPageHeroes();
+  if(view === 'team')       host.innerHTML = renderListView('team');
+  if(view === 'milestones') host.innerHTML = renderListView('milestones');
+  if(view === 'faq')        host.innerHTML = renderListView('faq');
+  if(view === 'sourcing')   host.innerHTML = renderListView('sourcing');
+  if(view === 'certs')      host.innerHTML = renderListView('certs');
+  if(view === 'company')    host.innerHTML = renderCompany();
+  if(view === 'settings')   host.innerHTML = renderSettings();
   attachInputs();
+  attachImageUploads();
+  if(['team','milestones','faq','sourcing','certs'].includes(view)) bindListAdd(view);
   if(view === 'dashboard') bindDashboard();
   if(view === 'blog') bindBlogAdd();
   if(view === 'products') bindProdAdd();
@@ -1541,7 +1638,7 @@ function renderHero(){
         <div class="field"><label>Read time</label><input type="text" data-bind id="feat-readtime" value="${esc(f.readTime||'')}"/></div>
         <div class="field"><label>Badge text</label><input type="text" data-bind id="feat-badge" value="${esc(f.badge||'')}"/></div>
       </div>
-      <div class="field"><label>Image path</label><input type="text" data-bind id="feat-image" value="${esc(f.image||'')}" placeholder="images/ceremonial-room.jpg"/></div>
+      <div class="field"><label>Image path</label>${imageInputRow('feat-image', f.image, 'images/ceremonial-room.jpg')}</div>
     </div>
   `;
 }
@@ -1598,7 +1695,7 @@ function blogCard(p, i, total){
         </select>
       </div>
       <div class="field"><label>Read time</label><input type="text" data-bind data-bp="readTime" value="${esc(p.readTime||'')}" placeholder="6 min read"/></div>
-      <div class="field"><label>Image path</label><input type="text" data-bind data-bp="image" value="${esc(p.image||'')}" placeholder="images/forest-origin.jpg"/></div>
+      <div class="field"><label>Image</label><div data-upload-wrap><input type="text" data-bind data-bp="image" id="bp-img-${i}" value="${esc(p.image||'')}" placeholder="images/forest-origin.jpg" style="flex:1"/><label class="btn btn-ghost upload-inline">↑ Upload<input type="file" accept="image/*" style="display:none" data-upload-target="bp-img-${i}"/></label></div></div>
     </div>
   </div>
   `;
@@ -1684,7 +1781,7 @@ function prodCard(p, i, total){
       </div>
       <div class="field"><label>Status label (custom)</label><input type="text" data-bind data-pr="statusLabel" value="${esc(p.statusLabel||'')}" placeholder="In Development"/></div>
     </div>
-    <div class="field"><label>Image path</label><input type="text" data-bind data-pr="image" value="${esc(p.image||'')}" placeholder="images/capsule-product.jpg"/></div>
+    <div class="field"><label>Image</label><div data-upload-wrap><input type="text" data-bind data-pr="image" id="pr-img-${i}" value="${esc(p.image||'')}" placeholder="images/capsule-product.jpg" style="flex:1"/><label class="btn btn-ghost upload-inline">↑ Upload<input type="file" accept="image/*" style="display:none" data-upload-target="pr-img-${i}"/></label></div></div>
     <div class="field"><label>Benefits</label>
       <div class="benefits-list" data-pr-benefits="${i}">
         ${benefits.map((b, bi) => `<span class="benefit-tag">${esc(b)} <button type="button" onclick="removeBenefit(${i},${bi})">×</button></span>`).join('')}
@@ -1801,13 +1898,289 @@ function captureCompany(){
   };
 }
 
+/* ============ IMAGE UPLOAD ============ */
+function imageInputRow(id, value, placeholder){
+  return `
+    <div style="display:flex;gap:.5rem;align-items:center">
+      <input type="text" data-bind id="${id}" value="${esc(value||'')}" placeholder="${esc(placeholder||'')}" style="flex:1"/>
+      <label class="btn btn-ghost" style="padding:.5rem .75rem;font-size:.7rem;cursor:pointer;text-transform:uppercase;letter-spacing:.06em">
+        ↑ Upload
+        <input type="file" accept="image/*" style="display:none" data-upload-target="${id}"/>
+      </label>
+    </div>
+    ${value ? `<div style="margin-top:.5rem;display:flex;align-items:center;gap:.5rem"><img src="../${esc(value)}" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid var(--border3)" onerror="this.style.display='none'"/><span style="font-size:.7rem;color:var(--fg3)">Current image</span></div>` : ''}
+  `;
+}
+async function handleImageUpload(file, targetInputId){
+  if(!gh) return;
+  if(!file.type.startsWith('image/')) { toast('error','Not an image','File must be jpg/png/webp/gif'); return; }
+  if(file.size > 4 * 1024 * 1024) { toast('error','Too large','Max 4 MB per image'); return; }
+  const input = document.getElementById(targetInputId);
+  const orig = input.value;
+  input.value = 'Uploading…';
+  input.disabled = true;
+  try {
+    const path = await gh.uploadImage(file);
+    input.value = path;
+    input.disabled = false;
+    setDirty(true);
+    toast('success', 'Image uploaded', path);
+  } catch(err) {
+    input.value = orig;
+    input.disabled = false;
+    toast('error', 'Upload failed', err.message);
+  }
+}
+function attachImageUploads(){
+  document.querySelectorAll('[data-upload-target]').forEach(el => {
+    el.addEventListener('change', e => {
+      const f = e.target.files && e.target.files[0];
+      if(f) handleImageUpload(f, e.target.dataset.uploadTarget);
+      e.target.value = '';
+    });
+  });
+}
+
+/* ============ PAGE HEROES ============ */
+function renderPageHeroes(){
+  const heroes = data.pageHeroes || {};
+  const pages = [
+    { key: 'about',    label: 'About Agarwood' },
+    { key: 'products', label: 'Products' },
+    { key: 'blog',     label: 'Blog' },
+    { key: 'company',  label: 'Company' },
+    { key: 'contact',  label: 'Contact' }
+  ];
+  return pages.map(p => {
+    const h = heroes[p.key] || {};
+    return `
+    <div class="card" data-ph-key="${p.key}">
+      <div class="card-head">
+        <div class="card-h">${esc(p.label)} page hero</div>
+        <span class="cat-pill">${esc(p.key)}.html</span>
+      </div>
+      <div class="field"><label>Background image</label>${imageInputRow(`ph-${p.key}-image`, h.image, 'images/forest-origin.jpg')}</div>
+      <div class="field"><label>Eyebrow tag</label><input type="text" data-bind id="ph-${p.key}-eyebrow" value="${esc(h.eyebrow||'')}" placeholder="e.g. The Collection · 준비중"/></div>
+      <div class="field"><label>Headline (HTML allowed — use &lt;em&gt; for italic gold accent)</label><input type="text" data-bind id="ph-${p.key}-headline" value="${esc(h.headline||'')}" placeholder="What is &lt;em&gt;Agarwood?&lt;/em&gt;"/></div>
+      <div class="field"><label>Sub-headline</label><textarea data-bind id="ph-${p.key}-sub">${esc(h.sub||'')}</textarea></div>
+    </div>`;
+  }).join('');
+}
+function capturePageHeroes(){
+  const cards = document.querySelectorAll('[data-ph-key]');
+  data.pageHeroes = data.pageHeroes || {};
+  cards.forEach(c => {
+    const k = c.dataset.phKey;
+    data.pageHeroes[k] = {
+      image:    val(`ph-${k}-image`),
+      eyebrow:  val(`ph-${k}-eyebrow`),
+      headline: val(`ph-${k}-headline`),
+      sub:      val(`ph-${k}-sub`)
+    };
+  });
+}
+
+/* ============ GENERIC LIST VIEW ============ */
+const LIST_SCHEMAS = {
+  team: {
+    field: 'team',
+    item: (m, i) => ({ id: m.id || 'tm_'+Date.now().toString(36)+'_'+i, name:m.name||'', role:m.role||'', bio:m.bio||'', image:m.image||'' }),
+    blank: () => ({ id:'tm_'+Date.now().toString(36), name:'New member', role:'Role', bio:'', image:'' }),
+    label: m => m.name || '(unnamed)',
+    pill: m => m.role || 'Team',
+    fields: [
+      { key:'name',  label:'Full name',  type:'text' },
+      { key:'role',  label:'Role',       type:'text' },
+      { key:'bio',   label:'Bio',        type:'textarea' },
+      { key:'image', label:'Photo URL or upload', type:'image' }
+    ]
+  },
+  milestones: {
+    field: 'milestones',
+    item: (m, i) => ({ id: m.id || 'ms_'+Date.now().toString(36)+'_'+i, year:m.year||'', title:m.title||'', description:m.description||'' }),
+    blank: () => ({ id:'ms_'+Date.now().toString(36), year:String(new Date().getFullYear()), title:'New milestone', description:'' }),
+    label: m => `${m.year} — ${m.title || '(untitled)'}`,
+    pill: m => m.year || '—',
+    fields: [
+      { key:'year',        label:'Year',        type:'text' },
+      { key:'title',       label:'Title',       type:'text' },
+      { key:'description', label:'Description', type:'textarea' }
+    ]
+  },
+  faq: {
+    field: 'faq',
+    item: (m, i) => ({ id: m.id || 'fq_'+Date.now().toString(36)+'_'+i, question:m.question||'', answer:m.answer||'' }),
+    blank: () => ({ id:'fq_'+Date.now().toString(36), question:'New question?', answer:'' }),
+    label: m => m.question || '(empty question)',
+    pill: () => 'FAQ',
+    fields: [
+      { key:'question', label:'Question', type:'text' },
+      { key:'answer',   label:'Answer',   type:'textarea' }
+    ]
+  },
+  sourcing: {
+    field: 'sourcing',
+    item: (m, i) => ({ id: m.id || 'sr_'+Date.now().toString(36)+'_'+i, country:m.country||'', type:m.type||'', description:m.description||'' }),
+    blank: () => ({ id:'sr_'+Date.now().toString(36), country:'New country', type:'', description:'' }),
+    label: m => m.country || '(unnamed)',
+    pill: m => m.type || 'Source',
+    fields: [
+      { key:'country',     label:'Country / region', type:'text' },
+      { key:'type',        label:'Species / type',   type:'text' },
+      { key:'description', label:'Description',      type:'textarea' }
+    ]
+  },
+  certs: {
+    field: 'certifications',
+    item: (m, i) => ({ id: m.id || 'ct_'+Date.now().toString(36)+'_'+i, label:m.label||'', title:m.title||'', description:m.description||'' }),
+    blank: () => ({ id:'ct_'+Date.now().toString(36), label:'New cert', title:'', description:'' }),
+    label: m => m.label || '(unnamed)',
+    pill: m => m.title ? m.title.slice(0, 24) : 'Cert',
+    fields: [
+      { key:'label',       label:'Short label',  type:'text' },
+      { key:'title',       label:'Full title',   type:'text' },
+      { key:'description', label:'Description',  type:'textarea' }
+    ]
+  }
+};
+function renderListView(view){
+  const sch = LIST_SCHEMAS[view];
+  const items = data[sch.field] || [];
+  return `
+    <div id="list-host">
+      ${items.map((it, i) => listCard(view, it, i, items.length)).join('')}
+    </div>
+    <button type="button" class="add-btn" id="add-list-${view}">+ Add a new ${view === 'faq' ? 'question' : view.replace(/s$/,'')}</button>
+  `;
+}
+function listCard(view, item, i, total){
+  const sch = LIST_SCHEMAS[view];
+  const fieldsHtml = sch.fields.map(f => {
+    if(f.type === 'textarea')
+      return `<div class="field"><label>${esc(f.label)}</label><textarea data-bind data-li="${esc(f.key)}">${esc(item[f.key]||'')}</textarea></div>`;
+    if(f.type === 'image')
+      return `<div class="field"><label>${esc(f.label)}</label>${imageInputRow(`li-${view}-${i}-${f.key}`, item[f.key], 'images/...')}<input type="hidden" data-bind data-li="${esc(f.key)}" data-mirror-of="li-${view}-${i}-${f.key}"/></div>`;
+    return `<div class="field"><label>${esc(f.label)}</label><input type="text" data-bind data-li="${esc(f.key)}" value="${esc(item[f.key]||'')}"/></div>`;
+  }).join('');
+  return `
+  <div class="card" data-li-i="${i}">
+    <div class="card-head">
+      <span class="cat-pill">${esc(sch.pill(item))}</span>
+      <div class="card-h">${esc(sch.label(item))}</div>
+      <div class="move-actions">
+        <button type="button" class="move-btn" onclick="moveList('${view}',${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button type="button" class="move-btn" onclick="moveList('${view}',${i},1)" ${i===total-1?'disabled':''}>↓</button>
+        <button type="button" class="move-btn" onclick="delList('${view}',${i})" style="border-color:rgba(192,57,43,.4);color:#E58371">✕</button>
+      </div>
+    </div>
+    ${fieldsHtml}
+  </div>
+  `;
+}
+function captureList(view){
+  const sch = LIST_SCHEMAS[view];
+  const cards = document.querySelectorAll('[data-li-i]');
+  const arr = [];
+  cards.forEach((c, i) => {
+    const old = (data[sch.field] || [])[parseInt(c.dataset.liI,10)] || {};
+    const obj = { id: old.id };
+    sch.fields.forEach(f => {
+      if(f.type === 'image'){
+        // Image uploaders sync the visible input; mirror reads from visible input id
+        const visible = c.querySelector(`input[type="text"][id^="li-${view}-${parseInt(c.dataset.liI,10)}-${f.key}"]`);
+        obj[f.key] = visible ? visible.value.trim() : (old[f.key]||'');
+      } else {
+        const el = c.querySelector(`[data-li="${f.key}"]`);
+        obj[f.key] = el ? (el.value || '').trim() : '';
+      }
+    });
+    arr.push(sch.item(obj, i));
+  });
+  data[sch.field] = arr;
+}
+window.moveList = function(view, i, dir){
+  captureList(view);
+  const sch = LIST_SCHEMAS[view];
+  const j = i + dir;
+  const arr = data[sch.field];
+  if(j < 0 || j >= arr.length) return;
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+  setDirty(true);
+  renderView(view);
+};
+window.delList = function(view, i){
+  if(!confirm('Delete this entry?')) return;
+  captureList(view);
+  data[LIST_SCHEMAS[view].field].splice(i,1);
+  setDirty(true);
+  updateBadges();
+  renderView(view);
+};
+function bindListAdd(view){
+  const b = document.getElementById('add-list-'+view);
+  if(!b) return;
+  b.addEventListener('click', () => {
+    captureList(view);
+    const sch = LIST_SCHEMAS[view];
+    data[sch.field] = data[sch.field] || [];
+    data[sch.field].push(sch.blank());
+    setDirty(true);
+    updateBadges();
+    renderView(view);
+  });
+}
+
+/* ============ SETTINGS ============ */
+function renderSettings(){
+  const ft = data.footer || {};
+  const meta = data.meta || {};
+  const pages = [
+    { k:'home', l:'Home' },{ k:'about', l:'About Agarwood' },{ k:'products', l:'Products' },
+    { k:'blog', l:'Blog' },{ k:'company', l:'Company' },{ k:'contact', l:'Contact' }
+  ];
+  return `
+    <div class="card">
+      <div class="card-head"><div class="card-h">Footer</div></div>
+      <div class="field"><label>Footer brand tagline</label><textarea data-bind id="ft-tagline">${esc(ft.tagline||'')}</textarea></div>
+      <div class="field"><label>Copyright line</label><input type="text" data-bind id="ft-copy" value="${esc(ft.copyright||'')}"/></div>
+    </div>
+    ${pages.map(p => {
+      const m = meta[p.k] || {};
+      return `
+      <div class="card" data-meta-key="${p.k}">
+        <div class="card-head">
+          <span class="cat-pill">${p.k}.html</span>
+          <div class="card-h">${esc(p.l)} — meta tags</div>
+        </div>
+        <div class="field"><label>Page title (browser tab)</label><input type="text" data-bind id="meta-${p.k}-title" value="${esc(m.title||'')}"/></div>
+        <div class="field"><label>Meta description (≤160 chars for SEO)</label><textarea data-bind id="meta-${p.k}-desc">${esc(m.description||'')}</textarea></div>
+      </div>`;
+    }).join('')}
+  `;
+}
+function captureSettings(){
+  data.footer = { tagline: val('ft-tagline'), copyright: val('ft-copy') };
+  data.meta = data.meta || {};
+  document.querySelectorAll('[data-meta-key]').forEach(c => {
+    const k = c.dataset.metaKey;
+    data.meta[k] = { title: val(`meta-${k}-title`), description: val(`meta-${k}-desc`) };
+  });
+}
+
 /* ============ HELPERS ============ */
 function val(id){ const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 function captureView(view){
-  if(view === 'hero')     captureHero();
-  if(view === 'blog')     captureBlog();
-  if(view === 'products') captureProducts();
-  if(view === 'company')  captureCompany();
+  if(view === 'hero')       captureHero();
+  if(view === 'blog')       captureBlog();
+  if(view === 'products')   captureProducts();
+  if(view === 'company')    captureCompany();
+  if(view === 'pageHeroes') capturePageHeroes();
+  if(view === 'team')       captureList('team');
+  if(view === 'milestones') captureList('milestones');
+  if(view === 'faq')        captureList('faq');
+  if(view === 'sourcing')   captureList('sourcing');
+  if(view === 'certs')      captureList('certs');
+  if(view === 'settings')   captureSettings();
 }
 
 window.addEventListener('beforeunload', e => {

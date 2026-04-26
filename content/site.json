@@ -1,4 +1,48 @@
 {
+  "meta": {
+    "home":      { "title": "Agarwooding — Premium Agarwood Specialty Brand", "description": "Premium agarwood capsules, ampoules and raw materials sourced from Vietnam, Indonesia and pristine Southeast Asian forests." },
+    "about":     { "title": "About Agarwood — 침향 (沈香) | Agarwooding", "description": "Discover what agarwood is, how it forms, 3,000-year history, unique properties, grading, and health benefits." },
+    "products":  { "title": "Products — Agarwood Capsules & Ampoules | Agarwooding", "description": "Premium agarwood capsules for vitality, ampoules for relaxation and focus, plus wholesale raw material." },
+    "blog":      { "title": "Knowledge & Wisdom — Agarwood Articles | Agarwooding", "description": "In-depth guides, historical research and science-backed insights into agarwood." },
+    "company":   { "title": "Company — Our Vision & Team | Agarwooding", "description": "Premium agarwood brand founded 2020 in Seoul. Vision, mission, core team, and certifications." },
+    "contact":   { "title": "Contact Us | Agarwooding", "description": "Contact Agarwooding for product enquiries, wholesale partnerships, bespoke sourcing or general questions." }
+  },
+  "pageHeroes": {
+    "about": {
+      "image": "images/forest-origin.jpg",
+      "eyebrow": "침향 (沈香) · Aquilaria · Oud",
+      "headline": "What is <em>Agarwood?</em>",
+      "sub": "The dark, resinous heartwood of Aquilaria trees — formed over decades through a rare natural process. Considered more precious than gold and treasured across civilisations for over 3,000 years."
+    },
+    "products": {
+      "image": "images/capsule-product.jpg",
+      "eyebrow": "The Collection · 준비중",
+      "headline": "Pure Expressions<br/>of <em>침향</em>",
+      "sub": "Science-based agarwood products developed through our patented extraction technology. ISO 22000 certified. Sourced from Vietnam, Indonesia, and the world's finest forests."
+    },
+    "blog": {
+      "image": "images/calligraphy-heritage.jpg",
+      "eyebrow": "18 Articles · History · Science · Lifestyle",
+      "headline": "Knowledge &amp;<br/><em>Wisdom</em>",
+      "sub": "In-depth guides, historical research, and science-backed insights into the world of agarwood — written by our team of specialists."
+    },
+    "company": {
+      "image": "images/ceremonial-room.jpg",
+      "eyebrow": "Seoul, South Korea · Est. 2020",
+      "headline": "Tradition &amp; Modernity,<br/><em>Perfectly Balanced</em>",
+      "sub": "Agarwooding is a premium agarwood specialty brand founded in 2020 in Seoul. We harmonise ancient wisdom with modern science to bring authentic agarwood to discerning customers worldwide."
+    },
+    "contact": {
+      "image": "images/ceremonial-room.jpg",
+      "eyebrow": "We're Here to Help",
+      "headline": "Get in <em>Touch</em>",
+      "sub": "For product enquiries, wholesale partnerships, bespoke sourcing requests, or general questions — our team responds within one business day."
+    }
+  },
+  "footer": {
+    "tagline": "Premium agarwood specialty brand harmonising ancient tradition with modern science. Seoul, South Korea.",
+    "copyright": "© 2024 Agarwooding Co., Ltd."
+  },
   "hero": {
     "eyebrow": "Premium Agarwood Specialty Brand",
     "headline": "Agarwooding",
@@ -17,6 +61,34 @@
     "address": "서울특별시 금천구 디지털로9길 68, 1410호",
     "addressEn": "1410, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, South Korea"
   },
+  "team": [
+    { "id": "t01", "name": "Kim Chul-soo", "role": "Founder & CEO", "bio": "20+ years of experience in traditional Korean medicine and natural product development. Founded Agarwooding to bring authentic agarwood to global markets.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" },
+    { "id": "t02", "name": "Lee Young-hee", "role": "Head of Product Development", "bio": "PhD in pharmaceutical chemistry. Leads our patented extraction process and product formulation, with peer-reviewed publications on agarwood bioactivity.", "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" },
+    { "id": "t03", "name": "Park Ji-min", "role": "Customer Experience Director", "bio": "Multilingual specialist managing our customer experience and education initiatives across Korean, English, Chinese and Japanese markets.", "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop" }
+  ],
+  "milestones": [
+    { "id": "m01", "year": "2020", "title": "Company Founded", "description": "Agarwooding Co., Ltd. established in Seoul with a mission to bring premium agarwood to global wellness markets." },
+    { "id": "m02", "year": "2021", "title": "Patent Registered", "description": "Patented extraction technology developed in partnership with Korea Institute of Oriental Medicine." },
+    { "id": "m03", "year": "2022", "title": "International Partnerships", "description": "Established direct sourcing partnerships in Vietnam, Indonesia, and Cambodia for authentic, traceable agarwood." },
+    { "id": "m04", "year": "2023", "title": "Premium Brand Award", "description": "Recognised with the Korea Premium Brand Award for innovation in traditional medicine modernisation." },
+    { "id": "m05", "year": "2024", "title": "Product Launch Preparation", "description": "Final preparations for the launch of our flagship Agarwood Capsule and Ampoule product lines." }
+  ],
+  "certifications": [
+    { "id": "c01", "label": "ISO 22000", "title": "Food Safety Certified", "description": "Comprehensive food safety management system covering every stage from raw material sourcing to final packaging." },
+    { "id": "c02", "label": "Patent", "title": "Patented Extraction", "description": "Our proprietary low-temperature extraction process is patent-registered with the Korean Intellectual Property Office." },
+    { "id": "c03", "label": "Award 2023", "title": "Premium Brand Award", "description": "Recognised by the Korea Premium Brand Award for excellence in traditional medicine modernisation." }
+  ],
+  "sourcing": [
+    { "id": "s01", "country": "Vietnam", "type": "Aquilaria Crassna", "description": "The northern highlands of Vietnam — premium-grade Aquilaria crassna with exceptional resin density. Our Vietnamese partners hold 15+ years of cultivation expertise." },
+    { "id": "s02", "country": "Indonesia", "type": "Aquilaria Malaccensis", "description": "Sumatra and Kalimantan rainforests — naturally-formed Aquilaria malaccensis, considered among the finest aromatic profiles in the world." },
+    { "id": "s03", "country": "Cambodia", "type": "Aquilaria Crassna", "description": "Cambodian highland forests — renowned for distinctive deep, complex fragrance profiles preferred in Middle Eastern and East Asian markets." }
+  ],
+  "faq": [
+    { "id": "f01", "question": "Do you ship internationally?", "answer": "Yes — we ship worldwide. Shipping costs and delivery times vary by destination. Contact us for a detailed quote based on your location and order size." },
+    { "id": "f02", "question": "What is your minimum wholesale order?", "answer": "Wholesale and B2B orders typically start at 10kg of raw material or 100 units of finished product. Contact our partnerships team to discuss your specific requirements." },
+    { "id": "f03", "question": "Can I verify product authenticity?", "answer": "Every product comes with a certificate of authenticity, species verification documentation, and a unique tracking number. We also provide HACCP and ISO 22000 documentation upon request." },
+    { "id": "f04", "question": "When will capsules and ampoules be available?", "answer": "Both products are currently in final development. Subscribe to our newsletter or submit a contact form with category 'Product Information' to be notified at launch." }
+  ],
   "blogFeatured": {
     "id": "feat-3000-year-history",
     "title": "Agarwood's 3,000-Year History: From Ancient Egypt to Modern Luxury",
@@ -85,8 +157,8 @@
     }
   ],
   "_meta": {
-    "version": 1,
+    "version": 2,
     "lastUpdated": "2026-04-26",
-    "schema": "agarwooding-cms-v1"
+    "schema": "agarwooding-cms-v2"
   }
 }

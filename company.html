@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="company">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -294,6 +294,49 @@
 </footer>
 <script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ── CMS HYDRATION: team + milestones ── */
+(async function hydrateCompany(){
+  if(!window.CMS) return;
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  try{
+    const [team, milestones] = await Promise.all([CMS.team(), CMS.milestones()]);
+
+    if(team.length){
+      const grid = document.querySelector('.team-grid');
+      if(grid){
+        grid.innerHTML = team.map((m, i) => `
+          <div class="team-card reveal delay-${(i%3)+1}">
+            <div class="team-photo">
+              <img src="${esc(m.image)}" alt="${esc(m.name)} ${esc(m.role)}" loading="lazy"/>
+              <div class="team-photo-overlay"></div>
+            </div>
+            <p class="team-role">${esc(m.role)}</p>
+            <h3 class="team-name">${esc(m.name)}</h3>
+            <p class="team-bio">${esc(m.bio)}</p>
+          </div>
+        `).join('');
+      }
+    }
+
+    if(milestones.length){
+      const list = document.querySelector('.hist-list');
+      if(list){
+        list.innerHTML = milestones.map(m => `
+          <div class="hist-item">
+            <div class="hist-year">${esc(m.year)}</div>
+            <div><div class="hist-content-title">${esc(m.title)}</div><div class="hist-content-desc">${esc(m.description)}</div></div>
+          </div>
+        `).join('');
+      }
+    }
+
+    document.querySelectorAll('.team-card.reveal,.hist-item').forEach(el => el.classList.add('on'));
+  }catch(err){
+    console.warn('[company] CMS hydration failed (static kept):', err.message);
+  }
+})();
+</script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>
     <li><a href="about-agarwood.html">About Agarwood</a></li>

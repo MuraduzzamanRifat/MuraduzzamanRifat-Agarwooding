@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="contact">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -258,7 +258,7 @@
       <p class="section-tag reveal">Common Questions</p>
       <h2 class="section-h2 section-h2--dark reveal delay-1">Frequently Asked <em>Questions</em></h2>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px" class="reveal delay-2">
+    <div id="faq-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px" class="reveal delay-2">
       <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px;margin-bottom:28px">
         <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">Do you ship internationally?</div>
         <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">Yes — we supply to customers and business partners worldwide. Contact us for international shipping rates and customs documentation support.</div>
@@ -292,6 +292,26 @@
 </footer>
 <script src="js/cms-api.js"></script>
 <script src="js/main.js"></script>
+<script>
+/* ── CMS HYDRATION: FAQ ── */
+(async function hydrateFaq(){
+  if(!window.CMS) return;
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  try{
+    const items = await CMS.faq();
+    const grid = document.getElementById('faq-grid');
+    if(!grid || !items.length) return;
+    grid.innerHTML = items.map((it, i) => `
+      <div style="border-left:1px solid rgba(212,168,67,.2);padding-left:24px;${i < items.length-2 ? 'margin-bottom:28px' : ''}">
+        <div style="font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:8px">${esc(it.question)}</div>
+        <div style="font-size:14px;color:var(--text-muted);line-height:1.7;font-weight:300">${esc(it.answer)}</div>
+      </div>
+    `).join('');
+  }catch(err){
+    console.warn('[contact FAQ] CMS hydration failed (static kept):', err.message);
+  }
+})();
+</script>
 <div class="mobile-menu" id="mobile-menu">
   <ul>
     <li><a href="about-agarwood.html">About Agarwood</a></li>

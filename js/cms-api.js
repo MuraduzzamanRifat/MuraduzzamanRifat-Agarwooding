@@ -10,10 +10,16 @@ window.CMS = (function () {
   let cache = null;
   let inflight = null;
 
+  function resolveSource() {
+    const depth = (location.pathname.match(/\/[^/]+\.html$/) ? 0 : 0);
+    const inSub = /\/admin\//.test(location.pathname);
+    return inSub ? '../' + SOURCE : SOURCE;
+  }
+
   async function load(force = false) {
     if (cache && !force) return cache;
     if (inflight) return inflight;
-    inflight = fetch(SOURCE + '?v=' + Date.now())
+    inflight = fetch(resolveSource() + '?v=' + Date.now())
       .then(r => {
         if (!r.ok) throw new Error('CMS fetch failed: ' + r.status);
         return r.json();
@@ -35,12 +41,19 @@ window.CMS = (function () {
     ADMIN_URL,
     load,
 
-    async hero()           { return (await load()).hero || {}; }
-    ,
-    async company()        { return (await load()).company || {}; }
-    ,
-    async blogFeatured()   { return (await load()).blogFeatured || null; }
-    ,
+    async hero()         { return (await load()).hero || {}; },
+    async company()      { return (await load()).company || {}; },
+    async footer()       { return (await load()).footer || {}; },
+    async pageHeroes()   { return (await load()).pageHeroes || {}; },
+    async pageHero(name) { return ((await load()).pageHeroes || {})[name] || null; },
+    async pageMeta(name) { return ((await load()).meta || {})[name] || null; },
+    async team()         { return (await load()).team || []; },
+    async milestones()   { return (await load()).milestones || []; },
+    async certifications(){ return (await load()).certifications || []; },
+    async sourcing()     { return (await load()).sourcing || []; },
+    async faq()          { return (await load()).faq || []; },
+    async blogFeatured() { return (await load()).blogFeatured || null; },
+
     async blogPosts(opts = {}) {
       const data = await load();
       let posts = data.blogPosts || [];
@@ -55,4 +68,59 @@ window.CMS = (function () {
     },
     async meta() { return (await load())._meta || {}; }
   };
+})();
+
+/* ── Universal hydrator: page-hero, footer, meta tags ─────
+   Pages opt in by adding data-page="<name>" to <body> or <html>.
+   This auto-runs and patches common elements that exist on
+   every page (footer tagline + copyright, page-hero block,
+   meta tags). No-op if elements not present.
+*/
+(async function autoHydrate(){
+  if (!window.CMS) return;
+  try {
+    const data = await CMS.load();
+    const pageName = (document.body.dataset.page || document.documentElement.dataset.page || '').trim();
+
+    // Meta tags
+    if (pageName && data.meta && data.meta[pageName]) {
+      const m = data.meta[pageName];
+      if (m.title) document.title = m.title;
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc && m.description) desc.setAttribute('content', m.description);
+    }
+
+    // Page hero (5 inner pages share .page-hero structure)
+    if (pageName && data.pageHeroes && data.pageHeroes[pageName]) {
+      const ph = data.pageHeroes[pageName];
+      const bg = document.querySelector('.page-hero-bg');
+      if (bg && ph.image) bg.style.backgroundImage = `url('${ph.image}')`;
+      const eb = document.querySelector('.page-hero-tag');
+      if (eb && ph.eyebrow) eb.textContent = ph.eyebrow;
+      const h1 = document.querySelector('.page-hero-h1');
+      if (h1 && ph.headline) h1.innerHTML = ph.headline;
+      const sub = document.querySelector('.page-hero-sub');
+      if (sub && ph.sub) sub.textContent = ph.sub;
+    }
+
+    // Footer tagline + copyright
+    const ft = data.footer || {};
+    document.querySelectorAll('.foot-tagline').forEach(el => {
+      if (ft.tagline) el.textContent = ft.tagline;
+    });
+    document.querySelectorAll('.foot-copy').forEach(el => {
+      if (ft.copyright) el.textContent = ft.copyright;
+    });
+
+    // Footer contact (uses company.email/phone/hours)
+    const co = data.company || {};
+    document.querySelectorAll('.foot-contact-item').forEach(el => {
+      const txt = el.textContent;
+      if (/Email:/.test(txt) && co.email)  el.innerHTML = `<span>Email:</span> ${co.email}`;
+      if (/Phone:/.test(txt) && co.phone)  el.innerHTML = `<span>Phone:</span> ${co.phone}`;
+      if (/Hours:/.test(txt) && co.hours)  el.innerHTML = `<span>Hours:</span> ${co.hours}`;
+    });
+  } catch (err) {
+    console.warn('[CMS auto-hydrate] failed (keeping static):', err.message);
+  }
 })();
